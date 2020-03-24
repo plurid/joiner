@@ -21,6 +21,23 @@ Multi/Mono-Repository Task Runner.
 Intended to be conjoined with Yark Workspaces.
 
 
+
+## Install
+
+It is recommended that `joiner` is installed globally. To install, run the command
+
+```
+npm install -g @plurid/joiner
+```
+
+or
+
+```
+yarn global add @plurid/joiner
+```
+
+
+
 ## Usage
 
 Joiner requires a `joiner.yaml` file at the root of the packages/workspaces.
