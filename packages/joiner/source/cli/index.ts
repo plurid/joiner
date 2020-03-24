@@ -30,83 +30,56 @@ const main = async (
             program.outputHelp();
         });
 
-    // program
-    //     .option(
-    //         '-t, --target <type>',
-    //         'compilation targets: typescript, graphql, protobuf',
-    //         'typescript,graphql,protobuf',
-    //     ).option(
-    //         '-o, --output <path>',
-    //         'output path',
-    //         '.',
-    //     ).option(
-    //         '-r, --resolve <type>',
-    //         'resolve the output path relative to the "file" directory, "process" directory, or "flatten" into the output path',
-    //         'file',
-    //     ).option(
-    //         '-c, --comments [value]',
-    //         'compile the comments into the target files',
-    //         false,
-    //     ).option(
-    //         '-s, --spacing <value>',
-    //         'indentation spacing to be used in the compiled files',
-    //         '4',
-    //     ).option(
-    //         '-p, --preserve [value]',
-    //         'preserve new lines spacing of the datasign file',
-    //         false,
-    //     ).option(
-    //         '-g, --generated [value]',
-    //         'inject a header in each generated file mentioning the source',
-    //         true,
-    //     );
+    program
+        .option(
+            '-c, --configuration <file>',
+            'path to the .yaml configuration file',
+            'joiner.yaml',
+        )
 
     program
         .command('run <packageName> <command...>')
         .description('run arbitrary command on package')
-        .action((packageName: any, command: any) => {
-            console.log('run command called', packageName, command);
-            runCommand();
+        .action(async (packageName: string, command: string[]) => {
+            await runCommand(
+                packageName,
+                command,
+            );
         });
 
     program
         .command('update <packageName>')
         .description('update package or "all" packages')
-        .action((packageName: any) => {
-            console.log('update command called', packageName);
-            updateCommand();
+        .action(async (packageName: string)=> {
+            updateCommand(packageName);
         });
 
     program
         .command('patch <packageName>')
         .description('patch package version or "all" packages')
-        .action((packageName: any) => {
-            console.log('patch command called', packageName);
-            patchCommand();
+        .action((packageName: string) => {
+            patchCommand(packageName);
         });
 
     program
         .command('commit <packageName>')
         .description('commit package or "all" packages')
-        .action((packageName: any) => {
-            console.log('commit command called', packageName);
-            commitCommand();
+        .action((packageName: string) => {
+            commitCommand(packageName);
         });
 
     program
         .command('publish <packageName>')
         .description('publish package or "all" packages')
-        .action((packageName: any) => {
-            console.log('publish command called', packageName);
-            publishCommand();
+        .action((packageName: string) => {
+            publishCommand(packageName);
         });
 
     program
         .command('upcomlish <packageName>')
         .description('upcomlish arbitrary command on package')
-        .action((packageName: any) => {
-            console.log('upcomlish command called', packageName);
-            upcomlishCommand();
+        .action((packageName: string) => {
+            upcomlishCommand(packageName);
         });
 
 

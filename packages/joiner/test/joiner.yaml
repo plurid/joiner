@@ -1,9 +1,9 @@
 # get packages location from yarn workspaces
 yarnWorkspace: true
-# packages:
-#   - global
-#   - plurid-app/general/*
-#   - plurid-com/*
+packages:
+  - global
+  - plurid-app/general/*
+  - plurid-com/*
 commitAfterUpdate: true
 # commitRoot + packageFolder + commitDivider + commitMessage
 # libraries/data/datasigns/plurid-app/general/dashboard > setup: package
