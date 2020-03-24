@@ -1,4 +1,8 @@
 import {
+    execSync,
+} from 'child_process';
+
+import {
     Package,
 } from '../data/interfaces';
 
@@ -41,6 +45,15 @@ const runLogic = async (
 ) => {
     console.log(configPackage);
     console.log(command);
+
+    const executableCommand = command.join(' ');
+
+    execSync(
+        executableCommand,
+        {
+            stdio: 'inherit',
+        },
+    );
 }
 
 
