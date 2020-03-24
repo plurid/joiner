@@ -35,11 +35,11 @@ const main = async (
             '-c, --configuration <file>',
             'path to the .yaml configuration file',
             'joiner.yaml',
-        )
+        );
 
     program
         .command('run <packageName> <command...>')
-        .description('run arbitrary command on package')
+        .description('run arbitrary command on package by name or on "all" packages')
         .action(async (packageName: string, command: string[]) => {
             await runCommand(
                 packageName,
@@ -49,35 +49,35 @@ const main = async (
 
     program
         .command('update <packageName>')
-        .description('update package or "all" packages')
+        .description('update package by name or "all" packages')
         .action(async (packageName: string)=> {
             updateCommand(packageName);
         });
 
     program
         .command('patch <packageName>')
-        .description('patch package version or "all" packages')
+        .description('patch package version by name or "all" packages')
         .action((packageName: string) => {
             patchCommand(packageName);
         });
 
     program
         .command('commit <packageName>')
-        .description('commit package or "all" packages')
+        .description('commit package by name or "all" packages')
         .action((packageName: string) => {
             commitCommand(packageName);
         });
 
     program
         .command('publish <packageName>')
-        .description('publish package or "all" packages')
+        .description('publish package by name or "all" packages')
         .action((packageName: string) => {
             publishCommand(packageName);
         });
 
     program
         .command('upcomlish <packageName>')
-        .description('upcomlish arbitrary command on package')
+        .description('upcomlish - update, patch, commit, publish - package by name or "all" packages')
         .action((packageName: string) => {
             upcomlishCommand(packageName);
         });
