@@ -50,7 +50,7 @@ export const handleParsedConfigurationFile = async (
         ? parsedData.commitMessage
         : 'setup: package';
 
-    if (!yarnWorkspace || packages.length === 0) {
+    if (packages.length === 0 || yarnWorkspace) {
         console.log(`\n\tPackages required to be specified in the 'joiner.yaml' file.\n`);
         return;
     }
@@ -63,7 +63,6 @@ export const handleParsedConfigurationFile = async (
         commitDivider,
         commitMessage,
     };
-    console.log(configurationFile);
 
     return configurationFile;
 }
