@@ -12,19 +12,24 @@ import {
 const initializeCommand = async () => {
     const joinerPath = path.join(process.cwd(), 'joiner.yaml');
 
-    const joinerContent = `yarnWorkspace: false
-packageManager: yarn
-packagePublisher: npm
-
+    const joinerContent = `---
 # uncomment and add paths to packages
 packages:
   # - /path/to/package
   # - /path/to/multiple-packages/*
 
-commitCombine: false
-commitRoot: '/path/to/root'
-commitDivider: ' > '
-commitMessage: 'setup: package'
+package:
+  manager: yarn
+  publisher: npm
+
+yarnWorkspace: false
+
+commit:
+  engine: git
+  combine: false
+  root: '/path/to/root'
+  divider: ' > '
+  message: 'setup: package'
 `;
 
     if (!await fileExists(joinerPath)) {
