@@ -17,8 +17,8 @@ Multi/Mono-Repository Task Runner.
 
 Supported languages:
 
-+ `JavaScript`;
-+ `TypeScript`;
++ `JavaScript`
++ `TypeScript`
 
 For `JavaScript`/`TypeScript`, `joiner` is intended to be conjoined with Yark Workspaces.
 
@@ -50,7 +50,7 @@ yarn global add @plurid/joiner
 
 ## Usage
 
-Joiner requires a `joiner.yaml` file where the packages paths must be registered such as
+`Joiner` requires a `joiner.yaml` file where the packages paths must be registered such as
 
 ``` yaml
 packages:
@@ -93,7 +93,7 @@ Instead of `packageName` the signifier `all` can be used to run the command on a
 
 The `joiner.yaml` configuration file can be at the root of the packages/workspaces and the `CLI` will parse it by default, or it can be specified at runtime with the `-c, --configuration <file>` option.
 
-The `joiner.yaml` file has as required fields only the `packages` field (or, if using Yarn Workspaces, the `yarnWorkspace` field set to `true`).
+The `joiner.yaml` configuration file has as required fields only the `packages` field (or, if using Yarn Workspaces, the `yarnWorkspace` field set to `true`).
 
 The list of `joiner.yaml` fields
 
