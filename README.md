@@ -137,6 +137,10 @@ commit:
   # The root of the packages/workspace.
   root: '/path/to/root'
 
+  # Use the full folder of the package in the commit message
+  # or only the folder name of the package.
+  fullFolder: false
+
   # Separator between the packageFolderName and the commitMessage.
   # default: ' > '
   divider: ' > '
