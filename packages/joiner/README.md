@@ -148,6 +148,6 @@ commit:
   divider: ' > '
 
   # The actual commit messsage.
-  # default: 'setup: pacakge'
+  # default: 'setup: package'
   message: 'setup: package'
 ```
