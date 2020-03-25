@@ -1,6 +1,6 @@
 {
     "name": "@plurid/joiner",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Multi/Mono-Repository Task Runner",
     "keywords": [
         "joiner"
