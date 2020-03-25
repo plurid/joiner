@@ -29,10 +29,10 @@ commitDivider: ' > '
 commitMessage: 'setup: package'
 `;
 
-    if (!fileExists(joinerPath)) {
+    if (!await fileExists(joinerPath)) {
         await fs.writeFile(joinerPath, joinerContent);
     } else {
-        console.log(`\n\tJoiner already initialized. File 'joiner.yaml' exists in path:\n${process.cwd()}\n`);
+        console.log(`\n\tJoiner already initialized. File 'joiner.yaml' exists in path:\n\n\t${process.cwd()}\n`);
     }
 }
 
