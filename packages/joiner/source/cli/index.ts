@@ -3,19 +3,14 @@ import program, {
 } from 'commander';
 
 import {
-    commitCommand,
-    patchCommand,
-    publishCommand,
+    initializeCommand,
     runCommand,
+    updateCommand,
+    patchCommand,
+    commitCommand,
+    publishCommand,
     upcomlishCommand,
-    updateCommand
 } from '../commands';
-
-// import {
-// } from '../data/interfaces';
-
-// import {
-// } from '../services/utilities';
 
 
 
@@ -49,38 +44,45 @@ const main = async (
         });
 
     program
+        .command('initialize')
+        .description('initialize joiner.yaml file')
+        .action(async ()=> {
+            await initializeCommand();
+        });
+
+    program
         .command('update <packageName>')
         .description('update package by name or "all" packages')
         .action(async (packageName: string)=> {
-            updateCommand(packageName, program.configuration);
+            await updateCommand(packageName, program.configuration);
         });
 
     program
         .command('patch <packageName>')
         .description('patch package version by name or "all" packages')
-        .action((packageName: string) => {
-            patchCommand(packageName, program.configuration);
+        .action(async (packageName: string) => {
+            await patchCommand(packageName, program.configuration);
         });
 
     program
         .command('commit <packageName>')
         .description('commit package by name or "all" packages')
-        .action((packageName: string) => {
-            commitCommand(packageName, program.configuration);
+        .action(async (packageName: string) => {
+            await commitCommand(packageName, program.configuration);
         });
 
     program
         .command('publish <packageName>')
         .description('publish package by name or "all" packages')
-        .action((packageName: string) => {
-            publishCommand(packageName, program.configuration);
+        .action(async (packageName: string) => {
+            await publishCommand(packageName, program.configuration);
         });
 
     program
         .command('upcomlish <packageName>')
         .description('upcomlish - update, patch, commit, publish - package by name or "all" packages')
-        .action((packageName: string) => {
-            upcomlishCommand(packageName, program.configuration);
+        .action(async (packageName: string) => {
+            await upcomlishCommand(packageName, program.configuration);
         });
 
 
