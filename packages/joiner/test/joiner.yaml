@@ -1,5 +1,6 @@
 yarnWorkspace: true
-packageManger: yarn
+packageManager: yarn
+packagePublisher: npm
 packages:
   - test/global
   - test/plurid-com/*
