@@ -1,6 +1,6 @@
 {
     "name": "@plurid/joiner",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Multi/Mono-Repository Task Runner",
     "keywords": [
         "joiner"
@@ -26,7 +26,7 @@
     "module": "distribution/index.es.js",
     "typings": "distribution/types/index.d.ts",
     "bin": {
-        "datasign": "binary/joiner"
+        "joiner": "binary/joiner"
     },
     "files": [
         "distribution",
