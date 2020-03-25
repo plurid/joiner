@@ -28,6 +28,7 @@ commit:
   engine: git
   combine: false
   root: '/path/to/root'
+  fullFolder: false
   divider: ' > '
   message: 'setup: package'
 `;
