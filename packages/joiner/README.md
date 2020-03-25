@@ -23,7 +23,7 @@ Supported languages:
 + `JavaScript`
 + `TypeScript`
 
-For `JavaScript`/`TypeScript`, `joiner` is intended to be conjoined with Yark Workspaces.
+For `JavaScript`/`TypeScript`, `joiner` is intended to be conjoined with `Yarn Workspaces`.
 
 
 ### Contents
