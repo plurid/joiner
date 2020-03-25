@@ -37,17 +37,17 @@ export const handleParsedConfigurationFile = async (
         ? parsedData.yarnWorkspace
         : false;
     const packages = await locatePackages(parsedData.packages);
-    const commitCombine = typeof parsedData.commitCombine === 'boolean'
-        ? parsedData.commitCombine
+    const commitCombine = typeof parsedData.commit?.combine === 'boolean'
+        ? parsedData.commit?.combine
         : false;
-    const commitRoot = typeof parsedData.commitRoot === 'string'
-        ? parsedData.commitRoot
+    const commitRoot = typeof parsedData.commit?.root === 'string'
+        ? parsedData.commit?.root
         : '';
-    const commitDivider = typeof parsedData.commitDivider === 'string'
-        ? parsedData.commitDivider
+    const commitDivider = typeof parsedData.commit?.divider === 'string'
+        ? parsedData.commit?.divider
         : ' > ';
-    const commitMessage = typeof parsedData.commitMessage === 'string'
-        ? parsedData.commitMessage
+    const commitMessage = typeof parsedData.commit?.message === 'string'
+        ? parsedData.commit?.message
         : 'setup: package';
 
     if (packages.length === 0 || yarnWorkspace) {
@@ -58,10 +58,17 @@ export const handleParsedConfigurationFile = async (
     const configurationFile: ConfigurationFile = {
         yarnWorkspace,
         packages,
-        commitCombine,
-        commitRoot,
-        commitDivider,
-        commitMessage,
+        package: {
+            manager: 'yarn',
+            publisher: 'npm'
+        },
+        commit: {
+            engine: 'git',
+            combine: commitCombine,
+            root: commitRoot,
+            divider: commitDivider,
+            message: commitMessage,
+        },
     };
 
     return configurationFile;
