@@ -18,7 +18,20 @@
 
 Multi/Mono-Repository Task Runner.
 
-Intended to be conjoined with Yark Workspaces.
+Supported languages:
+
++ `JavaScript`;
++ `TypeScript`;
+
+For `JavaScript`/`TypeScript`, `joiner` is intended to be conjoined with Yark Workspaces.
+
+
+### Contents
+
++ [Install](#install)
++ [Usage](#usage)
+    + [Command-Line Interface](#command-line-interface)
+    + [Configuration File](#configuration-file)
 
 
 
