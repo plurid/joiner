@@ -43,9 +43,9 @@ export const handleParsedConfigurationFile = async (
     const commitRoot = typeof parsedData.commit?.root === 'string'
         ? parsedData.commit?.root
         : '';
-    const commitFullFolder = typeof parsedData.commit?.fullFolder === 'string'
+    const commitFullFolder = typeof parsedData.commit?.fullFolder === 'boolean'
         ? parsedData.commit?.fullFolder
-        : '';
+        : false;
     const commitDivider = typeof parsedData.commit?.divider === 'string'
         ? parsedData.commit?.divider
         : ' > ';
