@@ -19,8 +19,9 @@ import {
 const runCommand = async (
     packageName: string,
     command: string[],
+    configurationFile: string,
 ) => {
-    const configurationData = await parseConfigurationFile();
+    const configurationData = await parseConfigurationFile(configurationFile);
     if (!configurationData) {
         return;
     }

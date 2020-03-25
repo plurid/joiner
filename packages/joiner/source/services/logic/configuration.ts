@@ -15,14 +15,16 @@ import {
 
 
 
-export const parseConfigurationFile = async () => {
+export const parseConfigurationFile = async (
+    configurationFile: string,
+) => {
     try {
-        const configurationFilepath = path.join(process.cwd(), 'joiner.yaml');
+        const configurationFilepath = path.join(process.cwd(), configurationFile);
         const configurationFileData = await fs.readFile(configurationFilepath, 'utf-8');
         const parsedData = yaml.safeLoad(configurationFileData);
         return await handleParsedConfigurationFile(parsedData);
     } catch {
-        console.log(`\n\tConfiguration file required.\n\n\tCheck the file 'joiner.yaml' exists on the rootpath:\n\t${process.cwd()}\n`);
+        console.log(`\n\tConfiguration file required.\n\n\tCheck the file '${configurationFile}' exists on the rootpath:\n\t${process.cwd()}\n`);
         return;
     }
 }
