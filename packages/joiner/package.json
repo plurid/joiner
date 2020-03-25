@@ -1,6 +1,6 @@
 {
     "name": "@plurid/joiner",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Multi/Mono-Repository Task Runner",
     "keywords": [
         "joiner"
@@ -32,7 +32,7 @@
         "distribution",
         "binary"
     ],
-    "preferGlobal": false,
+    "preferGlobal": true,
     "scripts": {
         "spec": "jest --coverage",
         "spec:watch": "jest --coverage --watch",
