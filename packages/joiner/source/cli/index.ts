@@ -70,8 +70,16 @@ const main = async (
     program
         .command('patch <packageName>')
         .description('patch package version by name or "all" packages')
-        .action(async (packageName: string) => {
-            await patchCommand(packageName, program.configuration);
+        .option(
+            '-t, --type <versionType>',
+            'version type: major, minor, patch',
+            'patch',
+        ).action(async (packageName: string, options: any) => {
+            await patchCommand(
+                packageName,
+                program.configuration,
+                options.type,
+            );
         });
 
     program

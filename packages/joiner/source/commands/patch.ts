@@ -19,6 +19,7 @@ import {
 const patchCommand = async (
     packageName: string,
     configurationFile: string,
+    versionType: string,
 ) => {
     const configurationData = await parseConfigurationFile(configurationFile);
     if (!configurationData) {
@@ -31,18 +32,23 @@ const patchCommand = async (
     }
 
     for (const configPackage of resolvedPackage) {
-        await patchLogic(configPackage);
+        await patchLogic(
+            configPackage,
+            versionType,
+        );
     }
 }
 
 
 const patchLogic = async (
     configPackage: Package,
+    versionType: string,
 ) => {
     try {
         console.log(`\n\tPatching version for package ${configPackage.name}...`);
 
-        const patchCommand = 'npm version patch --no-git-tag-version';
+        const versionTypeCommand = resolveVersionType(versionType);
+        const patchCommand = `npm version ${versionTypeCommand} --no-git-tag-version`;
         execSync(
             patchCommand,
             {
@@ -55,6 +61,20 @@ const patchLogic = async (
     } catch (error) {
         console.log(`\n\tSomething went wrong. Check the version field for '${configPackage.name}'.\n`);
     }
+}
+
+
+const resolveVersionType = (
+    versionType: string,
+) => {
+    const versionTypeCommand = (
+        versionType === 'major'
+        || versionType === 'minor'
+        || versionType === 'patch'
+    )
+        ? versionType
+        : 'patch';
+    return versionTypeCommand;
 }
 
 
