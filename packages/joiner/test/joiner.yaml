@@ -1,10 +1,18 @@
-yarnWorkspace: true
-packageManager: yarn
-packagePublisher: npm
+---
 packages:
   - test/global
   - test/plurid-com/*
-commitCombine: true
-commitRoot: 'libraries/data/datasigns/'
-commitDivider: ' > '
-commitMessage: 'setup: package'
+
+package:
+  manager: yarn
+  publisher: npm
+
+yarnWorkspace: false
+
+commit:
+  engine: git
+  combine: false
+  root: '/path/to/root'
+  fullFolder: false
+  divider: ' > '
+  message: 'setup: package'

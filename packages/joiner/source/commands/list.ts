@@ -16,10 +16,14 @@ const listCommand = async (
         packages,
     } = configurationData;
 
-    console.log(`\n\tJoiner commandable packages:\n`);
-    for (const configPackage of packages) {
-        console.log(`\t\t${configPackage.name}`);
-        console.log(`\t\tpath: ${configPackage.path}\n`);
+    if (packages.length > 0) {
+        console.log(`\n\tJoiner commandable packages:\n`);
+        for (const configPackage of packages) {
+            console.log(`\t\t${configPackage.name}`);
+            console.log(`\t\tpath: ${configPackage.path}\n`);
+        }
+    } else {
+        console.log(`\n\tNo joiner commandable packages.\n`);
     }
 }
 
