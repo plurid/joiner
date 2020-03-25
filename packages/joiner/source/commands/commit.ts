@@ -1,4 +1,10 @@
+import path from 'path';
 import {
+    execSync,
+} from 'child_process';
+
+import {
+    ConfigurationFile,
     Package,
 } from '../data/interfaces';
 
@@ -27,15 +33,51 @@ const commitCommand = async (
     }
 
     for (const configPackage of resolvedPackage) {
-        await commitLogic(configPackage);
+        await commitLogic(configPackage, configurationData);
     }
 }
 
 
 const commitLogic = async (
-    configPackage: string | Package,
+    configPackage: Package,
+    configurationData: ConfigurationFile,
 ) => {
-    console.log(configPackage);
+    try {
+        console.log(`\n\tCommiting the package '${configPackage.name}'...`);
+
+        const addCommand = 'git add .';
+        execSync(
+            addCommand,
+            {
+                cwd: configPackage.path,
+                stdio: 'ignore',
+            },
+        );
+
+        const {
+            commitCombine,
+            commitRoot,
+            commitDivider,
+            commitMessage,
+        } = configurationData;
+        const packageFolder = path.relative(process.cwd(), configPackage.path);
+        const commitCommandMessage = commitCombine
+            ? commitRoot + packageFolder + commitDivider + commitMessage
+            : commitMessage;
+
+        const commitCommand = `git commit -m '${commitCommandMessage}'`;
+        execSync(
+            commitCommand,
+            {
+                cwd: configPackage.path,
+                stdio: 'ignore',
+            },
+        );
+
+        console.log(`\t'${configPackage.name}' changes commited.\n`);
+    } catch (error) {
+        console.log(`\n\tSomething went wrong.\n`);
+    }
 }
 
 
