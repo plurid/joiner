@@ -1,10 +1,23 @@
 export interface ConfigurationFile {
-    yarnWorkspace: boolean;
     packages: Package[];
-    commitCombine: boolean;
-    commitRoot: string;
-    commitDivider: string;
-    commitMessage: string;
+    yarnWorkspace: boolean;
+    package: PackageConfiguration;
+    commit: CommitConfiguration;
+}
+
+
+export interface PackageConfiguration {
+    manager: string;
+    publisher: string;
+}
+
+
+export interface CommitConfiguration {
+    engine: string;
+    combine: boolean;
+    root: string;
+    divider: string;
+    message: string;
 }
 
 

@@ -55,15 +55,15 @@ const commitLogic = async (
         );
 
         const {
-            commitCombine,
-            commitRoot,
-            commitDivider,
-            commitMessage,
-        } = configurationData;
+            combine,
+            root,
+            divider,
+            message,
+        } = configurationData.commit;
         const packageFolder = path.relative(process.cwd(), configPackage.path);
-        const commitCommandMessage = commitCombine
-            ? commitRoot + packageFolder + commitDivider + commitMessage
-            : commitMessage;
+        const commitCommandMessage = combine
+            ? root + packageFolder + divider + message
+            : message;
 
         const commitCommand = `git commit -m '${commitCommandMessage}'`;
         execSync(

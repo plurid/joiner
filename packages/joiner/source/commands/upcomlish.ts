@@ -13,7 +13,7 @@ const upcomlishCommand = async (
     console.log(`\tUpcomlishing ${packageName}...`);
 
     await updateCommand(packageName, configurationFile);
-    await patchCommand(packageName, configurationFile);
+    await patchCommand(packageName, configurationFile, 'patch');
     await commitCommand(packageName, configurationFile);
     await publishCommand(packageName, configurationFile);
 
