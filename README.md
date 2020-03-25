@@ -29,6 +29,7 @@ For `JavaScript`/`TypeScript`, `joiner` is intended to be conjoined with `Yarn W
 + [Usage](#usage)
     + [Command-Line Interface](#command-line-interface)
     + [Configuration File](#configuration-file)
++ [Packages](#packages)
 
 
 
@@ -144,3 +145,16 @@ commit:
   # default: 'setup: pacakge'
   message: 'setup: package'
 ```
+
+
+
+## Packages
+
+
+<a target="_blank" href="https://www.npmjs.com/package/@plurid/joiner">
+    <img src="https://img.shields.io/npm/v/@plurid/joiner.svg?logo=npm&colorB=1380C3&style=for-the-badge" alt="Version">
+</a>
+
+[@plurid/joiner][joiner] • the CLI application
+
+[joiner]: https://github.com/plurid/datasign/tree/master/packages/joiner
