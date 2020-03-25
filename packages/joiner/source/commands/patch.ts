@@ -1,3 +1,7 @@
+import path from 'path';
+import {
+    promises as fs,
+} from 'fs';
 import {
     execSync,
 } from 'child_process';
@@ -57,7 +61,14 @@ const patchLogic = async (
             },
         );
 
-        console.log(`\t${configPackage.name} version patched.\n`);
+        const packageJSONPath = path.join(configPackage.path, 'package.json');
+        const packageJSONRawData = await fs.readFile(packageJSONPath, 'utf-8');
+        const packageJSONData = JSON.parse(packageJSONRawData);
+        const {
+            version,
+        } = packageJSONData;
+
+        console.log(`\t${configPackage.name} version patched to version ${version}.\n`);
     } catch (error) {
         console.log(`\n\tSomething went wrong. Check the version field for '${configPackage.name}'.\n`);
     }
