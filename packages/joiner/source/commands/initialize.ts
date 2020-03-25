@@ -12,16 +12,14 @@ import {
 const initializeCommand = async () => {
     const joinerPath = path.join(process.cwd(), 'joiner.yaml');
 
-    const joinerContent = `
-yarnWorkspace: false
-
+    const joinerContent = `yarnWorkspace: false
 packageManager: yarn
 packagePublisher: npm
 
 # uncomment and add paths to packages
 packages:
-    # - /path/to/package
-    # - /path/to/multiple-packages/*
+  # - /path/to/package
+  # - /path/to/multiple-packages/*
 
 commitCombine: false
 commitRoot: '/path/to/root'
