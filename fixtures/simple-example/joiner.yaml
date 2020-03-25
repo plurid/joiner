@@ -1,0 +1,18 @@
+---
+packages:
+  - global
+  - plurid-app/*
+
+package:
+  manager: yarn
+  publisher: npm
+
+yarnWorkspace: false
+
+commit:
+  engine: git
+  combine: true
+  root: 'root/'
+  fullFolder: true
+  divider: ' > '
+  message: 'setup: package'
