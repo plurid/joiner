@@ -53,7 +53,7 @@ export const handleParsedConfigurationFile = async (
         ? parsedData.commit?.message
         : 'setup: package';
 
-    if (packages.length === 0 || yarnWorkspace) {
+    if (packages.length === 0 && !yarnWorkspace) {
         console.log(`\n\tPackages required to be specified in the 'joiner.yaml' file.\n`);
         return;
     }
