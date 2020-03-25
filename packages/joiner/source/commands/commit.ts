@@ -14,8 +14,9 @@ import {
 
 const commitCommand = async (
     packageName: string,
+    configurationFile: string,
 ) => {
-    const configurationData = await parseConfigurationFile();
+    const configurationData = await parseConfigurationFile(configurationFile);
     if (!configurationData) {
         return;
     }

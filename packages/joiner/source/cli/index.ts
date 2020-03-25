@@ -44,6 +44,7 @@ const main = async (
             await runCommand(
                 packageName,
                 command,
+                program.configuration,
             );
         });
 
@@ -51,35 +52,35 @@ const main = async (
         .command('update <packageName>')
         .description('update package by name or "all" packages')
         .action(async (packageName: string)=> {
-            updateCommand(packageName);
+            updateCommand(packageName, program.configuration);
         });
 
     program
         .command('patch <packageName>')
         .description('patch package version by name or "all" packages')
         .action((packageName: string) => {
-            patchCommand(packageName);
+            patchCommand(packageName, program.configuration);
         });
 
     program
         .command('commit <packageName>')
         .description('commit package by name or "all" packages')
         .action((packageName: string) => {
-            commitCommand(packageName);
+            commitCommand(packageName, program.configuration);
         });
 
     program
         .command('publish <packageName>')
         .description('publish package by name or "all" packages')
         .action((packageName: string) => {
-            publishCommand(packageName);
+            publishCommand(packageName, program.configuration);
         });
 
     program
         .command('upcomlish <packageName>')
         .description('upcomlish - update, patch, commit, publish - package by name or "all" packages')
         .action((packageName: string) => {
-            upcomlishCommand(packageName);
+            upcomlishCommand(packageName, program.configuration);
         });
 
 

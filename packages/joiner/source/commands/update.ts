@@ -21,8 +21,9 @@ import checkUpdates from 'npm-check-updates';
 
 const updateCommand = async (
     packageName: string,
+    configurationFile: string,
 ) => {
-    const configurationData = await parseConfigurationFile();
+    const configurationData = await parseConfigurationFile(configurationFile);
     if (!configurationData) {
         return;
     }
