@@ -1,5 +1,11 @@
+import path from 'path';
+import {
+    promises as fs,
+} from 'fs';
+
 import {
     ConfigurationFile,
+    Package,
 } from '../../data/interfaces';
 
 
@@ -32,12 +38,33 @@ export const resolvePackage = (
 }
 
 
-export const locatePackages = (
+export const locatePackages = async (
     packages: any,
 ) => {
     if (!packages) {
         return [];
     }
 
-    return [];
+    const locatedPackages: Package[] = [];
+
+    for (const specifiedPackage of packages) {
+        const packagePath = path.join(process.cwd(), specifiedPackage, 'package.json');
+
+        try {
+            const packageRawData = await fs.readFile(packagePath, 'utf-8');
+            const packageData = JSON.parse(packageRawData);
+
+            const packageName = packageData.name || '';
+
+            const locatedPackage: Package = {
+                path: packagePath,
+                name: packageName,
+            };
+            locatedPackages.push(locatedPackage);
+        } catch (error) {
+            console.log(`\n\tCould not read the package from:\n\t${packagePath}\n`);
+        }
+    }
+
+    return locatedPackages;
 }
