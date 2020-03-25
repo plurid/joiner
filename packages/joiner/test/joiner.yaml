@@ -3,7 +3,7 @@ yarnWorkspace: true
 packages:
   - test/global
   # - plurid-app/general/*
-  - plurid-com/*
+  - test/plurid-com/*
 commitAfterUpdate: true
 # commitRoot + packageFolder + commitDivider + commitMessage
 # libraries/data/datasigns/plurid-app/general/dashboard > setup: package

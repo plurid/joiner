@@ -49,13 +49,32 @@ export const locatePackages = async (
 
     for (const specifiedPackage of packages) {
         if (!(specifiedPackage as string).includes('/*')) {
-            const packagePath = path.join(process.cwd(), specifiedPackage, 'package.json');
+            const packagePath = path.join(process.cwd(), specifiedPackage);
             const locatedPackage = await readPackageFile(packagePath);
             if (locatedPackage) {
                 locatedPackages.push(locatedPackage);
             }
         } else {
-            console.log(specifiedPackage);
+            const packagesRoot = specifiedPackage.replace('/*', '');
+            const packagesRootPath = path.join(process.cwd(), packagesRoot);
+
+            try {
+                const rootFiles = await fs.readdir(packagesRootPath);
+
+                for (const rootFile of rootFiles) {
+                    const packagePath = path.join(packagesRootPath, rootFile);
+                    const statistics = await fs.stat(packagePath);
+
+                    if (statistics.isDirectory()) {
+                        const locatedPackage = await readPackageFile(packagePath);
+                        if (locatedPackage) {
+                            locatedPackages.push(locatedPackage);
+                        }
+                    }
+                }
+            } catch (error) {
+                console.log(`\n\tPackages root ${packagesRootPath} could not be resolved.\n`);
+            }
         }
     }
 
@@ -67,7 +86,8 @@ const readPackageFile = async (
     packagePath: string,
 ) => {
     try {
-        const packageRawData = await fs.readFile(packagePath, 'utf-8');
+        const packageJSONPath = path.join(packagePath, 'package.json');
+        const packageRawData = await fs.readFile(packageJSONPath, 'utf-8');
         const packageData = JSON.parse(packageRawData);
 
         const packageName = packageData.name || '';
