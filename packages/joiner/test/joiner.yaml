@@ -1,12 +1,8 @@
-# get packages location from yarn workspaces
 yarnWorkspace: true
+packageManger: yarn
 packages:
   - test/global
-  # - plurid-app/general/*
   - test/plurid-com/*
-commitAfterUpdate: true
-# commitRoot + packageFolder + commitDivider + commitMessage
-# libraries/data/datasigns/plurid-app/general/dashboard > setup: package
 commitCombine: true
 commitRoot: 'libraries/data/datasigns/'
 commitDivider: ' > '

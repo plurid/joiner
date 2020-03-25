@@ -40,13 +40,13 @@ export const handleParsedConfigurationFile = async (
     const commitCombine = typeof parsedData.commitCombine === 'boolean'
         ? parsedData.commitCombine
         : false;
-    const commitRoot = typeof parsedData.commitRoot === 'boolean'
+    const commitRoot = typeof parsedData.commitRoot === 'string'
         ? parsedData.commitRoot
         : '';
-    const commitDivider = typeof parsedData.commitDivider === 'boolean'
+    const commitDivider = typeof parsedData.commitDivider === 'string'
         ? parsedData.commitDivider
         : ' > ';
-    const commitMessage = typeof parsedData.commitMessage === 'boolean'
+    const commitMessage = typeof parsedData.commitMessage === 'string'
         ? parsedData.commitMessage
         : 'setup: package';
 
@@ -63,6 +63,7 @@ export const handleParsedConfigurationFile = async (
         commitDivider,
         commitMessage,
     };
+    console.log(configurationFile);
 
     return configurationFile;
 }
