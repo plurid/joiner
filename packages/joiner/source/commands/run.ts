@@ -43,7 +43,7 @@ const runLogic = async (
 ) => {
     const executableCommand = command.join(' ');
 
-    console.log(`\n\tRunning command ${executableCommand} in:\n\t${configPackage.path}\n`);
+    console.log(`\n\tRunning command '${executableCommand}' in:\n\t${configPackage.path}\n`);
     const startTime = Date.now();
 
     execSync(
@@ -56,7 +56,7 @@ const runLogic = async (
 
     const endTime = Date.now();
     const commandTime = (endTime - startTime)/1000;
-    console.log(`\n\tCommand\n\t${executableCommand}\n\tran in ${commandTime} seconds\n`);
+    console.log(`\n\tCommand\n\n\t\t${executableCommand}\n\n\tran in ${commandTime} seconds.\n`);
 }
 
 
