@@ -62,13 +62,13 @@ const updateLogic = async (
 
             console.log(`\n\tInstalling the updates ${inThePackage}...`);
             installCommand(configPackage);
-            console.log(`\tUpdates installed ${inThePackage}...\n`);
+            console.log(`\tUpdates installed ${inThePackage}.\n`);
         } else {
             console.log(`\n\tNo dependencies updates ${inThePackage}.\n`);
 
             console.log(`\n\tInstalling the dependencies ${inThePackage}...`);
             installCommand(configPackage);
-            console.log(`\tDependencies installed ${inThePackage}...\n`);
+            console.log(`\tDependencies installed ${inThePackage}.\n`);
         }
     } catch (error) {
         console.log(`\n\tSomething went wrong.\n`);
