@@ -46,7 +46,7 @@ export const locatePackages = async (
         yarnWorkspace,
     } = parsedData;
 
-    if (!packages && !yarnWorkspace) {
+    if (!packages && yarnWorkspace) {
         return [];
     }
 
