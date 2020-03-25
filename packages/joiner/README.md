@@ -83,6 +83,7 @@ Options:
 Commands:
 
     run <packageName> <command...>  run arbitrary command on package by name or on "all" packages
+    initialize                      initialize joiner.yaml file
     update <packageName>            update package by name or "all" packages
     patch <packageName>             patch package version by name or "all" packages
     commit <packageName>            commit package by name or "all" packages
