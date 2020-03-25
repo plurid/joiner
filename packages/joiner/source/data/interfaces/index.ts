@@ -16,6 +16,7 @@ export interface CommitConfiguration {
     engine: string;
     combine: boolean;
     root: string;
+    fullFolder: boolean;
     divider: string;
     message: string;
 }

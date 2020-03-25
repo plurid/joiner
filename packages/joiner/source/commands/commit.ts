@@ -57,14 +57,18 @@ const commitLogic = async (
         const {
             combine,
             root,
+            fullFolder,
             divider,
             message,
         } = configurationData.commit;
         const packageFolder = path.relative(process.cwd(), configPackage.path);
         const packageFolderSplit = packageFolder.split('/');
         const packageFolderName = packageFolderSplit[packageFolderSplit.length - 1];
+        const packageName = fullFolder
+            ? packageFolder
+            : packageFolderName;
         const commitCommandMessage = combine
-            ? root + packageFolderName + divider + message
+            ? root + packageName + divider + message
             : message;
 
         const commitCommand = `git commit -m '${commitCommandMessage}'`;
