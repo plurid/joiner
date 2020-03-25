@@ -1,7 +1,7 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/plurid/joiner/master/about/identity/joiner-logo.png" height="250px">
     <br />
-    <img src="https://img.shields.io/badge/cli-v0.1.0-blue.svg?colorB=1380C3&style=for-the-badge" alt="CLI">
+    <!-- <img src="https://img.shields.io/badge/cli-v0.1.0-blue.svg?colorB=1380C3&style=for-the-badge" alt="CLI"> -->
     <a target="_blank" href="https://github.com/plurid/joiner/blob/master/LICENSE">
         <img src="https://img.shields.io/badge/license-MIT-blue.svg?colorB=1380C3&style=for-the-badge" alt="License: MIT">
     </a>
