@@ -2,5 +2,12 @@
     "name": "global",
     "scripts": {
         "echo": "echo"
+    },
+    "dependencies": {
+        "@plurid/datasign": "0.0.8",
+        "cross-env": "^7.0.2"
+    },
+    "devDependencies": {
+        "@plurid/plurid-react": "0.1.126"
     }
 }
