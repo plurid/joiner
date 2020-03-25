@@ -19,9 +19,8 @@ const listCommand = async (
     console.log(`\n\tJoiner commandable packages:\n`);
     for (const configPackage of packages) {
         console.log(`\t\t${configPackage.name}`);
-        console.log(`\t\t\tpath: ${configPackage.path}\n`);
+        console.log(`\t\tpath: ${configPackage.path}\n`);
     }
-    console.log(`\n`);
 }
 
 
