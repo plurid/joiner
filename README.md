@@ -50,6 +50,12 @@ yarn global add @plurid/joiner
 
 ## Usage
 
+Initialize by running, in the root folder of the project(s), the command
+
+``` bash
+joiner initialize
+```
+
 `Joiner` requires a `joiner.yaml` file where the packages paths must be registered such as
 
 ``` yaml
@@ -97,25 +103,44 @@ The `joiner.yaml` configuration file can be at the root of the packages/workspac
 
 The `joiner.yaml` configuration file has as required fields only the `packages` field (or, if using Yarn Workspaces, the `yarnWorkspace` field set to `true`).
 
-The list of `joiner.yaml` fields
+The `joiner.yaml` fields:
 
-``` typescript
-/** required */
-yarnWorkspace: boolean;
-packages: Package[];
+``` yarn
+### required
+packages:
+  - /path/to/package
+  - /path/to/multi-package/*
 
-/** optional */
-// The commit message is formed from:
-// commitRoot + packageFolder + commitDivider + commitMessage
-commitCombine: boolean;
+# default: false
+yarnWorkspace: false | true
 
-// The root of the packages/workspace.
-commitRoot: string;
 
-// Separator between the packageFolder and the commitMessage.
-// Default: ' > '.
-commitDivider: string;
+### optional
+package:
+  # default: yarn
+  manager: yarn | npm
 
-// The actual commit messsage.
-commitMessage: string;
+  # default: npm
+  publisher: yarn | npm
+
+
+commit:
+  # At the moment, only git is supported.
+  engine: git
+
+  # The commit message is formed from:
+  # commitRoot + packageFolderName + commitDivider + commitMessage
+  # default: false
+  combine: false | true
+
+  # The root of the packages/workspace.
+  root: '/path/to/root'
+
+  # Separator between the packageFolderName and the commitMessage.
+  # default: ' > '
+  divider: ' > '
+
+  # The actual commit messsage.
+  # default: 'setup: pacakge'
+  message: 'setup: package'
 ```
