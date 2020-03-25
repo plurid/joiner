@@ -1,17 +1,19 @@
-import commitCommand from './commit';
-import patchCommand from './patch';
-import publishCommand from './publish';
+import initializeCommand from './initialize';
 import runCommand from './run';
-import upcomlishCommand from './upcomlish';
 import updateCommand from './update';
+import patchCommand from './patch';
+import commitCommand from './commit';
+import publishCommand from './publish';
+import upcomlishCommand from './upcomlish';
 
 
 
 export {
-    commitCommand,
+    initializeCommand,
     runCommand,
+    updateCommand,
     patchCommand,
+    commitCommand,
     publishCommand,
     upcomlishCommand,
-    updateCommand,
 }
