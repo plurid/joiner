@@ -1,6 +1,6 @@
 export interface ConfigurationFile {
     yarnWorkspace: boolean;
-    packages: string[] | Package[];
+    packages: Package[];
     commitCombine: boolean;
     commitRoot: string;
     commitDivider: string;

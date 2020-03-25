@@ -6,7 +6,9 @@ import {
     parseConfigurationFile,
 } from '../services/logic/configuration';
 
-import resolvePackage from '../services/logic/resolvePackage';
+import {
+    resolvePackage,
+} from '../services/logic/packages';
 
 
 
@@ -23,14 +25,9 @@ const commitCommand = async (
         return;
     }
 
-    if (Array.isArray(resolvedPackage)) {
-        for (const configPackage of resolvedPackage) {
-            await commitLogic(configPackage);
-        }
-        return;
+    for (const configPackage of resolvedPackage) {
+        await commitLogic(configPackage);
     }
-
-    await commitLogic(resolvedPackage);
 }
 
 

@@ -9,6 +9,10 @@ import {
     ConfigurationFile,
 } from '../../data/interfaces';
 
+import {
+    locatePackages,
+} from './packages';
+
 
 
 export const parseConfigurationFile = async () => {
@@ -30,7 +34,7 @@ export const handleParsedConfigurationFile = (
     const yarnWorkspace = typeof parsedData.yarnWorkspace === 'boolean'
         ? parsedData.yarnWorkspace
         : false;
-    const packages = parsedData.packages || [];
+    const packages = locatePackages(parsedData.packages);
     const commitCombine = typeof parsedData.commitCombine === 'boolean'
         ? parsedData.commitCombine
         : false;

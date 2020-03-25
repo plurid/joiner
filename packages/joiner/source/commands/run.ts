@@ -10,7 +10,9 @@ import {
     parseConfigurationFile,
 } from '../services/logic/configuration';
 
-import resolvePackage from '../services/logic/resolvePackage';
+import {
+    resolvePackage,
+} from '../services/logic/packages';
 
 
 
@@ -28,14 +30,9 @@ const runCommand = async (
         return;
     }
 
-    if (Array.isArray(resolvedPackage)) {
-        for (const configPackage of resolvedPackage) {
-            await runLogic(configPackage, command);
-        }
-        return;
+    for (const configPackage of resolvedPackage) {
+        await runLogic(configPackage, command);
     }
-
-    await runLogic(resolvedPackage, command);
 }
 
 

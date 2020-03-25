@@ -4,7 +4,7 @@ import {
 
 
 
-const resolvePackage = (
+export const resolvePackage = (
     packageName: string,
     configurationData: ConfigurationFile,
 ) => {
@@ -22,15 +22,8 @@ const resolvePackage = (
     }
 
     for (const codePackage of packages) {
-        if (typeof codePackage === 'string') {
-            if (codePackage === packageName) {
-                return codePackage;
-            }
-            continue;
-        }
-
-        if (codePackage.name === packageName) {
-            return codePackage;
+        if (codePackage.name.toLowerCase() === safePackageName) {
+            return [codePackage];
         }
     }
 
@@ -39,4 +32,12 @@ const resolvePackage = (
 }
 
 
-export default resolvePackage;
+export const locatePackages = (
+    packages: any,
+) => {
+    if (!packages) {
+        return [];
+    }
+
+    return [];
+}
