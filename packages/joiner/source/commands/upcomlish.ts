@@ -8,7 +8,7 @@ import publishCommand from './publish';
 const upcomlishCommand = async (
     packageName: string,
 ) => {
-    console.log(`\n\t------------`);
+    console.log(`\n\t---------------`);
     console.log(`\tUpcomlishing ${packageName}...`);
 
     await updateCommand(packageName);
@@ -17,7 +17,7 @@ const upcomlishCommand = async (
     await publishCommand(packageName);
 
     console.log(`\n\tUpcomlished ${packageName}.`);
-    console.log(`\t------------\n`);
+    console.log(`\t---------------\n`);
 }
 
 
