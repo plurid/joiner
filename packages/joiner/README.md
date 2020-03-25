@@ -59,7 +59,7 @@ Initialize by running, in the root folder of the project(s), the command
 joiner initialize
 ```
 
-`Joiner` requires a `joiner.yaml` file where the packages paths must be registered such as
+`Joiner` requires* a `joiner.yaml` file where the packages paths must be registered such as
 
 ``` yaml
 packages:
@@ -76,6 +76,8 @@ packages:
 ```
 
 where the `multi-package-folder` is a directory containing multiple folders with their own `package.json`.
+
+* when using `yarnWorkspace: true` the `packages` field can be removed/commented, `joiner` will look for the packages in the `workspaces` field of the root `package.json`.
 
 
 ### Command-Line Interface
