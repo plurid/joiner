@@ -39,23 +39,30 @@ export const resolvePackage = (
 
 
 export const locatePackages = async (
-    packages: any,
+    parsedData: any,
 ) => {
-    if (!packages) {
+    const {
+        packages,
+        yarnWorkspace,
+    } = parsedData;
+
+    if (!packages && !yarnWorkspace) {
         return [];
     }
 
+    const packagesPaths = await resolvePackagesPaths(packages, yarnWorkspace);
+
     const locatedPackages: Package[] = [];
 
-    for (const specifiedPackage of packages) {
-        if (!(specifiedPackage as string).includes('/*')) {
-            const packagePath = path.join(process.cwd(), specifiedPackage);
-            const locatedPackage = await readPackageFile(packagePath);
+    for (const packagePath of packagesPaths) {
+        if (!(packagePath as string).includes('/*')) {
+            const packageAbsolutePath = path.join(process.cwd(), packagePath);
+            const locatedPackage = await readPackageFile(packageAbsolutePath);
             if (locatedPackage) {
                 locatedPackages.push(locatedPackage);
             }
         } else {
-            const packagesRoot = specifiedPackage.replace('/*', '');
+            const packagesRoot = packagePath.replace('/*', '');
             const packagesRootPath = path.join(process.cwd(), packagesRoot);
 
             try {
@@ -82,6 +89,28 @@ export const locatePackages = async (
 }
 
 
+const resolvePackagesPaths = async (
+    packages: any[],
+    yarnWorkspace: boolean | undefined,
+) => {
+    if (!yarnWorkspace) {
+        return packages;
+    }
+
+    try {
+        const packageJSONPath = path.join(process.cwd(), 'package.json');
+        const packageRawData = await fs.readFile(packageJSONPath, 'utf-8');
+        const packageData = JSON.parse(packageRawData);
+        const workspaces = packageData.workspaces || [];
+
+        return workspaces;
+    } catch (error) {
+        console.log(`\n\tCould not read the workspaces in the package.json from:\n\t${process.cwd()}\n`);
+        return [];
+    }
+}
+
+
 const readPackageFile = async (
     packagePath: string,
 ) => {
@@ -91,6 +120,7 @@ const readPackageFile = async (
         const packageData = JSON.parse(packageRawData);
 
         const packageName = packageData.name || '';
+        // const packageVersion = packageData.version || '';
 
         const locatedPackage: Package = {
             path: packagePath,

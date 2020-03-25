@@ -36,7 +36,7 @@ export const handleParsedConfigurationFile = async (
     const yarnWorkspace = typeof parsedData.yarnWorkspace === 'boolean'
         ? parsedData.yarnWorkspace
         : false;
-    const packages = await locatePackages(parsedData.packages);
+    const packages = await locatePackages(parsedData);
     const commitCombine = typeof parsedData.commit?.combine === 'boolean'
         ? parsedData.commit?.combine
         : false;
