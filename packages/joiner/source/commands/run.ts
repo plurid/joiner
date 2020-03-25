@@ -38,17 +38,15 @@ const runCommand = async (
 
 
 const runLogic = async (
-    configPackage: string | Package,
+    configPackage: Package,
     command: string[],
 ) => {
-    console.log(configPackage);
-    console.log(command);
-
     const executableCommand = command.join(' ');
 
     execSync(
         executableCommand,
         {
+            cwd: configPackage.path,
             stdio: 'inherit',
         },
     );

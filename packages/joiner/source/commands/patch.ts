@@ -51,7 +51,7 @@ const patchLogic = async (
             },
         );
 
-        console.log(`\t${configPackage.name} version patched\n`);
+        console.log(`\t${configPackage.name} version patched.\n`);
     } catch (error) {
         console.log(`\n\tSomething went wrong. Check the version field for '${configPackage.name}'.\n`);
     }
