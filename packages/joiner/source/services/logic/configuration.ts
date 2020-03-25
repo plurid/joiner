@@ -20,7 +20,7 @@ export const parseConfigurationFile = async () => {
         const configurationFilepath = path.join(process.cwd(), 'joiner.yaml');
         const configurationFileData = await fs.readFile(configurationFilepath, 'utf-8');
         const parsedData = yaml.safeLoad(configurationFileData);
-        return handleParsedConfigurationFile(parsedData);
+        return await handleParsedConfigurationFile(parsedData);
     } catch {
         console.log(`\n\tConfiguration file required.\n\n\tCheck the file 'joiner.yaml' exists on the rootpath:\n\t${process.cwd()}\n`);
         return;
@@ -28,13 +28,13 @@ export const parseConfigurationFile = async () => {
 }
 
 
-export const handleParsedConfigurationFile = (
+export const handleParsedConfigurationFile = async (
     parsedData: any,
-): ConfigurationFile | undefined => {
+): Promise<ConfigurationFile | undefined> => {
     const yarnWorkspace = typeof parsedData.yarnWorkspace === 'boolean'
         ? parsedData.yarnWorkspace
         : false;
-    const packages = locatePackages(parsedData.packages);
+    const packages = await locatePackages(parsedData.packages);
     const commitCombine = typeof parsedData.commitCombine === 'boolean'
         ? parsedData.commitCombine
         : false;

@@ -1,3 +1,6 @@
 {
-    "name": "global"
+    "name": "global",
+    "scripts": {
+        "echo": "echo"
+    }
 }
