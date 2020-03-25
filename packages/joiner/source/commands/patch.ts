@@ -1,4 +1,8 @@
 import {
+    execSync,
+} from 'child_process';
+
+import {
     Package,
 } from '../data/interfaces';
 
@@ -33,9 +37,24 @@ const patchCommand = async (
 
 
 const patchLogic = async (
-    configPackage: string | Package,
+    configPackage: Package,
 ) => {
-    console.log(configPackage);
+    try {
+        console.log(`\n\tPatching version for package ${configPackage.name}...`);
+
+        const patchCommand = 'npm version patch --no-git-tag-version';
+        execSync(
+            patchCommand,
+            {
+                cwd: configPackage.path,
+                stdio: 'ignore',
+            },
+        );
+
+        console.log(`\t${configPackage.name} version patched\n`);
+    } catch (error) {
+        console.log(`\n\tSomething went wrong.\n`);
+    }
 }
 
 
