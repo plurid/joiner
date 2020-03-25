@@ -1,40 +1,23 @@
-import {
-    Package,
-} from '../data/interfaces';
-
-import {
-    parseConfigurationFile,
-} from '../services/logic/configuration';
-
-import {
-    resolvePackage,
-} from '../services/logic/packages';
+import updateCommand from './update';
+import patchCommand from './patch';
+import commitCommand from './commit';
+import publishCommand from './publish';
 
 
 
 const upcomlishCommand = async (
     packageName: string,
 ) => {
-    const configurationData = await parseConfigurationFile();
-    if (!configurationData) {
-        return;
-    }
+    console.log(`\n\t------------`);
+    console.log(`\tUpcomlishing ${packageName}...`);
 
-    const resolvedPackage = resolvePackage(packageName, configurationData);
-    if (!resolvedPackage) {
-        return;
-    }
+    await updateCommand(packageName);
+    await patchCommand(packageName);
+    await commitCommand(packageName);
+    await publishCommand(packageName);
 
-    for (const configPackage of resolvedPackage) {
-        await upcomlishLogic(configPackage);
-    }
-}
-
-
-const upcomlishLogic = async (
-    configPackage: string | Package,
-) => {
-    console.log(configPackage);
+    console.log(`\n\tUpcomlished ${packageName}.`);
+    console.log(`\t------------\n`);
 }
 
 
