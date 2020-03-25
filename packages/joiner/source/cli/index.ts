@@ -4,6 +4,7 @@ import program, {
 
 import {
     initializeCommand,
+    listCommand,
     runCommand,
     updateCommand,
     patchCommand,
@@ -48,6 +49,15 @@ const main = async (
         .description('initialize joiner.yaml file')
         .action(async ()=> {
             await initializeCommand();
+        });
+
+    program
+        .command('list')
+        .description('list joiner commandable packages')
+        .action(async ()=> {
+            await listCommand(
+                program.configuration,
+            );
         });
 
     program
