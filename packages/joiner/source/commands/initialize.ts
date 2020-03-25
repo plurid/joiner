@@ -34,11 +34,12 @@ commit:
 
     if (!await fileExists(joinerPath)) {
         await fs.writeFile(joinerPath, joinerContent);
+
+        console.log(`\n\tJoiner initialized in root path:\n\n\t${process.cwd()}\n`);
     } else {
         console.log(`\n\tJoiner already initialized. File 'joiner.yaml' exists in path:\n\n\t${process.cwd()}\n`);
     }
 }
-
 
 
 export default initializeCommand;
