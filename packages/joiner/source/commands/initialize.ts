@@ -3,6 +3,10 @@ import {
     promises as fs,
 } from 'fs';
 
+import {
+    fileExists,
+} from '../services/utilities';
+
 
 
 const initializeCommand = async () => {
@@ -25,9 +29,7 @@ commitDivider: ' > '
 commitMessage: 'setup: package'
 `;
 
-    const fileStatistics = await fs.stat(joinerPath);
-
-    if (!fileStatistics.isFile()) {
+    if (!fileExists(joinerPath)) {
         await fs.writeFile(joinerPath, joinerContent);
     } else {
         console.log(`\n\tJoiner already initialized. File 'joiner.yaml' exists in path:\n${process.cwd()}\n`);
