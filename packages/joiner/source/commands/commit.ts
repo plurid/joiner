@@ -61,8 +61,10 @@ const commitLogic = async (
             message,
         } = configurationData.commit;
         const packageFolder = path.relative(process.cwd(), configPackage.path);
+        const packageFolderSplit = packageFolder.split('/');
+        const packageFolderName = packageFolderSplit[packageFolderSplit.length - 1];
         const commitCommandMessage = combine
-            ? root + packageFolder + divider + message
+            ? root + packageFolderName + divider + message
             : message;
 
         const commitCommand = `git commit -m '${commitCommandMessage}'`;
