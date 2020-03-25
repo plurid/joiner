@@ -43,6 +43,9 @@ export const handleParsedConfigurationFile = async (
     const commitRoot = typeof parsedData.commit?.root === 'string'
         ? parsedData.commit?.root
         : '';
+    const commitFullFolder = typeof parsedData.commit?.fullFolder === 'string'
+        ? parsedData.commit?.fullFolder
+        : '';
     const commitDivider = typeof parsedData.commit?.divider === 'string'
         ? parsedData.commit?.divider
         : ' > ';
@@ -66,6 +69,7 @@ export const handleParsedConfigurationFile = async (
             engine: 'git',
             combine: commitCombine,
             root: commitRoot,
+            fullFolder: commitFullFolder,
             divider: commitDivider,
             message: commitMessage,
         },
