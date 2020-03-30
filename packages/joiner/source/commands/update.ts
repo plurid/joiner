@@ -52,7 +52,7 @@ const updateLogic = async (
             silent: true,
             jsonUpgraded: true,
             upgrade: true,
-            dep: 'prod,dev,peer',
+            dep: 'prod, dev, peer',
         });
 
         if (Object.keys(updatedPackages).length > 0) {
