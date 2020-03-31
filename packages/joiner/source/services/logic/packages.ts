@@ -153,7 +153,9 @@ const readPackageFile = async (
 const computePackageAlias = (
     name: string,
 ) => {
-    const split = name.split('.');
+    const noScope = name.replace(/@\w+\//, '');
+    const split = noScope.split('.');
+    const lastWord = split[split.length - 1];
 
-    return split[split.length - 1];
+    return lastWord;
 }
