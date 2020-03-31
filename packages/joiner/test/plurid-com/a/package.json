@@ -1,5 +1,6 @@
 {
     "name": "@scope/aa.a",
+    "version": "0.0.0",
     "scripts": {
         "echo": "echo"
     }
