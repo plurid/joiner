@@ -25,5 +25,6 @@ export interface CommitConfiguration {
 export interface Package {
     name: string;
     path: string;
+    alias: string;
     language?: 'javascript' | 'typescript';
 }

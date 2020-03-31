@@ -28,7 +28,10 @@ export const resolvePackage = (
     }
 
     for (const codePackage of packages) {
-        if (codePackage.name.toLowerCase() === safePackageName) {
+        if (
+            codePackage.name.toLowerCase() === safePackageName ||
+            codePackage.alias.toLowerCase() === safePackageName
+        ) {
             return [codePackage];
         }
     }
@@ -120,15 +123,37 @@ const readPackageFile = async (
         const packageData = JSON.parse(packageRawData);
 
         const packageName = packageData.name || '';
+        const packageAlias = computePackageAlias(packageName);
         // const packageVersion = packageData.version || '';
 
         const locatedPackage: Package = {
             path: packagePath,
             name: packageName,
+            alias: packageAlias,
         };
         return locatedPackage;
     } catch (error) {
         console.log(`\n\tCould not read the package from:\n\t${packagePath}\n`);
         return;
     }
+}
+
+
+/**
+ * Extract from the package `name` the package `alias`.
+ *
+ * e.g.
+ *
+ * `@scope/one.two.three` -> `three`
+ *
+ * `one-two` -> `one-two`
+ *
+ * @param name
+ */
+const computePackageAlias = (
+    name: string,
+) => {
+    const split = name.split('.');
+
+    return split[split.length - 1];
 }
