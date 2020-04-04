@@ -40,6 +40,11 @@ const publishLogic = async (
     configPackage: Package,
 ) => {
     try {
+        if (configPackage.private) {
+            console.log(`\n\tPackage '${configPackage.name} is private. Did not publish.'`);
+            return;
+        }
+
         console.log(`\n\tPublishing the package '${configPackage.name}'...`);
 
         const publishCommand = 'npm publish';

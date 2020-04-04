@@ -26,5 +26,7 @@ export interface Package {
     name: string;
     path: string;
     alias: string;
+    version: string;
+    private: boolean;
     language?: 'javascript' | 'typescript';
 }

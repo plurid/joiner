@@ -122,14 +122,17 @@ const readPackageFile = async (
         const packageRawData = await fs.readFile(packageJSONPath, 'utf-8');
         const packageData = JSON.parse(packageRawData);
 
-        const packageName = packageData.name || '';
+        const packageName = packageData.name ?? '';
         const packageAlias = computePackageAlias(packageName);
-        // const packageVersion = packageData.version || '';
+        const packageVersion = packageData.version ?? '0.0.0';
+        const packagePrivate = packageData.private ?? false;
 
         const locatedPackage: Package = {
             path: packagePath,
             name: packageName,
             alias: packageAlias,
+            version: packageVersion,
+            private: packagePrivate,
         };
         return locatedPackage;
     } catch (error) {
