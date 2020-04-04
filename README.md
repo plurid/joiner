@@ -102,6 +102,8 @@ Commands:
 
 Instead of `packageName` the signifier `all` can be used to run the command on all the registered packages.
 
+To `run` a `command...` with flags, the divider `--` must be used, e.g. `joiner run all -- yarn add -D <some-development-dependency>`.
+
 
 ### Configuration File
 
