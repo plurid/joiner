@@ -30,6 +30,8 @@ For `JavaScript`/`TypeScript`, `joiner` is intended to be conjoined with `Yarn W
 + [Usage](#usage)
     + [Command-Line Interface](#command-line-interface)
     + [Configuration File](#configuration-file)
++ [Advanced Usage](#advanced-usage)
+    + [Path Resolution](#path-resolution)
 + [Packages](#packages)
 
 
@@ -75,6 +77,8 @@ packages:
 ```
 
 where the `multi-package-folder` is a directory containing multiple folders with their own `package.json`.
+
+The packages paths are resolved relative to the folder from where the command is called. See [path resolution](#path-resolution).
 
 † when using `yarnWorkspace: true` the `packages` field can be removed/commented, `joiner` will look for the packages in the `workspaces` field of the root `package.json`.
 
@@ -156,6 +160,69 @@ commit:
   # default: 'setup: package'
   message: 'setup: package'
 ```
+
+
+
+## Advanced Usage
+
+### Path Resolution
+
+`Joiner` can be used to couple arbitrary packages, spread across the filesystem, and perform any kind of maintenance cycle (run commands, update, patch, commit, publish) on them specifically.
+
+The `joiner.yaml` file can be anywhere on the filesystem. Consider the following file structure
+
+``` fs
+    | .
+    | - packages
+        | - package-a
+        | - package-b
+            | - package-b1
+            | - package-b2
+    | - scripts
+        | - joiners
+```
+
+The folder `./scripts/joiners` contains multiple `joiner.yaml` files. For example
+
+``` yaml
+# joiner-b2-a.yaml
+---
+packages:
+  - ./packages/package-b/package-b2
+  - ./packages/package-a
+```
+
+``` yaml
+# joiner-all.yaml
+---
+packages:
+  - ../../packages/package-b/*
+  - ../../packages/package-a
+```
+
+Running the command
+
+``` bash
+joiner update all -c ./scripts/joiners/joiner-b2-a.yaml
+```
+
+from the `root` directory will update all the packages mentioned in the `./scripts/joiners/joiner-b2-a.yaml` file (`package-b/package-b2` first, and then `package-a`).
+
+While running the command
+
+``` bash
+joiner update all -c ./joiner-all.yaml
+```
+
+from the `./scripts/joiners` directory will update all the packages in `./packages/package-b` and the `packages/package-a` package.
+
+In order to not run the command from a wrong directory, which will result in bad path resolution, the field `runFrom` can be specified
+
+``` yaml
+runFrom: ../../
+```
+
+which contains a path trunk, relative to the `joiner.yaml` file, from which the packages paths will be resolved, irrespective from where the `joiner` command is run.
 
 
 
