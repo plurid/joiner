@@ -104,7 +104,7 @@ Commands:
     list                            list joiner commandable packages
     update <packageName>            update package by name or "all" packages
     patch [options] <packageName>   patch package version by name or "all" packages
-    commit <packageName>            commit package by name or "all" packages
+    commit [options] <packageName>  commit package by name or "all" packages
     publish <packageName>           publish package by name or "all" packages
     ucom <packageName>              upcom - update, commit - package by name or "all" packages
     upcom <packageName>             upcom - update, patch, commit - package by name or "all" packages
