@@ -21,6 +21,7 @@ import {
 const commitCommand = async (
     packageName: string,
     configurationFile: string,
+    message?: string,
 ) => {
     const configurationData = await parseConfigurationFile(configurationFile);
     if (!configurationData) {
@@ -33,7 +34,11 @@ const commitCommand = async (
     }
 
     for (const configPackage of resolvedPackage) {
-        await commitLogic(configPackage, configurationData);
+        await commitLogic(
+            configPackage,
+            configurationData,
+            message,
+        );
     }
 }
 
@@ -41,6 +46,7 @@ const commitCommand = async (
 const commitLogic = async (
     configPackage: Package,
     configurationData: ConfigurationFile,
+    message?: string,
 ) => {
     try {
         console.log(`\n\tCommiting the package '${configPackage.name}'...`);
@@ -59,7 +65,7 @@ const commitLogic = async (
             root,
             fullFolder,
             divider,
-            message,
+            message: configMessage,
         } = configurationData.commit;
         const packageFolder = path.relative(process.cwd(), configPackage.path);
         const packageFolderSplit = packageFolder.split('/');
@@ -67,9 +73,10 @@ const commitLogic = async (
         const packageName = fullFolder
             ? packageFolder
             : packageFolderName;
+        const commitMessage = message || configMessage;
         const commitCommandMessage = combine
-            ? root + packageName + divider + message
-            : message;
+            ? root + packageName + divider + commitMessage
+            : commitMessage;
 
         const commitCommand = `git commit -m '${commitCommandMessage}'`;
         execSync(

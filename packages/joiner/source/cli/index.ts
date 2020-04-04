@@ -87,8 +87,16 @@ const main = async (
     program
         .command('commit <packageName>')
         .description('commit package by name or "all" packages')
-        .action(async (packageName: string) => {
-            await commitCommand(packageName, program.configuration);
+        .option(
+            '-m, --message <text>',
+            'commit message',
+            '',
+        ).action(async (packageName: string, options: any) => {
+            await commitCommand(
+                packageName,
+                program.configuration,
+                options.message,
+            );
         });
 
     program
