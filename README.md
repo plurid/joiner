@@ -159,6 +159,8 @@ commit:
   # The actual commit messsage.
   # default: 'setup: package'
   message: 'setup: package'
+
+runFrom: '' # see Path Resolution
 ```
 
 
