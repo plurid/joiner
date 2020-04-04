@@ -1,0 +1,17 @@
+---
+packages:
+  - joiner
+
+package:
+  manager: yarn
+  publisher: npm
+
+yarnWorkspace: false
+
+commit:
+  engine: git
+  combine: false
+  root: ''
+  fullFolder: false
+  divider: ' > '
+  message: 'setup: package'
