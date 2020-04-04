@@ -22,7 +22,8 @@ export const parseConfigurationFile = async (
         const configurationFilepath = path.join(process.cwd(), configurationFile);
         const configurationFileData = await fs.readFile(configurationFilepath, 'utf-8');
         const parsedData = yaml.safeLoad(configurationFileData);
-        return await handleParsedConfigurationFile(parsedData);
+
+        return await handleParsedConfigurationFile(parsedData, configurationFilepath);
     } catch {
         console.log(`\n\tConfiguration file required.\n\n\tCheck the file '${configurationFile}' exists on the rootpath:\n\t${process.cwd()}\n`);
         return;
@@ -32,9 +33,8 @@ export const parseConfigurationFile = async (
 
 export const handleParsedConfigurationFile = async (
     parsedData: any,
+    configurationFilepath: string,
 ): Promise<ConfigurationFile | undefined> => {
-    const packages = await locatePackages(parsedData);
-
     const yarnWorkspace = parsedData.yarnWorkspace ?? false;
 
     const commitCombine = parsedData.commit?.combine ?? false;
@@ -43,7 +43,17 @@ export const handleParsedConfigurationFile = async (
     const commitDivider = parsedData.commit?.divider ?? ' > ';
     const commitMessage = parsedData.commit?.message ?? 'setup: package';
 
-    const runFrom = parsedData.runFrom ?? process.cwd();
+    const runFromData = parsedData.runFrom ?? '';
+    const configurationFileDirectory = path.dirname(configurationFilepath);
+    const runFrom = runFromData
+        ? path.resolve(configurationFileDirectory, runFromData)
+        : process.cwd();
+
+    const packages = await locatePackages(
+        parsedData.packages,
+        yarnWorkspace,
+        runFrom,
+    );
 
     if (packages.length === 0 && !yarnWorkspace) {
         console.log(`\n\tPackages required to be specified in the 'joiner.yaml' file.\n`);

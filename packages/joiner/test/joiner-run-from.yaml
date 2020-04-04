@@ -1,7 +1,6 @@
 ---
 packages:
-  - test/global
-  - test/scope-com/*
+  - ./foo
 
 package:
   manager: yarn
@@ -16,3 +15,5 @@ commit:
   fullFolder: false
   divider: ' > '
   message: 'setup: package'
+
+runFrom: './run-from'
