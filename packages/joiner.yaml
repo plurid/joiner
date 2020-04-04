@@ -10,7 +10,7 @@ yarnWorkspace: false
 
 commit:
   engine: git
-  combine: false
+  combine: true
   root: ''
   fullFolder: false
   divider: ' > '
