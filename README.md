@@ -40,14 +40,20 @@ For `JavaScript`/`TypeScript`, `joiner` is intended to be conjoined with `Yarn W
 
 It is recommended that `joiner` is installed globally. To install, [NodeJS](https://nodejs.org/en/) is presumed to be already on the system, run the command
 
-```
+``` bash
 npm install -g @plurid/joiner
 ```
 
 or
 
-```
+``` bash
 yarn global add @plurid/joiner
+```
+
+If global installation is not an option or not preferred, run the command using `npx`
+
+``` bash
+npx @plurid/joiner <joiner commands and options>
 ```
 
 
