@@ -33,25 +33,17 @@ export const parseConfigurationFile = async (
 export const handleParsedConfigurationFile = async (
     parsedData: any,
 ): Promise<ConfigurationFile | undefined> => {
-    const yarnWorkspace = typeof parsedData.yarnWorkspace === 'boolean'
-        ? parsedData.yarnWorkspace
-        : false;
     const packages = await locatePackages(parsedData);
-    const commitCombine = typeof parsedData.commit?.combine === 'boolean'
-        ? parsedData.commit?.combine
-        : false;
-    const commitRoot = typeof parsedData.commit?.root === 'string'
-        ? parsedData.commit?.root
-        : '';
-    const commitFullFolder = typeof parsedData.commit?.fullFolder === 'boolean'
-        ? parsedData.commit?.fullFolder
-        : false;
-    const commitDivider = typeof parsedData.commit?.divider === 'string'
-        ? parsedData.commit?.divider
-        : ' > ';
-    const commitMessage = typeof parsedData.commit?.message === 'string'
-        ? parsedData.commit?.message
-        : 'setup: package';
+
+    const yarnWorkspace = parsedData.yarnWorkspace ?? false;
+
+    const commitCombine = parsedData.commit?.combine ?? false;
+    const commitRoot = parsedData.commit?.root ?? '';
+    const commitFullFolder = parsedData.commit?.fullFolder ?? false;
+    const commitDivider = parsedData.commit?.divider ?? ' > ';
+    const commitMessage = parsedData.commit?.message ?? 'setup: package';
+
+    const runFrom = parsedData.runFrom ?? process.cwd();
 
     if (packages.length === 0 && !yarnWorkspace) {
         console.log(`\n\tPackages required to be specified in the 'joiner.yaml' file.\n`);
@@ -73,6 +65,7 @@ export const handleParsedConfigurationFile = async (
             divider: commitDivider,
             message: commitMessage,
         },
+        runFrom,
     };
 
     return configurationFile;
