@@ -1,5 +1,5 @@
 {
-    "name": "@scope/global",
+    "name": "global",
     "version": "0.0.0",
     "scripts": {
         "echo": "echo"

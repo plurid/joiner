@@ -42,31 +42,37 @@ export const resolvePackage = (
 
 
 export const locatePackages = async (
-    parsedData: any,
+    packages: any,
+    yarnWorkspace: boolean,
+    runFrom: string,
 ) => {
-    const {
-        packages,
-        yarnWorkspace,
-    } = parsedData;
+    // const {
+    //     packages,
+    //     yarnWorkspace,
+    // } = parsedData;
 
     if (!packages && !yarnWorkspace) {
         return [];
     }
 
-    const packagesPaths = await resolvePackagesPaths(packages, yarnWorkspace);
+    const packagesPaths = await resolvePackagesPaths(
+        packages,
+        yarnWorkspace,
+        runFrom,
+    );
 
     const locatedPackages: Package[] = [];
 
     for (const packagePath of packagesPaths) {
         if (!(packagePath as string).includes('/*')) {
-            const packageAbsolutePath = path.join(process.cwd(), packagePath);
+            const packageAbsolutePath = path.join(runFrom, packagePath);
             const locatedPackage = await readPackageFile(packageAbsolutePath);
             if (locatedPackage) {
                 locatedPackages.push(locatedPackage);
             }
         } else {
             const packagesRoot = packagePath.replace('/*', '');
-            const packagesRootPath = path.join(process.cwd(), packagesRoot);
+            const packagesRootPath = path.join(runFrom, packagesRoot);
 
             try {
                 const rootFiles = await fs.readdir(packagesRootPath);
@@ -95,13 +101,14 @@ export const locatePackages = async (
 const resolvePackagesPaths = async (
     packages: any[],
     yarnWorkspace: boolean | undefined,
+    runFrom: string,
 ) => {
     if (!yarnWorkspace) {
         return packages;
     }
 
     try {
-        const packageJSONPath = path.join(process.cwd(), 'package.json');
+        const packageJSONPath = path.join(runFrom, 'package.json');
         const packageRawData = await fs.readFile(packageJSONPath, 'utf-8');
         const packageData = JSON.parse(packageRawData);
         const workspaces = packageData.workspaces || [];
