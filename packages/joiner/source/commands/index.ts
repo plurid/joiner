@@ -5,6 +5,8 @@ import updateCommand from './update';
 import patchCommand from './patch';
 import commitCommand from './commit';
 import publishCommand from './publish';
+import ucomCommand from './ucom';
+import upcomCommand from './upcom';
 import upcomlishCommand from './upcomlish';
 
 
@@ -17,5 +19,7 @@ export {
     patchCommand,
     commitCommand,
     publishCommand,
+    ucomCommand,
+    upcomCommand,
     upcomlishCommand,
 }

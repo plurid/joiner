@@ -10,6 +10,8 @@ import {
     patchCommand,
     commitCommand,
     publishCommand,
+    ucomCommand,
+    upcomCommand,
     upcomlishCommand,
 } from '../commands';
 
@@ -94,6 +96,20 @@ const main = async (
         .description('publish package by name or "all" packages')
         .action(async (packageName: string) => {
             await publishCommand(packageName, program.configuration);
+        });
+
+    program
+        .command('ucom <packageName>')
+        .description('upcom - update, commit - package by name or "all" packages')
+        .action(async (packageName: string) => {
+            await ucomCommand(packageName, program.configuration);
+        });
+
+    program
+        .command('upcom <packageName>')
+        .description('upcom - update, patch, commit - package by name or "all" packages')
+        .action(async (packageName: string) => {
+            await upcomCommand(packageName, program.configuration);
         });
 
     program
