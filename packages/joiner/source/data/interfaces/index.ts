@@ -3,6 +3,7 @@ export interface ConfigurationFile {
     yarnWorkspace: boolean;
     package: PackageConfiguration;
     commit: CommitConfiguration;
+    runFrom: string;
 }
 
 
