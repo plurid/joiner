@@ -43,7 +43,7 @@ For `JavaScript`/`TypeScript`, `joiner` can be used on its own or conjoined with
 It is recommended that `joiner` is installed globally. To install, [NodeJS](https://nodejs.org/en/) is presumed to be already on the system, run the command
 
 ``` bash
-npm install -g @plurid/joiner
+npm install --global @plurid/joiner
 ```
 
 or
