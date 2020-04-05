@@ -28,6 +28,7 @@ For `JavaScript`/`TypeScript`, `joiner` can be used on its own or conjoined with
 
 + [Install](#install)
 + [Usage](#usage)
+    + [Setup](#setup)
     + [Command-Line Interface](#command-line-interface)
     + [Configuration File](#configuration-file)
 + [Advanced Usage](#advanced-usage)
@@ -60,6 +61,8 @@ npx @plurid/joiner <joiner commands and options>
 
 
 ## Usage
+
+### Setup
 
 Initialize by running, in the root folder of the project(s), the command
 
