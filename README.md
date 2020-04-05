@@ -32,6 +32,7 @@ For `JavaScript`/`TypeScript`, `joiner` can be used on its own or conjoined with
     + [Configuration File](#configuration-file)
 + [Advanced Usage](#advanced-usage)
     + [Path Resolution](#path-resolution)
+    + [Aliases](#aliases)
 + [Packages](#packages)
 
 
@@ -231,6 +232,23 @@ runFrom: ../../
 ```
 
 which contains a path trunk, relative to the `joiner.yaml` file, from which the packages paths will be resolved, irrespective from where the `joiner` command is run.
+
+
+### Aliases
+
+Recommended `Joiner` Aliases for the terminal
+
+``` bash
+alias j='joiner'
+alias ju='joiner update'
+alias jua='joiner update all'
+alias jp='joiner patch'
+alias jpa='joiner patch all'
+alias jc='joiner commit'
+alias jca='joiner commit all'
+alias jpub='joiner publish'
+alias jpuba='joiner publish all'
+```
 
 
 
