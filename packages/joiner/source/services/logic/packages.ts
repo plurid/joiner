@@ -94,11 +94,11 @@ export const locatePackages = async (
     const filteredPackagesByPath = filteredPackagesByName.filter((filterablePackage) => {
         for (const packageIgnored of packageIgnore) {
             if (filterablePackage.path.includes(packageIgnored)) {
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return true;
     });
 
     return filteredPackagesByPath;

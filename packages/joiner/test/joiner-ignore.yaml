@@ -6,7 +6,8 @@ package:
   manager: yarn
   publisher: npm
   ignore:
-    - ignore/a
+    - ignore/a # path-based ignore
+    - ignore-c # name-based ignore
 
 yarnWorkspace: false
 
