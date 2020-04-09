@@ -45,6 +45,7 @@ export const locatePackages = async (
     packages: any,
     yarnWorkspace: boolean,
     runFrom: string,
+    packageIgnore: string[],
 ) => {
     // const {
     //     packages,
@@ -94,7 +95,9 @@ export const locatePackages = async (
         }
     }
 
-    return locatedPackages;
+    const filteredPackages = locatedPackages.filter(locatedPackage => !packageIgnore.includes(locatedPackage.name));
+
+    return filteredPackages;
 }
 
 
