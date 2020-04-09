@@ -38,7 +38,7 @@ const main = async (
 
     program
         .command('run <packageName> <command...>')
-        .description('run arbitrary command on package by name or on "all" packages')
+        .description('run an arbitrary command on package by name or on "all" packages')
         .action(async (packageName: string, command: string[]) => {
             await runCommand(
                 packageName,
@@ -49,7 +49,7 @@ const main = async (
 
     program
         .command('initialize')
-        .description('initialize joiner.yaml file')
+        .description('initialize the "joiner.yaml" file')
         .action(async ()=> {
             await initializeCommand();
         });
