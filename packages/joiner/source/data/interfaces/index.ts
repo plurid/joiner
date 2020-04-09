@@ -53,6 +53,14 @@ export interface DevelopmentConfiguration {
 }
 
 
+export interface DevelopmentWatchEventData {
+    event: string;
+    filename: string;
+    package: Package;
+}
+
+
+
 export interface Package {
     name: string;
     path: string;
