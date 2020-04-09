@@ -8,6 +8,7 @@ import publishCommand from './publish';
 import ucomCommand from './ucom';
 import upcomCommand from './upcom';
 import upcomlishCommand from './upcomlish';
+import developCommand from './develop';
 
 
 
@@ -22,4 +23,5 @@ export {
     ucomCommand,
     upcomCommand,
     upcomlishCommand,
+    developCommand,
 }
