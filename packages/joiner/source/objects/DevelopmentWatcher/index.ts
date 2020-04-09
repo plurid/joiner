@@ -116,7 +116,7 @@ export const developmentPackagesUpdate = (
 
 export const debouncedDevelopmentPackagesUpdate = debouncedCallback(
     developmentPackagesUpdate,
-    5_000,
+    3_300,
 );
 
 
