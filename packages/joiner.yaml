@@ -15,3 +15,5 @@ commit:
   fullFolder: false
   divider: ' > '
   message: 'setup: package'
+
+runFrom: './'
