@@ -14,7 +14,10 @@
 </h1>
 
 
-Multi/Mono-Repository Task Runner.
+<h3 align="center">
+    Multi/Mono-Repository Task Runner
+</h1>
+
 
 Supported languages:
 
