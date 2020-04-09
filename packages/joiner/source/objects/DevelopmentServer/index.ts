@@ -24,7 +24,7 @@ class DevelopmentServer {
         process.addListener('SIGINT', () => {
             this.watcher.stop();
 
-            console.log('\n\tJoiner development server closed.\n');
+            console.log('\n\tJoiner development linking server closed.\n');
 
             this.server.close();
         });
@@ -33,7 +33,7 @@ class DevelopmentServer {
     start() {
         const port = this.configuration.development.serverPort;
         this.server.listen(port, () => {
-            console.log(`\n\tJoiner development server started on port ${port}\n`);
+            console.log(`\n\tJoiner development linking server started on port ${port}\n`);
 
             this.watcher.start();
         });
