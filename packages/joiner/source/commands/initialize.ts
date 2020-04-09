@@ -21,6 +21,7 @@ packages:
 package:
   manager: yarn
   publisher: npm
+  ignore: []
 
 yarnWorkspace: false
 
@@ -31,6 +32,14 @@ commit:
   fullFolder: false
   divider: ' > '
   message: 'setup: package'
+
+runFrom: ''
+
+development:
+  watchPackages: all
+  serverPort: 55000
+  watchDirectories: ['build', 'distribution', 'dist']
+  externalPackages: []
 `;
 
     if (!await fileExists(joinerPath)) {
