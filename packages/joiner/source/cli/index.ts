@@ -13,6 +13,7 @@ import {
     ucomCommand,
     upcomCommand,
     upcomlishCommand,
+    developCommand,
 } from '../commands';
 
 
@@ -125,6 +126,13 @@ const main = async (
         .description('upcomlish - update, patch, commit, publish - package by name or "all" packages')
         .action(async (packageName: string) => {
             await upcomlishCommand(packageName, program.configuration);
+        });
+
+    program
+        .command('develop')
+        .description('listen for changes in the development watched packages')
+        .action(async () => {
+            await developCommand(program.configuration);
         });
 
 
