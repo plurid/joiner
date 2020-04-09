@@ -125,7 +125,7 @@ Commands:
 
     publish <packageName>           publish package by name or "all" packages
 
-    ucom <packageName>              upcom - update, commit - package by name or "all" packages
+    ucom <packageName>              ucom - update, commit - package by name or "all" packages
 
     upcom <packageName>             upcom - update, patch, commit - package by name or "all" packages
 
