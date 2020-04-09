@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 import {
     ConfigurationFile,
 } from '../../data/interfaces';
@@ -6,6 +9,7 @@ import {
 
 class DevelopmentWatcher {
     private configuration: ConfigurationFile;
+    private watchers: fs.FSWatcher[] = [];
 
     constructor(
         configuration: ConfigurationFile,
@@ -14,11 +18,29 @@ class DevelopmentWatcher {
     }
 
     start() {
+        try {
+            const developmentPackages = this.configuration.development.watchPackages;
 
+            for (const developmentPackage of developmentPackages) {
+                const watcher = fs.watch(developmentPackage, (event, filename) => {
+                    // debounced function
+                    // which copies the build folders to all the development packages
+
+                    console.log('event', event);
+                    console.log('filename', filename);
+                });
+
+                this.watchers.push(watcher);
+            }
+        } catch (error) {
+            return;
+        }
     }
 
     stop() {
-
+        for (const watcher of this.watchers) {
+            watcher.close();
+        }
     }
 }
 

@@ -37,7 +37,7 @@ export interface DevelopmentConfiguration {
      * The server will listen for file changes in the `build directory` of the `package`
      * and copy the files to the `node_modules` of all the packages which require them.
      */
-    watchPackages: string | string[];
+    watchPackages: string[];
 
     /**
      * Default `['build', 'distribution', 'dist']`.
