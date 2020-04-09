@@ -1,8 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 
-import rimraf from 'rimraf';
-
 import {
     ncp,
 } from 'ncp';
@@ -30,7 +28,10 @@ export const developmentPackageUpdateDirectoryLogic = async (
 
     if (fs.existsSync(watchDirectoryPath)) {
         if (fs.existsSync(updatePackageDependencyPath)) {
-            rimraf.sync(updatePackageDependencyPath);
+            fs.rmdirSync(
+                updatePackageDependencyPath,
+                { recursive: true },
+            );
         }
 
         fs.mkdirSync(
@@ -38,17 +39,16 @@ export const developmentPackageUpdateDirectoryLogic = async (
             { recursive: true },
         );
 
+        /**
+         * copy
+         * workPackage.path/watchDirectory
+         * to
+         * updatePackage/node_modules/workPackage.name/watchDirectory
+         */
         ncp(watchDirectoryPath, updatePackageDependencyPath, (error) => {
             if (error) {
                 return console.error(error);
             }
-
-            console.log('copied');
-
-            // go to workPackage.path/watchDirectory
-            // and copy to updatePackage/node_modules/workPackage.name/watchDirectory
-            console.log('watchDirectoryPath', watchDirectoryPath);
-            console.log('updatePackageDependencyPath', updatePackageDependencyPath);
         });
     }
 }
