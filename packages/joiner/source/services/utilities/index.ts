@@ -31,15 +31,15 @@ export function debouncedCallback<A extends any[]>(
         ...args: A
     ) {
         // capture latest args
-        argsRef.current = args;
+        argsRef = args;
 
         // clear debounce timer
         cleanup();
 
         // start waiting again
-        timeout.current = setTimeout(() => {
-            if(argsRef.current) {
-                callback(...argsRef.current);
+        timeout = setTimeout(() => {
+            if(argsRef) {
+                callback(...argsRef);
             }
         }, wait);
     };
