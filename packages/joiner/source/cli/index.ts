@@ -130,7 +130,7 @@ const main = async (
 
     program
         .command('develop')
-        .description('listen for changes in the development watched packages')
+        .description('start a server to listen for changes in the development watched packages and update the cross-dependencies')
         .action(async () => {
             await developCommand(program.configuration);
         });
