@@ -37,6 +37,11 @@ export const handleParsedConfigurationFile = async (
 ): Promise<ConfigurationFile | undefined> => {
     const yarnWorkspace = parsedData.yarnWorkspace ?? false;
 
+    const packageManager = parsedData.package?.manager ?? 'yarn';
+    const packagePublisher = parsedData.package?.publisher ?? 'npm';
+    const packageIgnore = parsedData.package?.ignore ?? [];
+
+    const commitEngine = parsedData.commit?.engine ?? 'git';
     const commitCombine = parsedData.commit?.combine ?? false;
     const commitRoot = parsedData.commit?.root ?? '';
     const commitFullFolder = parsedData.commit?.fullFolder ?? false;
@@ -53,6 +58,7 @@ export const handleParsedConfigurationFile = async (
         parsedData.packages,
         yarnWorkspace,
         runFrom,
+        packageIgnore,
     );
 
     if (packages.length === 0 && !yarnWorkspace) {
@@ -64,11 +70,12 @@ export const handleParsedConfigurationFile = async (
         yarnWorkspace,
         packages,
         package: {
-            manager: 'yarn',
-            publisher: 'npm'
+            manager: packageManager,
+            publisher: packagePublisher,
+            ignore: packageIgnore,
         },
         commit: {
-            engine: 'git',
+            engine: commitEngine,
             combine: commitCombine,
             root: commitRoot,
             fullFolder: commitFullFolder,

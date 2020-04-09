@@ -10,6 +10,7 @@ export interface ConfigurationFile {
 export interface PackageConfiguration {
     manager: string;
     publisher: string;
+    ignore: string[];
 }
 
 
