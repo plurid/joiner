@@ -3,6 +3,8 @@ import {
     promises as fs,
 } from 'fs';
 
+import yaml from 'js-yaml';
+
 import {
     ConfigurationFile,
     Package,
@@ -148,21 +150,41 @@ const readPackageFile = async (
             alias: packageAlias,
             version: packageVersion,
             private: packagePrivate,
+            joinerpackage: false,
         };
         return locatedPackage;
     } catch (error) {
-        let ignored = false;
-        for (const packageIgnored of packageIgnore) {
-            if (packagePath.includes(packageIgnored)) {
-                ignored = true;
+        try {
+            const packageJoinerPath = path.join(packagePath, 'joiner.package.yaml');
+            const packageRawData = await fs.readFile(packageJoinerPath, 'utf-8');
+            const packageData = yaml.safeLoad(packageRawData);
+
+            const packageName = packageData.name ?? '';
+            const packageAlias = computePackageAlias(packageName);
+
+            const locatedPackage: Package = {
+                path: packagePath,
+                name: packageName,
+                alias: packageAlias,
+                version: '0.0.0',
+                private: true,
+                joinerpackage: true,
+            };
+            return locatedPackage;
+        } catch (error) {
+            let ignored = false;
+            for (const packageIgnored of packageIgnore) {
+                if (packagePath.includes(packageIgnored)) {
+                    ignored = true;
+                }
             }
-        }
 
-        if (!ignored) {
-            console.log(`\n\tCould not read the package from:\n\t${packagePath}\n`);
-        }
+            if (!ignored) {
+                console.log(`\n\tCould not read the package from:\n\t${packagePath}\n`);
+            }
 
-        return;
+            return;
+        }
     }
 }
 
