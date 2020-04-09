@@ -38,6 +38,7 @@ For `JavaScript`/`TypeScript`, `joiner` can be used on its own or conjoined with
     + [Path Resolution](#path-resolution)
     + [Aliases](#aliases)
     + [Development](#development)
+    + [High-Scale](#high-scale)
 + [Packages](#packages)
 
 
@@ -322,3 +323,8 @@ development:
 To start the development server and the watchers, run the command
 
 `joiner develop`
+
+
+### High-Scale
+
+For multi-/mono-repositories containing 100+ packages, it is generally useful to have a `/scripts/joiner` directory as close as possible to the root directory with multiple, segmented `joiner.yaml` files, appropriately named, e.g. `joiner.backends.yaml`, `joiner.frontends.yaml`. The `joiner` commands will then be run from the root directory, and all the `joiner.yaml` files will resolve the paths in a similar fashion.
