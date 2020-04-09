@@ -33,7 +33,7 @@ class DevelopmentServer {
     start() {
         const port = this.configuration.development.serverPort;
         this.server.listen(port, () => {
-            console.log(`\n\tJoiner development server started on port ${port}.`);
+            console.log(`\n\tJoiner development server started on port ${port}\n`);
 
             this.watcher.start();
         });
