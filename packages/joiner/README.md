@@ -118,6 +118,7 @@ Commands:
     ucom <packageName>              upcom - update, commit - package by name or "all" packages
     upcom <packageName>             upcom - update, patch, commit - package by name or "all" packages
     upcomlish <packageName>         upcomlish - update, patch, commit, publish - package by name or "all" packages
+    develop                         start a server to listen for changes in the development watched packages and update the cross-dependencies
 
 Instead of `packageName` the signifier `all` can be used to run the command on all the registered packages.
 
