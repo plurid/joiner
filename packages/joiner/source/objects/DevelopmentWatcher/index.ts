@@ -1,6 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 
+import rimraf from 'rimraf';
+
+import {
+    ncp,
+} from 'ncp';
+
 import {
     ConfigurationFile,
     Package,
@@ -23,13 +29,28 @@ export const developmentPackageUpdateDirectoryLogic = async (
     );
 
     if (fs.existsSync(watchDirectoryPath)) {
-        console.log('watchDirectoryPath', watchDirectoryPath);
-        console.log('updatePackageDependencyPath', updatePackageDependencyPath);
+        if (fs.existsSync(updatePackageDependencyPath)) {
+            rimraf.sync(updatePackageDependencyPath);
+        }
+
+        fs.mkdirSync(
+            updatePackageDependencyPath,
+            { recursive: true },
+        );
+
+        ncp(watchDirectoryPath, updatePackageDependencyPath, (error) => {
+            if (error) {
+                return console.error(error);
+            }
+
+            console.log('copied');
+
+            // go to workPackage.path/watchDirectory
+            // and copy to updatePackage/node_modules/workPackage.name/watchDirectory
+            console.log('watchDirectoryPath', watchDirectoryPath);
+            console.log('updatePackageDependencyPath', updatePackageDependencyPath);
+        });
     }
-
-
-    // go to workPackage.path/watchDirectory
-    // and copy to updatePackage/node_modules/workPackage.name/watchDirectory
 }
 
 
