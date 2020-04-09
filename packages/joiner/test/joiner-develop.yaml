@@ -17,3 +17,6 @@ commit:
   message: 'setup: package'
 
 runFrom: ./
+
+development:
+  watchPackages: all

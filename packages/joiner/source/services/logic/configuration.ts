@@ -11,6 +11,7 @@ import {
 
 import {
     locatePackages,
+    resolveWatchedPackages,
 } from './packages';
 
 
@@ -54,15 +55,18 @@ export const handleParsedConfigurationFile = async (
         ? path.resolve(configurationFileDirectory, runFromData)
         : process.cwd();
 
-    const developmentServerPort = parsedData.development?.serverPort ?? 55000;
-    const developmentWatchPackages = parsedData.development?.watchPackages ?? [];
-    const developmentWatchDirectories = parsedData.development?.watchDirectories ?? ['build', 'distribution', 'dist'];
-
     const packages = await locatePackages(
         parsedData.packages,
         yarnWorkspace,
         runFrom,
         packageIgnore,
+    );
+
+    const developmentServerPort = parsedData.development?.serverPort ?? 55000;
+    const developmentWatchDirectories = parsedData.development?.watchDirectories ?? ['build', 'distribution', 'dist'];
+    const developmentWatchPackages = resolveWatchedPackages(
+        packages,
+        parsedData.development?.watchPackages,
     );
 
     if (packages.length === 0 && !yarnWorkspace) {

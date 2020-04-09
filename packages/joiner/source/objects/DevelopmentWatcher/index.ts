@@ -20,6 +20,8 @@ class DevelopmentWatcher {
     start() {
         try {
             const developmentPackages = this.configuration.development.watchPackages;
+            console.log(this.configuration);
+            console.log(developmentPackages);
 
             for (const developmentPackage of developmentPackages) {
                 const watcher = fs.watch(developmentPackage, (event, filename) => {
