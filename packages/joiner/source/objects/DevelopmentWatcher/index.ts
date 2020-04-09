@@ -4,27 +4,83 @@ import path from 'path';
 import {
     ConfigurationFile,
     Package,
+    DevelopmentWatchEventData,
 } from '../../data/interfaces';
 
 
 
+export const developmentPackageUpdateDirectoryLogic = async (
+    workPackage: Package,
+    updatePackage: Package,
+    watchDirectory: string,
+) => {
+    const watchDirectoryPath = path.join(workPackage.path, watchDirectory);
+    const updatePackageDependencyPath = path.join(
+        updatePackage.path,
+        'node_modules',
+        workPackage.name,
+        watchDirectory,
+    );
+
+    if (fs.existsSync(watchDirectoryPath)) {
+        console.log('watchDirectoryPath', watchDirectoryPath);
+        console.log('updatePackageDependencyPath', updatePackageDependencyPath);
+    }
+
+
+    // go to workPackage.path/watchDirectory
+    // and copy to updatePackage/node_modules/workPackage.name/watchDirectory
+}
+
+
+export const developmentPackageUpdateLogic = (
+    registeredPackage: string,
+    updatePackage: Package,
+    configuration: ConfigurationFile,
+) => {
+    const workPackage = configuration.packages.find(
+        configPackage => configPackage.name === registeredPackage,
+    );
+    if (!workPackage) {
+        return;
+    }
+
+    for (const watchDirectory of configuration.development.watchDirectories) {
+        developmentPackageUpdateDirectoryLogic(
+            workPackage,
+            updatePackage,
+            watchDirectory,
+        );
+    }
+}
+
+
 export const developmentPackagesUpdate = (
     configuration: ConfigurationFile,
-    packageRegistry: string[],
+    packageRegistry: Set<string>,
 ) => {
     for (const registeredPackage of packageRegistry) {
-        for (const packageA of configuration.packages) {
-            // update note_modules it they exist
+        // Loop over modules.
+        // TODO Better way: have a given dependency graph
+        for (const updatePackage of configuration.packages) {
+            /** Skip if it's itself */
+            if (updatePackage.name === registeredPackage) {
+                continue;
+            }
 
-            // better way
-            // have a given dependency graph
+            developmentPackageUpdateLogic(
+                registeredPackage,
+                updatePackage,
+                configuration,
+            );
         }
     }
 }
 
+
 export const debouncedDevelopmentPackagesUpdate = (
     configuration: ConfigurationFile,
-    packageRegistry: string[],
+    packageRegistry: Set<string>,
 ) => {
     developmentPackagesUpdate(configuration, packageRegistry);
 }
@@ -33,7 +89,7 @@ export const debouncedDevelopmentPackagesUpdate = (
 class DevelopmentWatcher {
     private configuration: ConfigurationFile;
     private watchers: fs.FSWatcher[] = [];
-    private packageRegistry: string[] = [];
+    private packageRegistry: Set<string> = new Set();
 
     constructor(
         configuration: ConfigurationFile,
@@ -58,14 +114,12 @@ class DevelopmentWatcher {
 
             for (const watchDirectory of watchDirectories) {
                 if (filename.includes(watchDirectory)) {
-                    const updateData = {
+                    const updateData: DevelopmentWatchEventData = {
                         event,
                         filename,
-                        packageData,
+                        package: packageData,
                     };
 
-                    // for each file hit, the package registry checks
-                    // if it's in a new package
                     this.updatePackageRegistry(updateData);
 
                     debouncedDevelopmentPackagesUpdate(
@@ -107,10 +161,14 @@ class DevelopmentWatcher {
     }
 
 
-    private updatePackageRegistry (
-        eventData: any,
+    private updatePackageRegistry(
+        eventData: DevelopmentWatchEventData,
     ) {
+        const {
+            package: packageData,
+        } = eventData;
 
+        this.packageRegistry.add(packageData.name);
     }
 }
 
