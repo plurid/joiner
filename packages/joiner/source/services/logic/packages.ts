@@ -62,7 +62,7 @@ export const locatePackages = async (
     for (const packagePath of packagesPaths) {
         if (!(packagePath as string).includes('/*')) {
             const packageAbsolutePath = path.join(runFrom, packagePath);
-            const locatedPackage = await readPackageFile(packageAbsolutePath);
+            const locatedPackage = await readPackageFile(packageAbsolutePath, packageIgnore);
             if (locatedPackage) {
                 locatedPackages.push(locatedPackage);
             }
@@ -78,7 +78,7 @@ export const locatePackages = async (
                     const statistics = await fs.stat(packagePath);
 
                     if (statistics.isDirectory()) {
-                        const locatedPackage = await readPackageFile(packagePath);
+                        const locatedPackage = await readPackageFile(packagePath, packageIgnore);
                         if (locatedPackage) {
                             locatedPackages.push(locatedPackage);
                         }
@@ -130,6 +130,7 @@ const resolvePackagesPaths = async (
 
 const readPackageFile = async (
     packagePath: string,
+    packageIgnore: string[],
 ) => {
     try {
         const packageJSONPath = path.join(packagePath, 'package.json');
@@ -150,7 +151,17 @@ const readPackageFile = async (
         };
         return locatedPackage;
     } catch (error) {
-        console.log(`\n\tCould not read the package from:\n\t${packagePath}\n`);
+        let ignored = false;
+        for (const packageIgnored of packageIgnore) {
+            if (packagePath.includes(packageIgnored)) {
+                ignored = true;
+            }
+        }
+
+        if (!ignored) {
+            console.log(`\n\tCould not read the package from:\n\t${packagePath}\n`);
+        }
+
         return;
     }
 }
