@@ -166,7 +166,7 @@ package:
   # default: npm
   publisher: npm # yarn | npm
 
-  # Names of the packages to be ignored by the "all" signifier.
+  # Names of the packages or paths of the folders to be ignored by the "all" signifier.
   # Helpful when the packages are registered in bulk with "/*"
   # and some of the folders are not actually packages (fixtures, specifications).
   # default: []
