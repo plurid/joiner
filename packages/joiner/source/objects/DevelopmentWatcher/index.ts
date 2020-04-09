@@ -20,11 +20,16 @@ class DevelopmentWatcher {
     start() {
         try {
             const developmentPackages = this.configuration.development.watchPackages;
-            console.log(this.configuration);
-            console.log(developmentPackages);
 
             for (const developmentPackage of developmentPackages) {
-                const watcher = fs.watch(developmentPackage, (event, filename) => {
+                const packageData = this.configuration.packages.find(
+                    workPackage => developmentPackage === workPackage.name
+                );
+                if (!packageData) {
+                    continue;
+                }
+
+                const watcher = fs.watch(packageData.path, (event, filename) => {
                     // debounced function
                     // which copies the build folders to all the development packages
 
