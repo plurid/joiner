@@ -67,5 +67,6 @@ export interface Package {
     alias: string;
     version: string;
     private: boolean;
+    joinerpackage: boolean;
     language?: 'javascript' | 'typescript';
 }
