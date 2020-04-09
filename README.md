@@ -187,9 +187,11 @@ commit:
   # default: 'setup: package'
   message: 'setup: package'
 
-runFrom: '' # see Advanced Usage -> Path Resolution
+# see Advanced Usage -> Path Resolution
+runFrom: ''
 
-development: # see Advanced Usage -> Development
+# see Advanced Usage -> Development
+development:
   watchPackages: 'all' # ['packageName'] | 'packageName' | 'all'
   serverPort: 55000
   watchDirectories: ['build', 'distribution', 'dist']
