@@ -11,6 +11,10 @@ import {
     DevelopmentWatchEventData,
 } from '../../data/interfaces';
 
+import {
+    debouncedCallback,
+} from '../../services/utilities';
+
 
 
 export const developmentPackageUpdateDirectoryLogic = async (
@@ -49,6 +53,8 @@ export const developmentPackageUpdateDirectoryLogic = async (
             if (error) {
                 return console.error(error);
             }
+
+            console.log(`\tCopied ${workPackage.name} build output to ${updatePackage.name} dependency folder.`);
         });
     }
 }
@@ -99,12 +105,10 @@ export const developmentPackagesUpdate = (
 }
 
 
-export const debouncedDevelopmentPackagesUpdate = (
-    configuration: ConfigurationFile,
-    packageRegistry: Set<string>,
-) => {
-    developmentPackagesUpdate(configuration, packageRegistry);
-}
+export const debouncedDevelopmentPackagesUpdate = debouncedCallback(
+    developmentPackagesUpdate,
+    1000,
+);
 
 
 class DevelopmentWatcher {
@@ -142,6 +146,7 @@ class DevelopmentWatcher {
                     };
 
                     this.updatePackageRegistry(updateData);
+                    console.log(this.packageRegistry);
 
                     debouncedDevelopmentPackagesUpdate(
                         this.configuration,
