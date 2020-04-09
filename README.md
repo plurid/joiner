@@ -32,10 +32,11 @@ For `JavaScript`/`TypeScript`, `joiner` can be used on its own or conjoined with
     + [Command-Line Interface](#command-line-interface)
     + [Configuration File](#configuration-file)
 + [Advanced Usage](#advanced-usage)
-    + [Path Resolution](#path-resolution)
     + [Aliases](#aliases)
     + [Development](#development)
     + [High-Scale](#high-scale)
+    + [Joiner Package](#joiner-package)
+    + [Path Resolution](#path-resolution)
 + [Packages](#packages)
 
 
@@ -209,6 +210,76 @@ development:
 
 ## Advanced Usage
 
+
+### Aliases
+
+Recommended `Joiner` Aliases for the terminal
+
+``` bash
+alias j='joiner'
+alias ju='joiner update'
+alias jua='joiner update all'
+alias jp='joiner patch'
+alias jpa='joiner patch all'
+alias jc='joiner commit'
+alias jca='joiner commit all'
+alias jpub='joiner publish'
+alias jpuba='joiner publish all'
+```
+
+
+### Development
+
+Cross-linking packages depending on each other with symlinks becomes very fast a complete mess, especially when the dependency chain is beyond 2-3 links, and even more so when one of the packages does not play well with having a copy of itself in the dependency graph.
+
+`Joiner` goes the "dumb" way: instead of symlinking the complete folder into `node_modules`, giving rise to the mess in the first place, `joiner` merely watches and copies the build process output (`/build`, `/distribution`, or any other folder) of a package into the adequate dependency folder for each 'linked', that is referenced, package.
+
+To setup the packages linkage, the configuration file should have at least the `watchPackages` field, if not, all the registered packages will be watched.
+
+``` yaml
+development:
+  # The packages which are targeted for development watch.
+  # The server will listen for file changes in the `watch directory` of the `package`
+  # and copy the files to the `node_modules` of all the packages which require them.
+  # The catch-all 'all' can be used, or a single package can be passed.
+  # default: all
+  watchPackages: 'all' # ['packageName'] | 'all' | 'packageName'
+
+  # Port for the server started with `joiner develop`.
+  # default: 55000
+  serverPort: 55000
+
+  # default: ['build', 'distribution', 'dist']
+  watchDirectories: ['build', 'distribution', 'dist']
+
+  # Paths to other packages which need to be linked/watched/updated
+  # but which do not belong to the same life-cycle management
+  # as the top-defined `packages`.
+  # default: []
+  externalPackages: []
+```
+
+To start the development server and the watchers, run the command
+
+`joiner develop`
+
+
+### High-Scale
+
+For multi-/mono-repositories containing 100+ packages, it is generally useful to have a `/scripts/joiner` directory as close as possible to the root directory with multiple, segmented `joiner.yaml` files, appropriately named, e.g. `joiner.backends.yaml`, `joiner.frontends.yaml`. The `joiner` commands will then be run from the root directory, and all the `joiner.yaml` files will resolve the paths in a similar fashion.
+
+
+### Joiner Package
+
+Instead of relying on the `package.json` file to specify the package-related data (name, dependencies), a `joiner.package.yaml` file can be created.
+
+``` yaml
+name: package-name
+```
+
+This feature is recommended for using `joiner` with other languages besides `JavaScript`-based project, and/or for using `joiner` as a meta-controller of multiple separated projects.
+
+
 ### Path Resolution
 
 `Joiner` can be used to couple arbitrary packages, spread across the filesystem, and perform any kind of maintenance cycle (run commands, update, patch, commit, publish) on them specifically.
@@ -267,64 +338,6 @@ runFrom: ../../
 ```
 
 which contains a path trunk, relative to the `joiner.yaml` file, from which the packages paths will be resolved, irrespective from where the `joiner` command is run.
-
-
-### Aliases
-
-Recommended `Joiner` Aliases for the terminal
-
-``` bash
-alias j='joiner'
-alias ju='joiner update'
-alias jua='joiner update all'
-alias jp='joiner patch'
-alias jpa='joiner patch all'
-alias jc='joiner commit'
-alias jca='joiner commit all'
-alias jpub='joiner publish'
-alias jpuba='joiner publish all'
-```
-
-
-### Development
-
-Cross-linking packages depending on each other with symlinks becomes very fast a complete mess, especially when the dependency chain is beyond 2-3 links, and even more so when one of the packages does not play well with having a copy of itself in the dependency graph.
-
-`Joiner` goes the "dumb" way: instead of symlinking the complete folder into `node_modules`, giving rise to the mess in the first place, `joiner` merely watches and copies the build process output (`/build`, `/distribution`, or any other folder) of a package into the adequate dependency folder for each 'linked', that is referenced, package.
-
-To setup the packages linkage, the configuration file should have at least the `watchPackages` field, if not, all the registered packages will be watched.
-
-``` yaml
-development:
-  # The packages which are targeted for development watch.
-  # The server will listen for file changes in the `watch directory` of the `package`
-  # and copy the files to the `node_modules` of all the packages which require them.
-  # The catch-all 'all' can be used, or a single package can be passed.
-  # default: all
-  watchPackages: 'all' # ['packageName'] | 'all' | 'packageName'
-
-  # Port for the server started with `joiner develop`.
-  # default: 55000
-  serverPort: 55000
-
-  # default: ['build', 'distribution', 'dist']
-  watchDirectories: ['build', 'distribution', 'dist']
-
-  # Paths to other packages which need to be linked/watched/updated
-  # but which do not belong to the same life-cycle management
-  # as the top-defined `packages`.
-  # default: []
-  externalPackages: []
-```
-
-To start the development server and the watchers, run the command
-
-`joiner develop`
-
-
-### High-Scale
-
-For multi-/mono-repositories containing 100+ packages, it is generally useful to have a `/scripts/joiner` directory as close as possible to the root directory with multiple, segmented `joiner.yaml` files, appropriately named, e.g. `joiner.backends.yaml`, `joiner.frontends.yaml`. The `joiner` commands will then be run from the root directory, and all the `joiner.yaml` files will resolve the paths in a similar fashion.
 
 
 
