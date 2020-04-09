@@ -183,6 +183,7 @@ development: # see Advanced Usage -> Development
   watchPackages: 'all' # ['packageName'] | 'packageName' | 'all'
   serverPort: 55000
   watchDirectories: ['build', 'distribution', 'dist']
+  externalPackages: []
 ```
 
 
@@ -289,6 +290,12 @@ development:
 
   # default: ['build', 'distribution', 'dist']
   watchDirectories: ['build', 'distribution', 'dist']
+
+  # Paths to other packages which need to be linked/watched/updated
+  # but which do not belong to the same life-cycle management
+  # as the top-defined `packages`.
+  # default: []
+  externalPackages: []
 ```
 
 To start the development server and watchers, run the command
