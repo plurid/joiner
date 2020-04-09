@@ -104,21 +104,33 @@ The packages paths are resolved relative to the folder from where the command is
 Options:
 
     -v, --version                   output the version number
+
     -c, --configuration <file>      path to the .yaml configuration file (default: "joiner.yaml")
+
     -h, --help                      display help for command
 
 Commands:
 
-    run <packageName> <command...>  run arbitrary command on package by name or on "all" packages
+    run <packageName> <command...>  run an arbitrary command on package by name or on "all" packages
+
     initialize                      initialize joiner.yaml file
+
     list                            list joiner commandable packages
+
     update <packageName>            update package by name or "all" packages
+
     patch [options] <packageName>   patch package version by name or "all" packages
+
     commit [options] <packageName>  commit package by name or "all" packages
+
     publish <packageName>           publish package by name or "all" packages
+
     ucom <packageName>              upcom - update, commit - package by name or "all" packages
+
     upcom <packageName>             upcom - update, patch, commit - package by name or "all" packages
+
     upcomlish <packageName>         upcomlish - update, patch, commit, publish - package by name or "all" packages
+
     develop                         start a server to listen for changes in the development watched packages
                                     and update the cross-dependencies
 
