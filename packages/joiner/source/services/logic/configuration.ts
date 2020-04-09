@@ -54,6 +54,10 @@ export const handleParsedConfigurationFile = async (
         ? path.resolve(configurationFileDirectory, runFromData)
         : process.cwd();
 
+    const developmentServerPort = parsedData.development?.serverPort ?? 55000;
+    const developmentWatchPackages = parsedData.development?.watchPackages ?? [];
+    const developmentWatchDirectories = parsedData.development?.watchDirectories ?? ['build', 'distribution', 'dist'];
+
     const packages = await locatePackages(
         parsedData.packages,
         yarnWorkspace,
@@ -81,6 +85,11 @@ export const handleParsedConfigurationFile = async (
             fullFolder: commitFullFolder,
             divider: commitDivider,
             message: commitMessage,
+        },
+        development: {
+            serverPort: developmentServerPort,
+            watchPackages: developmentWatchPackages,
+            watchDirectories: developmentWatchDirectories,
         },
         runFrom,
     };
