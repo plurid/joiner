@@ -54,7 +54,7 @@ export const developmentPackageUpdateDirectoryLogic = async (
                 return console.error(error);
             }
 
-            console.log(`\tCopied ${workPackage.name} build output to ${updatePackage.name} dependency folder.`);
+            console.log(`\tCopied '${workPackage.name}' build output '${watchDirectory}' to '${updatePackage.name}' dependency folder.`);
         });
     }
 }
@@ -146,7 +146,6 @@ class DevelopmentWatcher {
                     };
 
                     this.updatePackageRegistry(updateData);
-                    console.log(this.packageRegistry);
 
                     debouncedDevelopmentPackagesUpdate(
                         this.configuration,
