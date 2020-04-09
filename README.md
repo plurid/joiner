@@ -92,7 +92,7 @@ packages:
   - /path/to/package-2
 ```
 
-where the `multi-package-folder` is a directory containing multiple folders with their own `package.json`.
+where the `multi-package-folder` is a directory containing multiple folders with their own `package.json`, or [`joiner.package.yaml`](#joiner-package).
 
 The packages paths are resolved relative to the folder from where the command is called. See [path resolution](#path-resolution).
 
