@@ -37,6 +37,7 @@ For `JavaScript`/`TypeScript`, `joiner` can be used on its own or conjoined with
 + [Advanced Usage](#advanced-usage)
     + [Path Resolution](#path-resolution)
     + [Aliases](#aliases)
+    + [Development](#development)
 + [Packages](#packages)
 
 
@@ -133,23 +134,23 @@ The `joiner.yaml` configuration file has as required fields only the `packages` 
 
 The `joiner.yaml` fields:
 
-``` yarn
+``` yaml
 ### required
 packages:
   - /path/to/package
   - /path/to/multi-package/*
 
 # default: false
-yarnWorkspace: false | true
+yarnWorkspace: false # false | true
 
 
 ### optional
 package:
   # default: yarn
-  manager: yarn | npm
+  manager: yarn # yarn | npm
 
   # default: npm
-  publisher: yarn | npm
+  publisher: npm # yarn | npm
 
 
 commit:
@@ -159,7 +160,7 @@ commit:
   # The commit message is formed from:
   # commitRoot + packageFolderName + commitDivider + commitMessage
   # default: false
-  combine: false | true
+  combine: false # false | true
 
   # The root of the packages/workspace.
   root: '/path/to/root'
@@ -176,7 +177,12 @@ commit:
   # default: 'setup: package'
   message: 'setup: package'
 
-runFrom: '' # see Path Resolution
+runFrom: '' # see Advanced Usage -> Path Resolution
+
+development: # see Advanced Usage -> Development
+  watchPackages: 'all' # ['packageName'] | 'packageName' | 'all'
+  serverPort: 55000
+  watchDirectories: ['build', 'distribution', 'dist']
 ```
 
 
@@ -258,3 +264,33 @@ alias jca='joiner commit all'
 alias jpub='joiner publish'
 alias jpuba='joiner publish all'
 ```
+
+
+### Development
+
+Cross-linking packages depending on each other with symlinks becomes very fast a complete mess, especially when the dependency chain is beyond 2-3 links, and even more so when one of the packages do not play well with having a copy of itself in the dependency graph.
+
+`Joiner` goes the "dumb" way: instead of symlinking the complete folder into `node_modules`, giving rise to the mess, `joiner` merely watches and copies the built output (`/build`, `/distribution`, or any other folder) of a package into the adequate dependency folder for each 'linked' package.
+
+To setup the packages linkage, the configuration file should have at least the `watchPackages` field
+
+``` yaml
+development:
+  # The packages which are targeted for development watch.
+  # The server will listen for file changes in the `watch directory` of the `package`
+  # and copy the files to the `node_modules` of all the packages which require them.
+  # The catch-all 'all' can be used, or a single package can be passed.
+  # default: all
+  watchPackages: 'all' # ['packageName'] | 'all' | 'packageName'
+
+  # Port for the server started with `joiner develop`.
+  # default: 55000
+  serverPort: 55000
+
+  # default: ['build', 'distribution', 'dist']
+  watchDirectories: ['build', 'distribution', 'dist']
+```
+
+To start the development server and watchers, run the command
+
+`joiner develop`
