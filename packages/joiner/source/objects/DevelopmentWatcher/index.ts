@@ -27,19 +27,28 @@ export const developmentPackageUpdateDirectoryLogic = async (
         updatePackage.path,
         'node_modules',
         workPackage.name,
+    );
+    const updatePackageDependencyBuildPath = path.join(
+        updatePackageDependencyPath,
         watchDirectory,
     );
 
     if (fs.existsSync(watchDirectoryPath)) {
-        if (fs.existsSync(updatePackageDependencyPath)) {
+        // check that the updatePackage is actually dependent on the workPackage
+        if (!fs.existsSync(updatePackageDependencyPath)) {
+            return;
+        }
+
+        // check that if there is already a build folder
+        if (fs.existsSync(updatePackageDependencyBuildPath)) {
             fs.rmdirSync(
-                updatePackageDependencyPath,
+                updatePackageDependencyBuildPath,
                 { recursive: true },
             );
         }
 
         fs.mkdirSync(
-            updatePackageDependencyPath,
+            updatePackageDependencyBuildPath,
             { recursive: true },
         );
 
@@ -49,7 +58,7 @@ export const developmentPackageUpdateDirectoryLogic = async (
          * to
          * updatePackage/node_modules/workPackage.name/watchDirectory
          */
-        ncp(watchDirectoryPath, updatePackageDependencyPath, (error) => {
+        ncp(watchDirectoryPath, updatePackageDependencyBuildPath, (error) => {
             if (error) {
                 return console.error(error);
             }
@@ -107,7 +116,7 @@ export const developmentPackagesUpdate = (
 
 export const debouncedDevelopmentPackagesUpdate = debouncedCallback(
     developmentPackagesUpdate,
-    1000,
+    5_000,
 );
 
 
