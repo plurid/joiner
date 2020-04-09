@@ -3,13 +3,37 @@ import path from 'path';
 
 import {
     ConfigurationFile,
+    Package,
 } from '../../data/interfaces';
 
+
+
+export const developmentPackagesUpdate = (
+    configuration: ConfigurationFile,
+    packageRegistry: string[],
+) => {
+    for (const registeredPackage of packageRegistry) {
+        for (const packageA of configuration.packages) {
+            // update note_modules it they exist
+
+            // better way
+            // have a given dependency graph
+        }
+    }
+}
+
+export const debouncedDevelopmentPackagesUpdate = (
+    configuration: ConfigurationFile,
+    packageRegistry: string[],
+) => {
+    developmentPackagesUpdate(configuration, packageRegistry);
+}
 
 
 class DevelopmentWatcher {
     private configuration: ConfigurationFile;
     private watchers: fs.FSWatcher[] = [];
+    private packageRegistry: string[] = [];
 
     constructor(
         configuration: ConfigurationFile,
@@ -17,25 +41,57 @@ class DevelopmentWatcher {
         this.configuration = configuration;
     }
 
-    start() {
-        try {
-            const developmentPackages = this.configuration.development.watchPackages;
+    public start() {
+        const {
+            watchPackages,
+            watchDirectories,
+        } = this.configuration.development;
 
-            for (const developmentPackage of developmentPackages) {
+        const watchFunction = (
+            event: string,
+            filename: string,
+            packageData: Package,
+        ) => {
+            if (filename.includes('node_modules')) {
+                return;
+            }
+
+            for (const watchDirectory of watchDirectories) {
+                if (filename.includes(watchDirectory)) {
+                    const updateData = {
+                        event,
+                        filename,
+                        packageData,
+                    };
+
+                    // for each file hit, the package registry checks
+                    // if it's in a new package
+                    this.updatePackageRegistry(updateData);
+
+                    debouncedDevelopmentPackagesUpdate(
+                        this.configuration,
+                        this.packageRegistry,
+                    );
+                }
+            }
+        }
+
+        try {
+            for (const watchPackage of watchPackages) {
                 const packageData = this.configuration.packages.find(
-                    workPackage => developmentPackage === workPackage.name
+                    workPackage => watchPackage === workPackage.name
                 );
                 if (!packageData) {
                     continue;
                 }
 
-                const watcher = fs.watch(packageData.path, (event, filename) => {
-                    // debounced function
-                    // which copies the build folders to all the development packages
-
-                    console.log('event', event);
-                    console.log('filename', filename);
-                });
+                const watcher = fs.watch(
+                    packageData.path,
+                    {
+                        recursive: true,
+                    },
+                    (event, filename) => watchFunction(event, filename, packageData),
+                );
 
                 this.watchers.push(watcher);
             }
@@ -44,10 +100,17 @@ class DevelopmentWatcher {
         }
     }
 
-    stop() {
+    public stop() {
         for (const watcher of this.watchers) {
             watcher.close();
         }
+    }
+
+
+    private updatePackageRegistry (
+        eventData: any,
+    ) {
+
     }
 }
 
