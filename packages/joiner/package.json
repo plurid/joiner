@@ -49,7 +49,8 @@
     "dependencies": {
         "commander": "^5.0.0",
         "js-yaml": "^3.13.1",
-        "npm-check-updates": "^4.1.1"
+        "ncp": "^2.0.0",
+        "npm-check-updates": "^4.1.2"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^11.0.2",
@@ -58,27 +59,28 @@
         "@rollup/plugin-replace": "^2.3.1",
         "@types/inquirer": "^6.5.0",
         "@types/js-yaml": "^3.12.3",
-        "@types/node": "^13.11.0",
-        "@typescript-eslint/eslint-plugin": "^2.26.0",
-        "@typescript-eslint/parser": "^2.26.0",
+        "@types/ncp": "^2.0.3",
+        "@types/node": "^13.11.1",
+        "@typescript-eslint/eslint-plugin": "^2.27.0",
+        "@typescript-eslint/parser": "^2.27.0",
         "colors": "^1.4.0",
         "coveralls": "^3.0.11",
         "cross-env": "^7.0.2",
         "eslint": "^6.8.0",
-        "jest": "^25.2.7",
-        "jest-config": "^25.2.7",
+        "jest": "^25.3.0",
+        "jest-config": "^25.3.0",
         "prompt": "^1.0.0",
         "replace-in-file": "^5.0.2",
         "rimraf": "^3.0.2",
-        "rollup": "^2.3.2",
+        "rollup": "^2.3.4",
         "rollup-plugin-copy": "^3.3.0",
         "rollup-plugin-peer-deps-external": "^2.2.2",
         "rollup-plugin-sourcemaps": "^0.5.0",
         "rollup-plugin-typescript2": "^0.27.0",
         "shelljs": "^0.8.3",
         "ts-jest": "^25.3.1",
-        "ts-node": "^8.8.1",
-        "typedoc": "^0.17.3",
+        "ts-node": "^8.8.2",
+        "typedoc": "^0.17.4",
         "typescript": "^3.8.3"
     }
 }
