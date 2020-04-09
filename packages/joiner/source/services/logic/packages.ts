@@ -90,9 +90,18 @@ export const locatePackages = async (
         }
     }
 
-    const filteredPackages = locatedPackages.filter(locatedPackage => !packageIgnore.includes(locatedPackage.name));
+    const filteredPackagesByName = locatedPackages.filter(locatedPackage => !packageIgnore.includes(locatedPackage.name));
+    const filteredPackagesByPath = filteredPackagesByName.filter((filterablePackage) => {
+        for (const packageIgnored of packageIgnore) {
+            if (filterablePackage.path.includes(packageIgnored)) {
+                return true;
+            }
+        }
 
-    return filteredPackages;
+        return false;
+    });
+
+    return filteredPackagesByPath;
 }
 
 

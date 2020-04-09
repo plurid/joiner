@@ -41,6 +41,7 @@ export const handleParsedConfigurationFile = async (
     const packageManager = parsedData.package?.manager ?? 'yarn';
     const packagePublisher = parsedData.package?.publisher ?? 'npm';
     const packageIgnore = parsedData.package?.ignore ?? [];
+    console.log(packageIgnore);
 
     const commitEngine = parsedData.commit?.engine ?? 'git';
     const commitCombine = parsedData.commit?.combine ?? false;
