@@ -109,7 +109,7 @@ const main = async (
 
     program
         .command('ucom <packageName>')
-        .description('upcom - update, commit - package by name or "all" packages')
+        .description('ucom - update, commit - package by name or "all" packages')
         .action(async (packageName: string) => {
             await ucomCommand(packageName, program.configuration);
         });
