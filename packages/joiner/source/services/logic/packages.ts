@@ -178,13 +178,19 @@ export const resolveWatchedPackages = (
     packages: Package[],
     watchPackages?: string | string[],
 ) => {
+    const allPackages = packages.map(workPackage => workPackage.name);
+
     if (!watchPackages) {
-        return [];
+        return [
+            ...allPackages,
+        ];
     }
 
     if (typeof watchPackages === 'string') {
         if (watchPackages.toLowerCase() === 'all') {
-            return packages.map(workPackage => workPackage.name);
+            return [
+                ...allPackages,
+            ];
         }
 
         const watchPackage = packages.find(workPackage => workPackage.name === watchPackages);

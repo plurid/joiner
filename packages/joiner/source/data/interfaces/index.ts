@@ -27,9 +27,11 @@ export interface CommitConfiguration {
 
 export interface DevelopmentConfiguration {
     /**
-     * Port for the server started with `joiner develop`. Default `55000`.
+     * Paths to other packages which need to be linked/watched/updated
+     * but which do not belong to the same life-cycle management
+     * as the top-defined `packages`.
      */
-    serverPort: number;
+    externalPackages: string[];
 
     /**
      * The packages which are targeted for development watch.
@@ -43,6 +45,11 @@ export interface DevelopmentConfiguration {
      * Default `['build', 'distribution', 'dist']`.
      */
     watchDirectories: string[];
+
+    /**
+     * Port for the server started with `joiner develop`. Default `55000`.
+     */
+    serverPort: number;
 }
 
 

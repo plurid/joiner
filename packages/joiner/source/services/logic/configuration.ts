@@ -62,12 +62,13 @@ export const handleParsedConfigurationFile = async (
         packageIgnore,
     );
 
-    const developmentServerPort = parsedData.development?.serverPort ?? 55000;
-    const developmentWatchDirectories = parsedData.development?.watchDirectories ?? ['build', 'distribution', 'dist'];
+    const developmentExternalPackages = parsedData.development?.externalPackages ?? [];
     const developmentWatchPackages = resolveWatchedPackages(
         packages,
         parsedData.development?.watchPackages,
     );
+    const developmentWatchDirectories = parsedData.development?.watchDirectories ?? ['build', 'distribution', 'dist'];
+    const developmentServerPort = parsedData.development?.serverPort ?? 55000;
 
     if (packages.length === 0 && !yarnWorkspace) {
         console.log(`\n\tPackages required to be specified in the 'joiner.yaml' file.\n`);
@@ -91,9 +92,10 @@ export const handleParsedConfigurationFile = async (
             message: commitMessage,
         },
         development: {
-            serverPort: developmentServerPort,
+            externalPackages: developmentExternalPackages,
             watchPackages: developmentWatchPackages,
             watchDirectories: developmentWatchDirectories,
+            serverPort: developmentServerPort,
         },
         runFrom,
     };
