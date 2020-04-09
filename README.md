@@ -266,11 +266,11 @@ alias jpuba='joiner publish all'
 
 ### Development
 
-Cross-linking packages depending on each other with symlinks becomes very fast a complete mess, especially when the dependency chain is beyond 2-3 links, and even more so when one of the packages do not play well with having a copy of itself in the dependency graph.
+Cross-linking packages depending on each other with symlinks becomes very fast a complete mess, especially when the dependency chain is beyond 2-3 links, and even more so when one of the packages does not play well with having a copy of itself in the dependency graph.
 
-`Joiner` goes the "dumb" way: instead of symlinking the complete folder into `node_modules`, giving rise to the mess, `joiner` merely watches and copies the built output (`/build`, `/distribution`, or any other folder) of a package into the adequate dependency folder for each 'linked' package.
+`Joiner` goes the "dumb" way: instead of symlinking the complete folder into `node_modules`, giving rise to the mess in the first place, `joiner` merely watches and copies the build process output (`/build`, `/distribution`, or any other folder) of a package into the adequate dependency folder for each 'linked', that is referenced, package.
 
-To setup the packages linkage, the configuration file should have at least the `watchPackages` field
+To setup the packages linkage, the configuration file should have at least the `watchPackages` field, if not, all the registered packages will be watched.
 
 ``` yaml
 development:
@@ -295,7 +295,7 @@ development:
   externalPackages: []
 ```
 
-To start the development server and watchers, run the command
+To start the development server and the watchers, run the command
 
 `joiner develop`
 
