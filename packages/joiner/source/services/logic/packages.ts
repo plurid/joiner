@@ -172,3 +172,39 @@ const computePackageAlias = (
 
     return lastWord;
 }
+
+
+export const resolveWatchedPackages = (
+    packages: Package[],
+    watchPackages?: string | string[],
+) => {
+    if (!watchPackages) {
+        return [];
+    }
+
+    if (typeof watchPackages === 'string') {
+        if (watchPackages.toLowerCase() === 'all') {
+            return packages.map(workPackage => workPackage.name);
+        }
+
+        const watchPackage = packages.find(workPackage => workPackage.name === watchPackages);
+        if (!watchPackage) {
+            return [];
+        }
+
+        return [watchPackage.name];
+    }
+
+    const resolvedWatchPackages: string[] = [];
+
+    for (const watchPackage of watchPackages) {
+        for (const workPackage of packages) {
+            if (watchPackage === workPackage.name) {
+                resolvedWatchPackages.push(watchPackage);
+                break;
+            }
+        }
+    }
+
+    return resolvedWatchPackages;
+}
