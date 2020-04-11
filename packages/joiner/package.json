@@ -1,6 +1,6 @@
 {
     "name": "@plurid/joiner",
-    "version": "0.0.31",
+    "version": "0.0.32",
     "description": "Multi/Mono-Repository Task Runner",
     "keywords": [
         "joiner"
@@ -72,7 +72,7 @@
         "prompt": "^1.0.0",
         "replace-in-file": "^5.0.2",
         "rimraf": "^3.0.2",
-        "rollup": "^2.3.4",
+        "rollup": "^2.6.0",
         "rollup-plugin-copy": "^3.3.0",
         "rollup-plugin-peer-deps-external": "^2.2.2",
         "rollup-plugin-sourcemaps": "^0.5.0",
