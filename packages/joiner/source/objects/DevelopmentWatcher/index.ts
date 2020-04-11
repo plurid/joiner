@@ -63,7 +63,9 @@ export const developmentPackageUpdateDirectoryLogic = async (
                 return console.error(error);
             }
 
-            console.log(`\tCopied '${workPackage.name}' build output '${watchDirectory}' to '${updatePackage.name}' dependency folder.`);
+            const date = new Date();
+
+            console.log(`\t[${date.toLocaleTimeString()} - ${date.toLocaleDateString()}]: Copied '${workPackage.name}' build output '${watchDirectory}' to '${updatePackage.name}' dependency folder.`);
         });
     }
 }
