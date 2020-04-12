@@ -267,7 +267,9 @@ development:
 
 To start the development server and the watchers, run the command
 
-`joiner develop`
+```
+joiner develop
+```
 
 
 ### High-Scale
