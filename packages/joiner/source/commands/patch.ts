@@ -25,6 +25,22 @@ const patchCommand = async (
     configurationFile: string,
     versionType: string,
 ) => {
+    if (packageName === '.') {
+        const packageData: Package = {
+            alias: '',
+            joinerpackage: false,
+            name: 'in the current directory',
+            path: process.cwd(),
+            private: false,
+            version: '0.0.0',
+        };
+        await patchLogic(
+            packageData,
+            versionType,
+        );
+        return;
+    }
+
     const configurationData = await parseConfigurationFile(configurationFile);
     if (!configurationData) {
         return;
@@ -65,10 +81,11 @@ const patchLogic = async (
         const packageJSONRawData = await fs.readFile(packageJSONPath, 'utf-8');
         const packageJSONData = JSON.parse(packageJSONRawData);
         const {
+            name,
             version,
         } = packageJSONData;
 
-        console.log(`\t${configPackage.name} version patched to version ${version}.\n`);
+        console.log(`\t${name} version patched to version ${version}.\n`);
     } catch (error) {
         console.log(`\n\tSomething went wrong. Check the version field for '${configPackage.name}'.\n`);
     }
