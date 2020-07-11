@@ -20,12 +20,14 @@ export const parseConfigurationFile = async (
     configurationFile: string,
 ) => {
     try {
-        const configurationFilepath = path.join(process.cwd(), configurationFile);
+        const configurationFilepath = configurationFile.startsWith('/')
+            ? configurationFile
+            : path.join(process.cwd(), configurationFile);
         const configurationFileData = await fs.readFile(configurationFilepath, 'utf-8');
         const parsedData = yaml.safeLoad(configurationFileData);
 
         return await handleParsedConfigurationFile(parsedData, configurationFilepath);
-    } catch {
+    } catch (error) {
         console.log(`\n\tConfiguration file required.\n\n\tCheck the file '${configurationFile}' exists on the rootpath:\n\t${process.cwd()}\n`);
         return;
     }
