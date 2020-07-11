@@ -28,10 +28,12 @@ export const developmentPackageUpdateDirectoryLogic = async (
         'node_modules',
         workPackage.name,
     );
+    // console.log('updatePackageDependencyPath', updatePackageDependencyPath);
     const updatePackageDependencyBuildPath = path.join(
         updatePackageDependencyPath,
         watchDirectory,
-    );
+        );
+    // console.log('updatePackageDependencyBuildPath', updatePackageDependencyBuildPath);
 
     if (fs.existsSync(watchDirectoryPath)) {
         // check that the updatePackage is actually dependent on the workPackage
@@ -93,35 +95,6 @@ export const developmentPackageUpdateLogic = (
 }
 
 
-export const developmentPackagesUpdate = (
-    configuration: ConfigurationFile,
-    packageRegistry: Set<string>,
-) => {
-    for (const registeredPackage of packageRegistry) {
-        // Loop over modules.
-        // TODO Better way: have a given dependency graph
-        for (const updatePackage of configuration.packages) {
-            /** Skip if it's itself */
-            if (updatePackage.name === registeredPackage) {
-                continue;
-            }
-
-            developmentPackageUpdateLogic(
-                registeredPackage,
-                updatePackage,
-                configuration,
-            );
-        }
-    }
-}
-
-
-export const debouncedDevelopmentPackagesUpdate = debouncedCallback(
-    developmentPackagesUpdate,
-    3_300,
-);
-
-
 class DevelopmentWatcher {
     private configuration: ConfigurationFile;
     private watchers: fs.FSWatcher[] = [];
@@ -139,36 +112,6 @@ class DevelopmentWatcher {
             watchDirectories,
         } = this.configuration.development;
 
-        console.log('watchPackages', watchPackages);
-        console.log('watchDirectories', watchDirectories);
-
-        const watchFunction = (
-            event: string,
-            filename: string,
-            packageData: Package,
-        ) => {
-            if (filename.includes('node_modules')) {
-                return;
-            }
-
-            for (const watchDirectory of watchDirectories) {
-                if (filename.includes(watchDirectory)) {
-                    const updateData: DevelopmentWatchEventData = {
-                        event,
-                        filename,
-                        package: packageData,
-                    };
-
-                    this.updatePackageRegistry(updateData);
-
-                    debouncedDevelopmentPackagesUpdate(
-                        this.configuration,
-                        this.packageRegistry,
-                    );
-                }
-            }
-        }
-
         try {
             for (const watchPackage of watchPackages) {
                 const packageData = this.configuration.packages.find(
@@ -183,7 +126,12 @@ class DevelopmentWatcher {
                     {
                         recursive: true,
                     },
-                    (event, filename) => watchFunction(event, filename, packageData),
+                    (event, filename) => this.watchFunction(
+                        event,
+                        filename,
+                        packageData,
+                        watchDirectories,
+                    ),
                 );
 
                 this.watchers.push(watcher);
@@ -209,6 +157,77 @@ class DevelopmentWatcher {
 
         this.packageRegistry.add(packageData.name);
     }
+
+    private watchFunction(
+        event: string,
+        filename: string,
+        packageData: Package,
+        watchDirectories: string[],
+    ) {
+        if (filename.includes('node_modules')) {
+            return;
+        }
+
+        for (const watchDirectory of watchDirectories) {
+            if (filename.includes(watchDirectory)) {
+                const updateData: DevelopmentWatchEventData = {
+                    event,
+                    filename,
+                    package: packageData,
+                };
+
+                this.updatePackageRegistry(updateData);
+
+                this.debouncedDevelopmentPackagesUpdate(
+                    this.configuration,
+                    this.packageRegistry,
+                );
+            }
+        }
+    }
+
+    private unregisterPackage(
+        packageName: string,
+    )  {
+        const newSet = new Set<string>();
+
+        for (const registeredPackage of this.packageRegistry) {
+            if (packageName !== registeredPackage) {
+                newSet.add(registeredPackage);
+            }
+        }
+
+        this.packageRegistry = newSet;
+    }
+
+    private developmentPackagesUpdate = (
+        configuration: ConfigurationFile,
+        packageRegistry: Set<string>,
+    ) => {
+        for (const registeredPackage of packageRegistry) {
+            // Loop over modules.
+            // TODO Better way: have a given dependency graph
+            for (const updatePackage of configuration.packages) {
+                /** Skip if it's itself */
+                if (updatePackage.name === registeredPackage) {
+                    continue;
+                }
+
+                developmentPackageUpdateLogic(
+                    registeredPackage,
+                    updatePackage,
+                    configuration,
+                );
+            }
+
+            this.unregisterPackage(registeredPackage);
+        }
+    }
+
+    private debouncedDevelopmentPackagesUpdate = debouncedCallback(
+        this.developmentPackagesUpdate,
+        3_300,
+    );
 }
 
 
