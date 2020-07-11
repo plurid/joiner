@@ -26,11 +26,11 @@
     "module": "distribution/index.es.js",
     "typings": "distribution/types/index.d.ts",
     "bin": {
-        "joiner": "binary/joiner"
+        "joiner": "binder/joiner"
     },
     "files": [
         "distribution",
-        "binary"
+        "binder"
     ],
     "preferGlobal": true,
     "scripts": {
