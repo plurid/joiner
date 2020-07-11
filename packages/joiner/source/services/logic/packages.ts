@@ -159,7 +159,7 @@ const readPackageFile = async (
             const packageRawData = await fs.readFile(packageJoinerPath, 'utf-8');
             const packageData = yaml.safeLoad(packageRawData);
 
-            const packageName = packageData.name ?? '';
+            const packageName = (packageData as any)?.name ?? '';
             const packageAlias = computePackageAlias(packageName);
 
             const locatedPackage: Package = {

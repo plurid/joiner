@@ -139,6 +139,9 @@ class DevelopmentWatcher {
             watchDirectories,
         } = this.configuration.development;
 
+        console.log('watchPackages', watchPackages);
+        console.log('watchDirectories', watchDirectories);
+
         const watchFunction = (
             event: string,
             filename: string,
