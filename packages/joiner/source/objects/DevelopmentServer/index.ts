@@ -18,8 +18,7 @@ class DevelopmentServer {
     ) {
         this.configuration = configuration;
         this.watcher = new DevelopmentWatcher(configuration);
-        this.server = http.createServer((req, res) => {
-        });
+        this.server = http.createServer();
 
         process.addListener('SIGINT', () => {
             this.watcher.stop();
