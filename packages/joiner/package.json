@@ -47,7 +47,7 @@
         "prepublishOnly": "yarn build"
     },
     "dependencies": {
-        "@plurid/deon": "^0.0.0",
+        "@plurid/deon": "^0.0.2",
         "commander": "^6.1.0",
         "js-yaml": "^3.14.0",
         "ncp": "^2.0.0",

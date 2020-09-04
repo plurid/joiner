@@ -6,6 +6,11 @@ import path from 'path';
 import yaml from 'js-yaml';
 
 import {
+    Deon,
+    DEON_FILENAME_EXTENSION,
+} from '@plurid/deon';
+
+import {
     ConfigurationFile,
 } from '../../data/interfaces';
 
@@ -24,6 +29,18 @@ export const parseConfigurationFile = async (
             ? configurationFile
             : path.join(process.cwd(), configurationFile);
         const configurationFileData = await fs.readFile(configurationFilepath, 'utf-8');
+
+        const extension = path.extname(configurationFile);
+
+        if (extension === DEON_FILENAME_EXTENSION) {
+            const deon = new Deon();
+            const data = deon.parse(configurationFileData);
+            return await handleParsedConfigurationFile(
+                data,
+                configurationFilepath,
+            );
+        }
+
         const parsedData = yaml.safeLoad(configurationFileData);
 
         return await handleParsedConfigurationFile(parsedData, configurationFilepath);
