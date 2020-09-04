@@ -32,8 +32,8 @@ const main = async (
     program
         .option(
             '-c, --configuration <file>',
-            'path to the .yaml configuration file',
-            'joiner.yaml',
+            'path to the .deon or .yaml configuration file',
+            'joiner.deon',
         );
 
     program
@@ -49,9 +49,15 @@ const main = async (
 
     program
         .command('initialize')
-        .description('initialize the "joiner.yaml" file')
-        .action(async ()=> {
-            await initializeCommand();
+        .description('initialize the "joiner" configuration file')
+        .option(
+            '-t, --type <file>',
+            'configuration type: deon, yaml',
+            'deon',
+        ).action(async (options: any)=> {
+            await initializeCommand(
+                options.type,
+            );
         });
 
     program

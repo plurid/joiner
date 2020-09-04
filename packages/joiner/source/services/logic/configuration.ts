@@ -98,7 +98,7 @@ export const handleParsedConfigurationFile = async (
     const developmentServerPort = parsedData.development?.serverPort ?? 55000;
 
     if (packages.length === 0 && !yarnWorkspace) {
-        console.log(`\n\tPackages required to be specified in the 'joiner.yaml' file.\n`);
+        console.log(`\n\tPackages required to be specified in the 'joiner' configuration file.\n`);
         return;
     }
 

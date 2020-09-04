@@ -24,4 +24,4 @@ export {
     upcomCommand,
     upcomlishCommand,
     developCommand,
-}
+};
