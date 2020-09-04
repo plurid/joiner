@@ -1,10 +1,7 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/plurid/joiner/master/about/identity/joiner-logo.png" height="250px">
     <br />
-    <a target="_blank" href="https://www.npmjs.com/package/@plurid/joiner">
-        <img src="https://img.shields.io/npm/v/@plurid/joiner.svg?logo=npm&colorB=1380C3&style=for-the-badge" alt="Version">
-    </a>
-    <!-- <img src="https://img.shields.io/badge/cli-v0.1.0-blue.svg?colorB=1380C3&style=for-the-badge" alt="CLI"> -->
+    <br />
     <a target="_blank" href="https://github.com/plurid/joiner/blob/master/LICENSE">
         <img src="https://img.shields.io/badge/license-MIT-blue.svg?colorB=1380C3&style=for-the-badge" alt="License: MIT">
     </a>
@@ -20,6 +17,16 @@
 <h3 align="center">
     Multi/Mono-Repository Task Runner
 </h1>
+
+
+<br />
+
+
+`joiner` is intended to sub-automate commands over a span of projects/packages/folders.
+
+`joiner` can run arbitrary commands in each target project, or specific commands (`update`, `commit`, etc.) based on supported workflows.
+
+`joiner` is a sub-automation tool in that the commands are manually called from the command-line, and it requires another publish/subscribe-like layer on top of it in order to reach full automation.
 
 
 Supported languages:
@@ -43,7 +50,6 @@ For `JavaScript`/`TypeScript`, `joiner` can be used on its own or conjoined with
     + [High-Scale](#high-scale)
     + [Joiner Package](#joiner-package)
     + [Path Resolution](#path-resolution)
-+ [Packages](#packages)
 
 
 
@@ -79,29 +85,35 @@ Initialize by running, in the root folder of the project(s), the command
 joiner initialize
 ```
 
-`Joiner` requires† a `joiner.yaml`‡ file where the packages paths must be registered such as
+`joiner` requires† a `joiner`‡ configuration file where the packages paths must be registered, using [`deon`](https://github.com/plurid/deon) or `yaml`, such as:
 
-``` yaml
-packages:
-  - /path/to/package-1
-  - /path/to/package-2
+``` deon
+{
+    packages {
+        /path/to/package-1
+        /path/to/package-2
+    }
+}
 ```
 
 Catch-all paths can be used with `/*` such as
 
-``` yaml
-packages:
-  - /path/to/multi-package-folder/*
-  - /path/to/package-2
+``` deon
+{
+    packages {
+        /path/to/multi-package-folder/*
+        /path/to/package-2
+    }
+}
 ```
 
 where the `multi-package-folder` is a directory containing multiple folders with their own `package.json`, or [`joiner.package.yaml`](#joiner-package).
 
 The packages paths are resolved relative to the folder from where the command is called. See [path resolution](#path-resolution).
 
-† when using `yarnWorkspace: true` the `packages` field can be removed/commented, `joiner` will look for the packages in the `workspaces` field of the root `package.json`.
+† when using `yarnWorkspace true` [`.deon`] the `packages` field can be removed/commented; `joiner` will look for the packages in the `workspaces` field of the root `package.json`.
 
-‡ `joiner` will by default look for a `joiner.yaml` file in the working directory, but the file can be arbitrarily named/placed, provided it is passed to the `-c, --configuration` option.
+‡ `joiner` will by default look for a `joiner.deon` file in the working directory, but the file can be arbitrarily named/placed, provided it is passed to the `-c, --configuration` option.
 
 
 ### Command-Line Interface
@@ -146,9 +158,11 @@ To `run` a `command...` with flags, the divider `--` must be used, e.g. `joiner 
 
 ### Configuration File
 
-The `joiner.yaml` configuration file can be at the root of the packages/workspaces and the `CLI` will parse it by default, or it can be specified at runtime with the `-c, --configuration <file>` option.
+The `joiner` configuration file can be at the root of the packages/workspaces and the `CLI` will parse it by default, or it can be specified at runtime with the `-c, --configuration <file>` option.
 
-The `joiner.yaml` configuration file has as required fields only the `packages` field (or, if using Yarn Workspaces, the `yarnWorkspace` field set to `true`).
+The `joiner` configuration file has as required fields only the `packages` field (or, if using Yarn Workspaces, the `yarnWorkspace` field set to `true`).
+
+The `joiner` configuration file can be formatted using [`deon`](https://github.com/plurid/deon) or `yaml`.
 
 The `joiner.yaml` fields:
 
@@ -267,7 +281,7 @@ development:
 
 To start the development server and the watchers, run the command
 
-```
+``` bash
 joiner develop
 ```
 
