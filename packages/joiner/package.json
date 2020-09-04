@@ -1,18 +1,18 @@
 {
     "name": "@plurid/joiner",
-    "version": "0.0.34",
+    "version": "0.0.35",
     "description": "Multi/Mono-Repository Task Runner",
     "keywords": [
         "joiner"
     ],
-    "author": "Jan Cavel <caveljan@plurid.com> (https://plurid.com)",
+    "author": "ly3xqhl8g9 <ly3xqhl8g9@plurid.com> (https://plurid.com)",
     "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/plurid/joiner"
     },
     "bugs": {
-        "email": "feedback@plurid.com",
+        "email": "source@plurid.com",
         "url": "https://github.com/plurid/joiner/issues"
     },
     "homepage": "https://github.com/plurid/joiner/blob/master/packages/joiner/README.md",
@@ -20,7 +20,7 @@
         "access": "public"
     },
     "engines": {
-        "node": ">=6.0.0"
+        "node": ">=12.0.0"
     },
     "main": "distribution/index.js",
     "module": "distribution/index.es.js",

@@ -36,6 +36,7 @@ export default {
         'child_process',
         'path',
         'fs',
+        'http',
     ],
     watch: {
         include: 'source/**',
