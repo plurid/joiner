@@ -5,8 +5,7 @@ import path from 'path';
 
 import yaml from 'js-yaml';
 
-import {
-    Deon,
+import Deon, {
     DEON_FILENAME_EXTENSION,
 } from '@plurid/deon';
 
@@ -43,7 +42,10 @@ export const parseConfigurationFile = async (
 
         const parsedData = yaml.safeLoad(configurationFileData);
 
-        return await handleParsedConfigurationFile(parsedData, configurationFilepath);
+        return await handleParsedConfigurationFile(
+            parsedData,
+            configurationFilepath,
+        );
     } catch (error) {
         console.log(`\n\tConfiguration file required.\n\n\tCheck the file '${configurationFile}' exists on the rootpath:\n\t${process.cwd()}\n`);
         return;
