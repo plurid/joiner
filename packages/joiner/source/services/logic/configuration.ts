@@ -33,7 +33,7 @@ export const parseConfigurationFile = async (
 
         if (extension === DEON_FILENAME_EXTENSION) {
             const deon = new Deon();
-            const data = deon.parse(configurationFileData);
+            const data = await deon.parse(configurationFileData);
             return await handleParsedConfigurationFile(
                 data,
                 configurationFilepath,
@@ -57,16 +57,22 @@ export const handleParsedConfigurationFile = async (
     parsedData: any,
     configurationFilepath: string,
 ): Promise<ConfigurationFile | undefined> => {
-    const yarnWorkspace = parsedData.yarnWorkspace ?? false;
+    const yarnWorkspace = typeof parsedData.yarnWorkspace === 'boolean'
+        ? parsedData.yarnWorkspace
+        : parsedData.yarnWorkspace === 'true';
 
     const packageManager = parsedData.package?.manager ?? 'yarn';
     const packagePublisher = parsedData.package?.publisher ?? 'npm';
     const packageIgnore = parsedData.package?.ignore ?? [];
 
     const commitEngine = parsedData.commit?.engine ?? 'git';
-    const commitCombine = parsedData.commit?.combine ?? false;
+    const commitCombine = typeof parsedData.commit?.combine === 'boolean'
+        ? parsedData.commit?.combine
+        : parsedData.commit?.combine === 'true';
     const commitRoot = parsedData.commit?.root ?? '';
-    const commitFullFolder = parsedData.commit?.fullFolder ?? false;
+    const commitFullFolder = typeof parsedData.commit?.fullFolder === 'boolean'
+        ? parsedData.commit?.fullFolder
+        : parsedData.commit?.fullFolder === 'true';
     const commitDivider = parsedData.commit?.divider ?? ' > ';
     const commitMessage = parsedData.commit?.message ?? 'setup: package';
 
