@@ -130,7 +130,7 @@ Commands:
 
     run <packageName> <command...>  run an arbitrary command on package by name or on "all" packages
 
-    command <commandName>           run a named command specified in the "joiner" file
+    command <commandNames...>       run the named commands specified in the "joiner" file on package by name or on "all" packages
 
     initialize                      initialize the "joiner" file
 
