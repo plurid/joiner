@@ -16,7 +16,7 @@
 
 <h3 align="center">
     Multi/Mono-Repository Task Runner
-</h1>
+</h3>
 
 
 <br />
@@ -129,30 +129,30 @@ Options:
 
 Commands:
 
-    run <packageName> <command...>  run an arbitrary command on package by name or on "all" packages
+    initialize                          initialize the "joiner" file
 
-    command <commandNames...>       run the named commands specified in the "joiner" file on package by name or on "all" packages
+    list                                list joiner commandable packages
 
-    initialize                      initialize the "joiner" file
+    run <packageName> <command...>      run an arbitrary command on package by name or on "all" packages
 
-    list                            list joiner commandable packages
+    command <commandNames...>           run the named commands specified in the "joiner" file on package by name or on "all" packages
 
-    update <packageName>            update package by name or "all" packages
+    update <packageName>                update package by name or "all" packages
 
-    patch [options] <packageName>   patch package version by name or "all" packages
+    patch [options] <packageName>       patch package version by name or "all" packages
 
-    commit [options] <packageName>  commit package by name or "all" packages
+    commit [options] <packageName>      commit package by name or "all" packages
 
-    publish <packageName>           publish package by name or "all" packages
+    publish <packageName>               publish package by name or "all" packages
 
-    ucom <packageName>              ucom - update, commit - package by name or "all" packages
+    ucom <packageName>                  ucom - update, commit - package by name or "all" packages
 
-    upcom <packageName>             upcom - update, patch, commit - package by name or "all" packages
+    upcom <packageName>                 upcom - update, patch, commit - package by name or "all" packages
 
-    upcomlish <packageName>         upcomlish - update, patch, commit, publish - package by name or "all" packages
+    upcomlish <packageName>             upcomlish - update, patch, commit, publish - package by name or "all" packages
 
-    develop                         start a server to listen for changes in the development watched packages
-                                    and update the cross-dependencies
+    develop                             start a server to listen for changes in the development watched packages
+                                        and update the cross-dependencies
 
 Instead of `packageName` the signifier `all` can be used to run the command on all the registered packages.
 
