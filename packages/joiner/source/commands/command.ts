@@ -4,6 +4,7 @@ import {
 
 import {
     Package,
+    ConfigurationFile,
 } from '../data/interfaces';
 
 import {
@@ -23,18 +24,29 @@ const commandCommand = async (
 ) => {
     const configurationData = await parseConfigurationFile(configurationFile);
     if (!configurationData) {
+        console.log(`\n\tNo configuration data in the configuration file ${configurationFile}.\n`);
         return;
     }
 
     const resolvedPackage = resolvePackage(packageName, configurationData);
     if (!resolvedPackage) {
+        console.log(`\n\tNo package ${packageName}.\n`);
         return;
+    }
+
+    const registeredCommands = Object.keys(configurationData.commands);
+    for (const commandName of commandNames) {
+        if (!registeredCommands.includes(commandName)) {
+            console.log(`\n\tNo command ${commandName}.\n`);
+            return;
+        }
     }
 
     for (const configPackage of resolvedPackage) {
         await runLogic(
             configPackage,
             commandNames,
+            configurationData,
         );
     }
 }
@@ -43,23 +55,27 @@ const commandCommand = async (
 const runLogic = async (
     configPackage: Package,
     commandNames: string[],
+    configurationData: ConfigurationFile,
 ) => {
-    // const executableCommand = commandNames.join(' ');
+    for (const commandName of commandNames) {
+        const executableCommandData = configurationData.commands[commandName];
+        const executableCommand = executableCommandData.join(' ');
 
-    // console.log(`\n\tRunning command '${executableCommand}' in:\n\t${configPackage.path}\n`);
-    // const startTime = Date.now();
+        console.log(`\n\tRunning command '${executableCommand}' in:\n\t${configPackage.path}\n`);
+        const startTime = Date.now();
 
-    // execSync(
-    //     executableCommand,
-    //     {
-    //         cwd: configPackage.path,
-    //         stdio: 'inherit',
-    //     },
-    // );
+        execSync(
+            executableCommand,
+            {
+                cwd: configPackage.path,
+                stdio: 'inherit',
+            },
+        );
 
-    // const endTime = Date.now();
-    // const commandTime = (endTime - startTime)/1000;
-    // console.log(`\n\tCommand\n\n\t\t${executableCommand}\n\n\tran in ${commandTime} seconds.\n`);
+        const endTime = Date.now();
+        const commandTime = (endTime - startTime)/1000;
+        console.log(`\n\tCommand\n\n\t\t${executableCommand}\n\n\tran in ${commandTime} seconds.\n`);
+    }
 }
 
 

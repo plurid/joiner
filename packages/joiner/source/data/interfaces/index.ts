@@ -5,6 +5,7 @@ export interface ConfigurationFile {
     commit: CommitConfiguration;
     runFrom: string;
     development: DevelopmentConfiguration;
+    commands: Record<string, string[]>;
 }
 
 

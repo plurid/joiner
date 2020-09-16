@@ -81,6 +81,7 @@ export const handleParsedConfigurationFile = async (
     const runFrom = runFromData
         ? path.resolve(configurationFileDirectory, runFromData)
         : process.cwd();
+    const commands = parsedData.commands || {};
 
     const packages = await locatePackages(
         parsedData.packages,
@@ -125,6 +126,7 @@ export const handleParsedConfigurationFile = async (
             serverPort: developmentServerPort,
         },
         runFrom,
+        commands,
     };
 
     return configurationFile;
