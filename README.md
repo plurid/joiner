@@ -375,4 +375,4 @@ which contains a path trunk, relative to the `joiner.yaml` file, from which the 
 
 [@plurid/joiner][joiner] • the CLI application
 
-[joiner]: https://github.com/plurid/datasign/tree/master/packages/joiner
+[joiner]: https://github.com/plurid/joiner/tree/master/packages/joiner
