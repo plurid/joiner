@@ -38,28 +38,6 @@ const main = async (
         );
 
     program
-        .command('run <packageName> <command...>')
-        .description('run an arbitrary command on package by name or on "all" packages')
-        .action(async (packageName: string, command: string[]) => {
-            await runCommand(
-                packageName,
-                command,
-                program.configuration,
-            );
-        });
-
-    program
-        .command('command <packageName> <commandNames...>')
-        .description('run the named commands specified in the "joiner" file on package by name or on "all" packages')
-        .action(async (packageName: string, commands: string[]) => {
-            await commandCommand(
-                packageName,
-                commands,
-                program.configuration,
-            );
-        });
-
-    program
         .command('initialize')
         .description('initialize the "joiner" configuration file')
         .option(
@@ -77,6 +55,28 @@ const main = async (
         .description('list joiner commandable packages')
         .action(async ()=> {
             await listCommand(
+                program.configuration,
+            );
+        });
+
+    program
+        .command('run <packageName> <command...>')
+        .description('run an arbitrary command on package by name or on "all" packages')
+        .action(async (packageName: string, command: string[]) => {
+            await runCommand(
+                packageName,
+                command,
+                program.configuration,
+            );
+        });
+
+    program
+        .command('command <packageName> <commandNames...>')
+        .description('run the named commands specified in the "joiner" file on package by name or on "all" packages')
+        .action(async (packageName: string, commands: string[]) => {
+            await commandCommand(
+                packageName,
+                commands,
                 program.configuration,
             );
         });
