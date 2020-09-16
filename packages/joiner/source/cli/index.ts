@@ -6,6 +6,7 @@ import {
     initializeCommand,
     listCommand,
     runCommand,
+    commandCommand,
     updateCommand,
     patchCommand,
     commitCommand,
@@ -43,6 +44,17 @@ const main = async (
             await runCommand(
                 packageName,
                 command,
+                program.configuration,
+            );
+        });
+
+    program
+        .command('command <packageName> <commandNames...>')
+        .description('run the named commands specified in the "joiner" file on package by name or on "all" packages')
+        .action(async (packageName: string, commands: string[]) => {
+            await commandCommand(
+                packageName,
+                commands,
                 program.configuration,
             );
         });

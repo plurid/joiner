@@ -1,6 +1,7 @@
 import initializeCommand from './initialize';
 import listCommand from './list';
 import runCommand from './run';
+import commandCommand from './command';
 import updateCommand from './update';
 import patchCommand from './patch';
 import commitCommand from './commit';
@@ -16,6 +17,7 @@ export {
     initializeCommand,
     listCommand,
     runCommand,
+    commandCommand,
     updateCommand,
     patchCommand,
     commitCommand,
