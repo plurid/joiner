@@ -131,7 +131,9 @@ Commands:
 
     run <packageName> <command...>  run an arbitrary command on package by name or on "all" packages
 
-    initialize                      initialize the "joiner.yaml" file
+    command <commandName>           run a named command specified in the "joiner" file
+
+    initialize                      initialize the "joiner" file
 
     list                            list joiner commandable packages
 
