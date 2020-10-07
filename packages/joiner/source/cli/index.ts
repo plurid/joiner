@@ -45,7 +45,7 @@ const main = async (
     program
         .option(
             '-c, --configuration <file>',
-            `path to the .deon or .yaml configuration file (defaults: 'joiner', 'scripts/joiner', 'scripts/joiner.packages', deon or yaml files)`,
+            `path to the .deon or .yaml configuration file (defaults: 'joiner', 'scripts/joiner', 'scripts/joiner.packages')`,
         );
 
     program
