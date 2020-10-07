@@ -131,3 +131,36 @@ export const handleParsedConfigurationFile = async (
 
     return configurationFile;
 }
+
+
+export const getDefaultConfigurationFilepath = async () => {
+    const filepaths = [
+        'joiner.deon',
+        'joiner.yaml',
+        'scripts/joiner.deon',
+        'scripts/joiner.yaml',
+        'scripts/joiner.packages.deon',
+        'scripts/joiner.packages.yaml',
+    ];
+
+    let pathFound = filepaths[0];
+
+    for (const filepath of filepaths) {
+        try {
+            const possiblePath = path.join(
+                process.cwd(),
+                filepath,
+            );
+            const exists = await fs.stat(possiblePath);
+
+            if (exists) {
+                pathFound = filepath;
+                break;
+            }
+        } catch (error) {
+            continue;
+        }
+    }
+
+    return pathFound;
+}
