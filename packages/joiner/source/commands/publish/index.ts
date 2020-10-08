@@ -1,21 +1,29 @@
-import {
-    execSync,
-} from 'child_process';
-
-import {
-    Package,
-} from '../data/interfaces';
-
-import {
-    parseConfigurationFile,
-} from '../services/logic/configuration';
-
-import {
-    resolvePackage,
-} from '../services/logic/packages';
+// #region imports
+    // #region libraries
+    import {
+        execSync,
+    } from 'child_process';
+    // #endregion libraries
 
 
+    // #region external
+    import {
+        Package,
+    } from '../../data/interfaces';
 
+    import {
+        parseConfigurationFile,
+    } from '../../services/logic/configuration';
+
+    import {
+        resolvePackage,
+    } from '../../services/logic/packages';
+    // #endregion external
+// #endregion imports
+
+
+
+// #region module
 const publishCommand = async (
     packageName: string,
     configurationFile: string,
@@ -61,6 +69,10 @@ const publishLogic = async (
         console.log(`\n\tSomething went wrong.\n`);
     }
 }
+// #endregion module
 
 
+
+// #region exports
 export default publishCommand;
+// #endregion exports

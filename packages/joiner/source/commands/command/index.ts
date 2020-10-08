@@ -1,22 +1,30 @@
-import {
-    execSync,
-} from 'child_process';
-
-import {
-    Package,
-    ConfigurationFile,
-} from '../data/interfaces';
-
-import {
-    parseConfigurationFile,
-} from '../services/logic/configuration';
-
-import {
-    resolvePackage,
-} from '../services/logic/packages';
+// #region imports
+    // #region libraries
+    import {
+        execSync,
+    } from 'child_process';
+    // #endregion libraries
 
 
+    // #region external
+    import {
+        Package,
+        ConfigurationFile,
+    } from '../../data/interfaces';
 
+    import {
+        parseConfigurationFile,
+    } from '../../services/logic/configuration';
+
+    import {
+        resolvePackage,
+    } from '../../services/logic/packages';
+    // #endregion external
+// #endregion imports
+
+
+
+// #region module
 const commandCommand = async (
     packageName: string,
     commandNames: string[],
@@ -73,10 +81,14 @@ const runLogic = async (
         );
 
         const endTime = Date.now();
-        const commandTime = (endTime - startTime)/1000;
+        const commandTime = (endTime - startTime) / 1000;
         console.log(`\n\tCommand\n\n\t\t${executableCommand}\n\n\tran in ${commandTime} seconds.\n`);
     }
 }
+// #endregion module
 
 
+
+// #region exports
 export default commandCommand;
+// #endregion exports

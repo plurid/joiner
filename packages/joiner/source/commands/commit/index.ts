@@ -1,23 +1,32 @@
-import path from 'path';
-import {
-    execSync,
-} from 'child_process';
+// #region imports
+    // #region libraries
+    import path from 'path';
 
-import {
-    ConfigurationFile,
-    Package,
-} from '../data/interfaces';
-
-import {
-    parseConfigurationFile,
-} from '../services/logic/configuration';
-
-import {
-    resolvePackage,
-} from '../services/logic/packages';
+    import {
+        execSync,
+    } from 'child_process';
+    // #endregion libraries
 
 
+    // #region external
+    import {
+        ConfigurationFile,
+        Package,
+    } from '../../data/interfaces';
 
+    import {
+        parseConfigurationFile,
+    } from '../../services/logic/configuration';
+
+    import {
+        resolvePackage,
+    } from '../../services/logic/packages';
+    // #endregion external
+// #endregion imports
+
+
+
+// #region module
 const commitCommand = async (
     packageName: string,
     configurationFile: string,
@@ -92,6 +101,10 @@ const commitLogic = async (
         console.log(`\n\tSomething went wrong.\n`);
     }
 }
+// #endregion module
 
 
+
+// #region exports
 export default commitCommand;
+// #endregion exports

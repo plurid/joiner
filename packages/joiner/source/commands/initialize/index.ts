@@ -1,15 +1,23 @@
-import path from 'path';
-import {
-    promises as fs,
-} from 'fs';
+// #region imports
+    // #region libraries
+    import path from 'path';
 
-import {
-    fileExists,
-} from '../services/utilities';
-
-
+    import {
+        promises as fs,
+    } from 'fs';
+    // #endregion libraries
 
 
+    // #region external
+    import {
+        fileExists,
+    } from '../../services/utilities';
+    // #endregion external
+// #endregion imports
+
+
+
+// #region module
 const deonDefaultConfiguration = `// uncomment and add paths to packages
 {
     packages [
@@ -108,6 +116,10 @@ const initializeCommand = async (
         console.log(`\n\tJoiner already initialized. File '${filename}' exists in path:\n\n\t${process.cwd()}\n`);
     }
 }
+// #endregion module
 
 
+
+// #region exports
 export default initializeCommand;
+// #endregion exports

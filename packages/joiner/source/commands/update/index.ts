@@ -1,24 +1,33 @@
-import path from 'path';
-import {
-    execSync,
-} from 'child_process';
+// #region imports
+    // #region libraries
+    import path from 'path';
 
-import {
-    Package,
-} from '../data/interfaces';
+    import {
+        execSync,
+    } from 'child_process';
 
-import {
-    parseConfigurationFile,
-} from '../services/logic/configuration';
-
-import {
-    resolvePackage,
-} from '../services/logic/packages';
-
-import checkUpdates from 'npm-check-updates';
+    import checkUpdates from 'npm-check-updates';
+    // #endregion libraries
 
 
+    // #region external
+    import {
+        Package,
+    } from '../../data/interfaces';
 
+    import {
+        parseConfigurationFile,
+    } from '../../services/logic/configuration';
+
+    import {
+        resolvePackage,
+    } from '../../services/logic/packages';
+    // #endregion external
+// #endregion imports
+
+
+
+// #region module
 const updateCommand = async (
     packageName: string,
     configurationFile: string,
@@ -89,6 +98,10 @@ const installCommand = (
         },
     );
 }
+// #endregion module
 
 
+
+// #region exports
 export default updateCommand;
+// #endregion exports

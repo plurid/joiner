@@ -1,9 +1,14 @@
-import updateCommand from './update';
-import patchCommand from './patch';
-import commitCommand from './commit';
+// #region imports
+    // #region external
+    import updateCommand from '../update';
+    import patchCommand from '../patch';
+    import commitCommand from '../commit';
+    // #endregion external
+// #endregion imports
 
 
 
+// #region module
 const upcomCommand = async (
     packageName: string,
     configurationFile: string,
@@ -18,6 +23,10 @@ const upcomCommand = async (
     console.log(`\n\tUpcomished ${packageName}.`);
     console.log(`\t---------------\n`);
 }
+// #endregion module
 
 
+
+// #region exports
 export default upcomCommand;
+// #endregion exports

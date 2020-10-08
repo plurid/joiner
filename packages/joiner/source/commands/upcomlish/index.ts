@@ -1,10 +1,15 @@
-import updateCommand from './update';
-import patchCommand from './patch';
-import commitCommand from './commit';
-import publishCommand from './publish';
+// #region imports
+    // #region external
+    import updateCommand from '../update';
+    import patchCommand from '../patch';
+    import commitCommand from '../commit';
+    import publishCommand from '../publish';
+    // #endregion external
+// #endregion imports
 
 
 
+// #region module
 const upcomlishCommand = async (
     packageName: string,
     configurationFile: string,
@@ -20,6 +25,10 @@ const upcomlishCommand = async (
     console.log(`\n\tUpcomlished ${packageName}.`);
     console.log(`\t---------------\n`);
 }
+// #endregion module
 
 
+
+// #region exports
 export default upcomlishCommand;
+// #endregion exports

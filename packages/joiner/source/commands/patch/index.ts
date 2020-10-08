@@ -1,22 +1,32 @@
-import path from 'path';
-import {
-    promises as fs,
-} from 'fs';
-import {
-    execSync,
-} from 'child_process';
+// #region imports
+    // #region libraries
+    import path from 'path';
 
-import {
-    Package,
-} from '../data/interfaces';
+    import {
+        promises as fs,
+    } from 'fs';
 
-import {
-    parseConfigurationFile,
-} from '../services/logic/configuration';
+    import {
+        execSync,
+    } from 'child_process';
+    // #endregion libraries
 
-import {
-    resolvePackage,
-} from '../services/logic/packages';
+
+    // #region external
+    import {
+        Package,
+    } from '../../data/interfaces';
+
+    import {
+        parseConfigurationFile,
+    } from '../../services/logic/configuration';
+
+    import {
+        resolvePackage,
+    } from '../../services/logic/packages';
+    // #endregion external
+// #endregion imports
+
 
 
 
@@ -104,6 +114,10 @@ const resolveVersionType = (
         : 'patch';
     return versionTypeCommand;
 }
+// #endregion module
 
 
+
+// #region exports
 export default patchCommand;
+// #endregion exports

@@ -1,9 +1,14 @@
-import {
-    parseConfigurationFile,
-} from '../services/logic/configuration';
+// #region imports
+    // #region external
+    import {
+        parseConfigurationFile,
+    } from '../../services/logic/configuration';
+    // #endregion external
+// #endregion imports
 
 
 
+// #region module
 const listCommand = async (
     configurationFile: string,
 ) => {
@@ -27,6 +32,10 @@ const listCommand = async (
         console.log(`\n\tNo joiner commandable packages.\n`);
     }
 }
+// #endregion module
 
 
+
+// #region exports
 export default listCommand;
+// #endregion exports
