@@ -34,15 +34,11 @@
     ],
     "preferGlobal": true,
     "scripts": {
-        "spec": "jest --coverage",
-        "spec:watch": "jest --coverage --watch",
-        "spec:prod": "npm run lint && npm run spec -- --no-cache",
-        "report-coverage": "cat ./coverage/lcov.info | coveralls",
-        "documentation": "typedoc --out documentation --target es6 --theme minimal --mode file source",
-        "start": "rollup -c rollup.config.ts -w",
+        "spec": "jest -c ./configurations/jest.config.js --coverage",
+        "start": "rollup -c ./scripts/rollup.config.ts rollup.config.ts -w",
         "build.removeSpecs": "rm -rf `find ./distribution/ -type d -name __specs__`",
-        "build.development": "rollup -c rollup.config.ts && yarn build.removeSpecs",
-        "build": "MODE_ENV=local rollup -c rollup.config.ts && yarn build.removeSpecs",
+        "build.development": "rollup -c ./scripts/rollup.config.ts && yarn build.removeSpecs",
+        "build": "ENV_MODE=production,NODE_ENV=production rollup -c ./scripts/rollup.config.ts && yarn build.removeSpecs",
         "prebuild": "rimraf distribution",
         "prepublishOnly": "yarn build"
     },
@@ -81,7 +77,6 @@
         "shelljs": "^0.8.4",
         "ts-jest": "^26.4.1",
         "ts-node": "^9.0.0",
-        "typedoc": "^0.19.2",
         "typescript": "^4.0.3"
     }
 }

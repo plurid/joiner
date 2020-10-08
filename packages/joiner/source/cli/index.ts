@@ -37,7 +37,7 @@ const main = async (
     program
         .name('joiner')
         .usage('<command>')
-        .version('0.1.0', '-v, --version')
+        .version('0.0.0', '-v, --version')
         .action(() => {
             program.outputHelp();
         });
