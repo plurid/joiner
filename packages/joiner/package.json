@@ -1,6 +1,6 @@
 {
     "name": "@plurid/joiner",
-    "version": "0.0.41",
+    "version": "0.0.42",
     "description": "Multi/Mono-Repository Task Runner",
     "keywords": [
         "joiner"
@@ -54,7 +54,7 @@
         "@rollup/plugin-node-resolve": "^9.0.0",
         "@types/js-yaml": "^3.12.5",
         "@types/ncp": "^2.0.4",
-        "@types/node": "^14.11.5",
+        "@types/node": "^14.11.6",
         "@typescript-eslint/eslint-plugin": "^4.4.0",
         "@typescript-eslint/parser": "^4.4.0",
         "eslint": "^7.10.0",
