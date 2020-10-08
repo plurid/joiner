@@ -158,7 +158,7 @@ Instead of `packageName`, the signifier `all` can be used to run the command on 
 
 Instead of `packageName`, a zero-based index can be passed, `%<number>`, given the position of the package in the packages list (e.g. `joiner update %2` will update the third package as listed by `joiner list`).
 
-If `joiner` is configured with only one package, instead of `packageName` the keyword `self` can be used.
+If `joiner` is configured with only one package, instead of `packageName` the signifier `self` can be used.
 
 To `run` a `command...` with flags, the divider `--` must be used, e.g. `joiner run all -- yarn add -D <some-development-dependency>`.
 
