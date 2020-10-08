@@ -1,10 +1,17 @@
-import {
-    promises as fs,
-} from 'fs';
+// #region imports
+    // #region libraries
+    import {
+        promises as fs,
+    } from 'fs';
+    // #endregion libraries
+// #endregion imports
 
 
 
-export const fileExists = async (path: string) => !!(await fs.stat(path).catch(e => false));
+// #region module
+export const fileExists = async (
+    path: string,
+) => !!(await fs.stat(path).catch(e => false));
 
 
 /**
@@ -44,3 +51,4 @@ export function debouncedCallback<A extends any[]>(
         }, wait);
     };
 }
+// #endregion module

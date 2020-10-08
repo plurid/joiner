@@ -1,13 +1,21 @@
-import http from 'http';
-
-import {
-    ConfigurationFile,
-} from '../../data/interfaces';
-
-import DevelopmentWatcher from '../DevelopmentWatcher';
+// #region imports
+    // #region libraries
+    import http from 'http';
+    // #endregion libraries
 
 
+    // #region external
+    import {
+        ConfigurationFile,
+    } from '../../data/interfaces';
 
+    import DevelopmentWatcher from '../DevelopmentWatcher';
+    // #endregion external
+// #endregion imports
+
+
+
+// #region module
 class DevelopmentServer {
     private server: http.Server;
     private configuration: ConfigurationFile;
@@ -38,6 +46,10 @@ class DevelopmentServer {
         });
     }
 }
+// #endregion module
 
 
+
+// #region exports
 export default DevelopmentServer;
+// #endregion exports

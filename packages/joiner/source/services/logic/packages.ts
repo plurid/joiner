@@ -1,17 +1,26 @@
-import path from 'path';
-import {
-    promises as fs,
-} from 'fs';
+// #region imports
+    // #region libraries
+    import path from 'path';
 
-import yaml from 'js-yaml';
+    import {
+        promises as fs,
+    } from 'fs';
 
-import {
-    ConfigurationFile,
-    Package,
-} from '../../data/interfaces';
-
+    import yaml from 'js-yaml';
+    // #endregion libraries
 
 
+    // #region external
+    import {
+        ConfigurationFile,
+        Package,
+    } from '../../data/interfaces';
+    // #endregion external
+// #endregion imports
+
+
+
+// #region module
 export const resolvePackage = (
     packageName: string,
     configurationData: ConfigurationFile,
@@ -286,3 +295,4 @@ export const resolveWatchedPackages = (
 
     return resolvedWatchPackages;
 }
+// #endregion module

@@ -1,22 +1,31 @@
-import fs from 'fs';
-import path from 'path';
+// #region imports
+    // #region libraries
+    import fs from 'fs';
 
-import {
-    ncp,
-} from 'ncp';
+    import path from 'path';
 
-import {
-    ConfigurationFile,
-    Package,
-    DevelopmentWatchEventData,
-} from '../../data/interfaces';
-
-import {
-    debouncedCallback,
-} from '../../services/utilities';
+    import {
+        ncp,
+    } from 'ncp';
+    // #endregion libraries
 
 
+    // #region external
+    import {
+        ConfigurationFile,
+        Package,
+        DevelopmentWatchEventData,
+    } from '../../data/interfaces';
 
+    import {
+        debouncedCallback,
+    } from '../../services/utilities';
+    // #endregion external
+// #endregion imports
+
+
+
+// #region module
 export const developmentPackageUpdateDirectoryLogic = async (
     workPackage: Package,
     updatePackage: Package,
@@ -229,6 +238,10 @@ class DevelopmentWatcher {
         3_300,
     );
 }
+// #endregion module
 
 
+
+// #region exports
 export default DevelopmentWatcher;
+// #endregion exports

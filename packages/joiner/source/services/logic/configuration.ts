@@ -1,25 +1,34 @@
-import {
-    promises as fs,
-} from 'fs';
-import path from 'path';
+// #region imports
+    // #region libraries
+    import {
+        promises as fs,
+    } from 'fs';
 
-import yaml from 'js-yaml';
+    import path from 'path';
 
-import Deon, {
-    DEON_FILENAME_EXTENSION,
-} from '@plurid/deon';
+    import yaml from 'js-yaml';
 
-import {
-    ConfigurationFile,
-} from '../../data/interfaces';
-
-import {
-    locatePackages,
-    resolveWatchedPackages,
-} from './packages';
+    import Deon, {
+        DEON_FILENAME_EXTENSION,
+    } from '@plurid/deon';
+    // #endregion libraries
 
 
+    // #region external
+    import {
+        ConfigurationFile,
+    } from '../../data/interfaces';
 
+    import {
+        locatePackages,
+        resolveWatchedPackages,
+    } from './packages';
+    // #endregion external
+// #endregion imports
+
+
+
+// #region module
 export const parseConfigurationFile = async (
     configurationFile: string,
 ) => {
@@ -164,3 +173,4 @@ export const getDefaultConfigurationFilepath = async () => {
 
     return pathFound;
 }
+// #endregion module
