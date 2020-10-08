@@ -128,7 +128,7 @@ Options:
 
 Commands:
 
-    initialize                          initialize the "joiner" file
+    initialize                          initialize the "joiner" configuration file
 
     list                                list joiner commandable packages
 
@@ -154,6 +154,10 @@ Commands:
                                         and update the cross-dependencies
 
 Instead of `packageName` the signifier `all` can be used to run the command on all the registered packages.
+
+Instead of `packageName` a zero-based index can be passed, `%<number>`, given the position of the package in the packages list.
+
+If `joiner` is configured with only one package, instead of `packageName` the keyword `self` can be used.
 
 To `run` a `command...` with flags, the divider `--` must be used, e.g. `joiner run all -- yarn add -D <some-development-dependency>`.
 
