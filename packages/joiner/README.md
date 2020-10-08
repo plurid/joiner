@@ -153,9 +153,9 @@ Commands:
     develop                             start a server to listen for changes in the development watched packages
                                         and update the cross-dependencies
 
-Instead of `packageName` the signifier `all` can be used to run the command on all the registered packages.
+Instead of `packageName`, the signifier `all` can be used to run the command on all the registered packages.
 
-Instead of `packageName` a zero-based index can be passed, `%<number>`, given the position of the package in the packages list (e.g. `joiner update %2` will update the third package as listed by `joiner list`).
+Instead of `packageName`, a zero-based index can be passed, `%<number>`, given the position of the package in the packages list (e.g. `joiner update %2` will update the third package as listed by `joiner list`).
 
 If `joiner` is configured with only one package, instead of `packageName` the keyword `self` can be used.
 
