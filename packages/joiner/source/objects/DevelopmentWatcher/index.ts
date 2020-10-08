@@ -15,11 +15,11 @@
         ConfigurationFile,
         Package,
         DevelopmentWatchEventData,
-    } from '../../data/interfaces';
+    } from '#data/interfaces';
 
     import {
         debouncedCallback,
-    } from '../../services/utilities';
+    } from '#services/utilities';
     // #endregion external
 // #endregion imports
 

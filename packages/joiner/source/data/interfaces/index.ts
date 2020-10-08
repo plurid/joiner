@@ -1,3 +1,4 @@
+// #region module
 export interface ConfigurationFile {
     packages: Package[];
     yarnWorkspace: boolean;
@@ -71,3 +72,4 @@ export interface Package {
     joinerpackage: boolean;
     language?: 'javascript' | 'typescript';
 }
+// #endregion module

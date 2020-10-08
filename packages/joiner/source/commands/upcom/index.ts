@@ -1,8 +1,8 @@
 // #region imports
     // #region external
-    import updateCommand from '../update';
-    import patchCommand from '../patch';
-    import commitCommand from '../commit';
+    import updateCommand from '#commands/update';
+    import patchCommand from '#commands/patch';
+    import commitCommand from '#commands/commit';
     // #endregion external
 // #endregion imports
 

@@ -9,7 +9,7 @@
     // #region external
     import {
         MANUAL_JOINER,
-    } from '../data/constants';
+    } from '#data/constants';
 
     import {
         initializeCommand,
@@ -24,11 +24,11 @@
         upcomCommand,
         upcomlishCommand,
         developCommand,
-    } from '../commands';
+    } from '#commands/index';
 
     import {
         getDefaultConfigurationFilepath,
-    } from '../services/logic/configuration';
+    } from '#services/logic/configuration';
     // #endregion external
 // #endregion imports
 

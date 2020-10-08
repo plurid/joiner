@@ -17,7 +17,7 @@
     // #region external
     import {
         ConfigurationFile,
-    } from '../../data/interfaces';
+    } from '#data/interfaces';
 
     import {
         locatePackages,
