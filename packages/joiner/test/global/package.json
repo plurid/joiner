@@ -9,6 +9,6 @@
         "cross-env": "^7.0.2"
     },
     "devDependencies": {
-        "@plurid/plurid-react": "0.1.126"
+        "@plurid/plurid-react": "0.1.202"
     }
 }

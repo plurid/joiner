@@ -65,7 +65,8 @@ const main = async (
         .command('list')
         .description('list joiner commandable packages')
         .action(async ()=> {
-            const configuration = await getDefaultConfigurationFilepath();
+            const configuration = program.configuration
+                || await getDefaultConfigurationFilepath();
 
             await listCommand(
                 configuration,
@@ -76,7 +77,8 @@ const main = async (
         .command('run <packageName> <command...>')
         .description('run an arbitrary command on package by name or on "all" packages')
         .action(async (packageName: string, command: string[]) => {
-            const configuration = await getDefaultConfigurationFilepath();
+            const configuration = program.configuration
+                || await getDefaultConfigurationFilepath();
 
             await runCommand(
                 packageName,
@@ -89,7 +91,8 @@ const main = async (
         .command('command <packageName> <commandNames...>')
         .description('run the named commands specified in the "joiner" file on package by name or on "all" packages')
         .action(async (packageName: string, commands: string[]) => {
-            const configuration = await getDefaultConfigurationFilepath();
+            const configuration = program.configuration
+                || await getDefaultConfigurationFilepath();
 
             await commandCommand(
                 packageName,
@@ -102,7 +105,8 @@ const main = async (
         .command('update <packageName>')
         .description('update package by name or "all" packages')
         .action(async (packageName: string) => {
-            const configuration = await getDefaultConfigurationFilepath();
+            const configuration = program.configuration
+                || await getDefaultConfigurationFilepath();
 
             await updateCommand(
                 packageName,
@@ -118,7 +122,8 @@ const main = async (
             'version type: major, minor, patch',
             'patch',
         ).action(async (packageName: string, options: any) => {
-            const configuration = await getDefaultConfigurationFilepath();
+            const configuration = program.configuration
+                || await getDefaultConfigurationFilepath();
 
             await patchCommand(
                 packageName,
@@ -135,7 +140,8 @@ const main = async (
             'commit message',
             '',
         ).action(async (packageName: string, options: any) => {
-            const configuration = await getDefaultConfigurationFilepath();
+            const configuration = program.configuration
+                || await getDefaultConfigurationFilepath();
 
             await commitCommand(
                 packageName,
@@ -148,7 +154,8 @@ const main = async (
         .command('publish <packageName>')
         .description('publish package by name or "all" packages')
         .action(async (packageName: string) => {
-            const configuration = await getDefaultConfigurationFilepath();
+            const configuration = program.configuration
+                || await getDefaultConfigurationFilepath();
 
             await publishCommand(packageName, configuration);
         });
@@ -157,7 +164,8 @@ const main = async (
         .command('ucom <packageName>')
         .description('ucom - update, commit - package by name or "all" packages')
         .action(async (packageName: string) => {
-            const configuration = await getDefaultConfigurationFilepath();
+            const configuration = program.configuration
+                || await getDefaultConfigurationFilepath();
 
             await ucomCommand(
                 packageName,
@@ -169,7 +177,8 @@ const main = async (
         .command('upcom <packageName>')
         .description('upcom - update, patch, commit - package by name or "all" packages')
         .action(async (packageName: string) => {
-            const configuration = await getDefaultConfigurationFilepath();
+            const configuration = program.configuration
+                || await getDefaultConfigurationFilepath();
 
             await upcomCommand(
                 packageName,
@@ -181,7 +190,8 @@ const main = async (
         .command('upcomlish <packageName>')
         .description('upcomlish - update, patch, commit, publish - package by name or "all" packages')
         .action(async (packageName: string) => {
-            const configuration = await getDefaultConfigurationFilepath();
+            const configuration = program.configuration
+                || await getDefaultConfigurationFilepath();
 
             await upcomlishCommand(
                 packageName,
@@ -193,7 +203,8 @@ const main = async (
         .command('develop')
         .description('start a server to listen for changes in the development watched packages and update the cross-dependencies')
         .action(async () => {
-            const configuration = await getDefaultConfigurationFilepath();
+            const configuration = program.configuration
+                || await getDefaultConfigurationFilepath();
 
             await developCommand(configuration);
         });

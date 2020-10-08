@@ -143,7 +143,7 @@ export const getDefaultConfigurationFilepath = async () => {
         'scripts/joiner.packages.yaml',
     ];
 
-    let pathFound = filepaths[0];
+    let pathFound = '';
 
     for (const filepath of filepaths) {
         try {

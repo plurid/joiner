@@ -44,10 +44,10 @@ export const resolvePackage = (
         return packages[0];
     }
 
-    if (safePackageName.startsWith('$')) {
-        // The package is a numeric value, e.g. '$0', or '$12'.
+    if (safePackageName.startsWith('%')) {
+        // The package is a numeric value, e.g. '%0', or '%12'.
 
-        const value = parseInt(safePackageName.replace('$', '')) || 0;
+        const value = parseInt(safePackageName.replace('%', '')) || 0;
         const codePackage = packages[value];
 
         if (!codePackage) {
