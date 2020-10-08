@@ -41,7 +41,9 @@ export const resolvePackage = (
             return;
         }
 
-        return packages[0];
+        return [
+            packages[0],
+        ];
     }
 
     if (safePackageName.startsWith('%')) {
@@ -55,7 +57,9 @@ export const resolvePackage = (
             return;
         }
 
-        return [codePackage];
+        return [
+            codePackage,
+        ];
     }
 
     for (const codePackage of packages) {
@@ -63,7 +67,9 @@ export const resolvePackage = (
             codePackage.name.toLowerCase() === safePackageName ||
             codePackage.alias.toLowerCase() === safePackageName
         ) {
-            return [codePackage];
+            return [
+                codePackage,
+            ];
         }
     }
 
