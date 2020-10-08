@@ -29,6 +29,35 @@ export const resolvePackage = (
         return packages;
     }
 
+    if (
+        safePackageName === 'self'
+    ) {
+        // The joiner file resolves to only one package.
+
+        const codePackage = packages[0];
+
+        if (!codePackage) {
+            console.log(`\n\tPackage ${packageName} could not be resolved.\n`);
+            return;
+        }
+
+        return packages[0];
+    }
+
+    if (safePackageName.startsWith('$')) {
+        // The package is a numeric value, e.g. '$0', or '$12'.
+
+        const value = parseInt(safePackageName.replace('$', '')) || 0;
+        const codePackage = packages[value];
+
+        if (!codePackage) {
+            console.log(`\n\tPackage ${packageName} could not be resolved.\n`);
+            return;
+        }
+
+        return [codePackage];
+    }
+
     for (const codePackage of packages) {
         if (
             codePackage.name.toLowerCase() === safePackageName ||
