@@ -8,6 +8,10 @@
 
     // #region external
     import {
+        MANUAL_JOINER,
+    } from '../data/constants';
+
+    import {
         initializeCommand,
         listCommand,
         runCommand,
@@ -47,6 +51,13 @@ const main = async (
             '-c, --configuration <file>',
             `path to the .deon or .yaml configuration file (defaults: 'joiner', 'scripts/joiner', 'scripts/joiner.packages')`,
         );
+
+    program
+        .command('manual')
+        .description('the "joiner" manual')
+        .action(async ()=> {
+            console.log(`\n\tThe "joiner" manual is available on: ${MANUAL_JOINER}\n`);
+        });
 
     program
         .command('initialize')
