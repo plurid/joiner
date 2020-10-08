@@ -128,6 +128,8 @@ Options:
 
 Commands:
 
+    manual                              the "joiner" manual
+
     initialize                          initialize the "joiner" configuration file
 
     list                                list joiner commandable packages
