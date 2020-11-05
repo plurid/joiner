@@ -85,7 +85,7 @@ const main = async (
         });
 
     program
-        .command('run <packageName> <command...>')
+        .command('run <package> <command...>')
         .description('run an arbitrary command on package by name or on "all" packages')
         .action(async (packageName: string, command: string[]) => {
             const configuration = program.configuration
@@ -99,7 +99,7 @@ const main = async (
         });
 
     program
-        .command('command <packageName> <commandNames...>')
+        .command('command <package> <command...>')
         .description('run the named commands specified in the "joiner" file on package by name or on "all" packages')
         .action(async (packageName: string, commands: string[]) => {
             const configuration = program.configuration
@@ -113,7 +113,7 @@ const main = async (
         });
 
     program
-        .command('update <packageName>')
+        .command('update <package>')
         .description('update package by name or "all" packages')
         .action(async (packageName: string) => {
             const configuration = program.configuration
@@ -126,7 +126,7 @@ const main = async (
         });
 
     program
-        .command('patch <packageName>')
+        .command('patch <package>')
         .description('patch package version by name or "all" packages')
         .option(
             '-t, --type <versionType>',
@@ -144,7 +144,7 @@ const main = async (
         });
 
     program
-        .command('commit <packageName>')
+        .command('commit <package>')
         .description('commit package by name or "all" packages')
         .option(
             '-m, --message <text>',
@@ -162,7 +162,7 @@ const main = async (
         });
 
     program
-        .command('publish <packageName>')
+        .command('publish <package>')
         .description('publish package by name or "all" packages')
         .action(async (packageName: string) => {
             const configuration = program.configuration
@@ -172,7 +172,7 @@ const main = async (
         });
 
     program
-        .command('ucom <packageName>')
+        .command('ucom <package>')
         .description('ucom - update, commit - package by name or "all" packages')
         .action(async (packageName: string) => {
             const configuration = program.configuration
@@ -185,7 +185,7 @@ const main = async (
         });
 
     program
-        .command('upcom <packageName>')
+        .command('upcom <package>')
         .description('upcom - update, patch, commit - package by name or "all" packages')
         .action(async (packageName: string) => {
             const configuration = program.configuration
@@ -198,7 +198,7 @@ const main = async (
         });
 
     program
-        .command('upcomlish <packageName>')
+        .command('upcomlish <package>')
         .description('upcomlish - update, patch, commit, publish - package by name or "all" packages')
         .action(async (packageName: string) => {
             const configuration = program.configuration
