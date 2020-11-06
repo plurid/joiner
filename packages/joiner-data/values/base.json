@@ -1,0 +1,16 @@
+{
+    "package": {
+        "manager": "yarn",
+        "publisher": "npm"
+    },
+    "yarnWorkspace": false,
+    "runFrom": "../",
+    "commit": {
+        "engine": "git",
+        "combine": true,
+        "root": "",
+        "fullFolder": false,
+        "divider": " > ",
+        "message": "setup: package"
+    }
+}
