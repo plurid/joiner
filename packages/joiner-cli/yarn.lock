@@ -590,10 +590,10 @@
     node-gyp "^7.1.0"
     read-package-json-fast "^1.1.3"
 
-"@plurid/deon@^0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@plurid/deon/-/deon-0.0.32.tgz#c9cbe38b8144414d45e863fd5bf44ab84c970112"
-  integrity sha512-gbTacOKRPjSXZqAgyck/o75B6TAid9Gaob+gvyeeEJ21wUBl4Y0bOHNYP/axLllVbEyR04i0f6p5RXFrDsRwFg==
+"@plurid/deon@^0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@plurid/deon/-/deon-0.0.33.tgz#86e0ae78aba4e05f5c22b5493a1b3092485c655a"
+  integrity sha512-fWLWYEjYZIF8oEh2UoylljjOAZKniypqIkxNeI3db3j4Or37sOhnck9cRx/mdkxWAU9w+hmStDTqBJVPv8V1KA==
   dependencies:
     commander "^6.2.0"
     cross-fetch "^3.0.6"

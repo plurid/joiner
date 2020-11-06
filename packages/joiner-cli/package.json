@@ -1,6 +1,6 @@
 {
     "name": "@plurid/joiner",
-    "version": "0.0.46",
+    "version": "0.0.47",
     "description": "Multi/Mono-Repository Task Runner",
     "keywords": [
         "joiner"
@@ -43,7 +43,7 @@
         "prepublishOnly": "yarn build"
     },
     "dependencies": {
-        "@plurid/deon": "^0.0.32",
+        "@plurid/deon": "^0.0.33",
         "commander": "^6.2.0",
         "js-yaml": "^3.14.0",
         "ncp": "^2.0.0",
