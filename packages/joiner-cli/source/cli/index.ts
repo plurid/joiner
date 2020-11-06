@@ -8,6 +8,8 @@
 
     // #region external
     import {
+        JOINER_CLI_VERSION,
+
         MANUAL_JOINER,
     } from '#data/constants';
 
@@ -41,7 +43,7 @@ const main = async (
     program
         .name('joiner')
         .usage('<command>')
-        .version('0.0.45', '-v, --version')
+        .version(JOINER_CLI_VERSION, '-v, --version')
         .action(() => {
             program.outputHelp();
         });
