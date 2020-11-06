@@ -31,8 +31,7 @@
 
 Supported languages:
 
-+ `JavaScript`
-+ `TypeScript`
++ `JavaScript`/`TypeScript`
 
 For `JavaScript`/`TypeScript`, `joiner` can be used on its own or conjoined with `Yarn Workspaces`.
 
@@ -90,10 +89,10 @@ joiner initialize
 
 ``` deon
 {
-    packages {
+    packages [
         /path/to/package-1
         /path/to/package-2
-    }
+    ]
 }
 ```
 
@@ -101,10 +100,10 @@ Catch-all paths can be used with `/*` such as
 
 ``` deon
 {
-    packages {
+    packages [
         /path/to/multi-package-folder/*
         /path/to/package-2
-    }
+    ]
 }
 ```
 
@@ -119,48 +118,35 @@ The packages paths are resolved relative to the folder from where the command is
 
 ### Command-Line Interface
 
+```
+Usage: joiner <command>
+
 Options:
-
-    -v, --version                   output the version number
-
-    -c, --configuration <file>      path to the .yaml configuration file (default: "joiner.yaml")
-
-    -h, --help                      display help for command
+  -v, --version                   output the version number
+  -c, --configuration <file>      path to the .deon or .yaml configuration file (defaults: 'joiner', 'scripts/joiner', 'scripts/joiner.packages')
+  -h, --help                      display help for command
 
 Commands:
+  manual                          the "joiner" manual
+  initialize [options]            initialize the "joiner" configuration file
+  list                            list joiner commandable packages
+  run <package> <command...>      run an arbitrary command on package by name or on "all" packages
+  command <package> <command...>  run the named commands specified in the "joiner" file on package by name or on "all" packages
+  update <package>                update package by name or "all" packages
+  patch [options] <package>       patch package version by name or "all" packages
+  commit [options] <package>      commit package by name or "all" packages
+  publish <package>               publish package by name or "all" packages
+  ucom <package>                  ucom - update, commit - package by name or "all" packages
+  upcom <package>                 upcom - update, patch, commit - package by name or "all" packages
+  upcomlish <package>             upcomlish - update, patch, commit, publish - package by name or "all" packages
+  develop                         start a server to listen for changes in the development watched packages and update the cross-dependencies
+```
 
-    manual                              the "joiner" manual
+Instead of `package`, the signifier `all` can be used to run the command on all the registered packages.
 
-    initialize                          initialize the "joiner" configuration file
+Instead of `package`, a zero-based index can be passed, `%<number>`, given the position of the package in the packages list (e.g. `joiner update %2` will update the third package as listed by `joiner list`).
 
-    list                                list joiner commandable packages
-
-    run <packageName> <command...>      run an arbitrary command on package by name or on "all" packages
-
-    command <commandNames...>           run the named commands specified in the "joiner" file on package by name or on "all" packages
-
-    update <packageName>                update package by name or "all" packages
-
-    patch [options] <packageName>       patch package version by name or "all" packages
-
-    commit [options] <packageName>      commit package by name or "all" packages
-
-    publish <packageName>               publish package by name or "all" packages
-
-    ucom <packageName>                  ucom - update, commit - package by name or "all" packages
-
-    upcom <packageName>                 upcom - update, patch, commit - package by name or "all" packages
-
-    upcomlish <packageName>             upcomlish - update, patch, commit, publish - package by name or "all" packages
-
-    develop                             start a server to listen for changes in the development watched packages
-                                        and update the cross-dependencies
-
-Instead of `packageName`, the signifier `all` can be used to run the command on all the registered packages.
-
-Instead of `packageName`, a zero-based index can be passed, `%<number>`, given the position of the package in the packages list (e.g. `joiner update %2` will update the third package as listed by `joiner list`).
-
-If `joiner` is configured with only one package, instead of `packageName` the signifier `self` can be used.
+If `joiner` is configured with only one package, instead of `package` the signifier `self` can be used.
 
 To `run` a `command...` with flags, the divider `--` must be used, e.g. `joiner run all -- yarn add -D <some-development-dependency>`.
 
@@ -379,6 +365,6 @@ which contains a path trunk, relative to the `joiner.yaml` file, from which the 
     <img src="https://img.shields.io/npm/v/@plurid/joiner.svg?logo=npm&colorB=1380C3&style=for-the-badge" alt="Version">
 </a>
 
-[@plurid/joiner][joiner] • the CLI application
+[@plurid/joiner][joiner-cli] • the CLI application
 
-[joiner]: https://github.com/plurid/joiner/tree/master/packages/joiner
+[joiner-cli]: https://github.com/plurid/joiner/tree/master/packages/joiner-cli
