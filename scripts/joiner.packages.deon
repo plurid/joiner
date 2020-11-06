@@ -8,15 +8,13 @@
 
 
 packages [
-    ./packages/joiner
+    ./packages/joiner-cli
 ]
 
 package {
     manager yarn
     publisher npm
 }
-
-yarnWorkspace false
 
 commit {
     engine git
