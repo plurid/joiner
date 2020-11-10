@@ -1,0 +1,33 @@
+import base from https://raw.githubusercontent.com/plurid/joiner/master/packages/joiner-data/values/base.deon
+
+
+
+{
+    ...#base
+    #packages
+    #package
+    #development
+}
+
+
+packages [
+    './packages/*'
+]
+
+package {
+    ...#base.package
+    ignore [
+        node_modules
+    ]
+}
+
+development {
+    watchPackages all
+    serverPort 55000
+    watchDirectories [
+        'build'
+        'distribution'
+        'dist'
+    ]
+    externalPackages []
+}

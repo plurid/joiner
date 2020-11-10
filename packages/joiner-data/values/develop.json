@@ -1,0 +1,32 @@
+{
+    "package": {
+        "manager": "yarn",
+        "publisher": "npm",
+        "ignore": [
+            "node_modules"
+        ]
+    },
+    "yarnWorkspace": "false",
+    "runFrom": "../",
+    "commit": {
+        "engine": "git",
+        "combine": "true",
+        "root": "",
+        "fullFolder": "false",
+        "divider": " > ",
+        "message": "setup: package"
+    },
+    "packages": [
+        "./packages/*"
+    ],
+    "development": {
+        "watchPackages": "all",
+        "serverPort": "55000",
+        "watchDirectories": [
+            "build",
+            "distribution",
+            "dist"
+        ],
+        "externalPackages": []
+    }
+}
