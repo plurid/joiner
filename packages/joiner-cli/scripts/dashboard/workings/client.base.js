@@ -10,7 +10,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 
 /** CONSTANTS */
-const BUILD_DIRECTORY = process.env.PLURID_BUILD_DIRECTORY || 'build';
+const BUILD_DIRECTORY = process.env.PLURID_BUILD_DIRECTORY || 'distribution';
 
 const isProduction = process.env.ENV_MODE === 'production';
 
