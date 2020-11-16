@@ -72,29 +72,6 @@ const inputCall = async <T>(
         // #endregion private usage
 
 
-        // #region logic usage
-        const logic = request.delogLogic;
-
-        if (customLogicUsage && logic) {
-            logger.log(
-                logs.infoHandleCustomLogicUsage,
-                logLevels.trace,
-            );
-
-            await call(input);
-
-            logger.log(
-                logs.infoEndCustomLogicUsage,
-                logLevels.info,
-            );
-
-            return {
-                status: true,
-            };
-        }
-        // #endregion logic usage
-
-
         // #region public usage
         await call(input);
 

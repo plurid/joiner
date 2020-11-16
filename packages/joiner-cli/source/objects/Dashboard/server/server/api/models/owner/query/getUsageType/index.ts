@@ -18,13 +18,6 @@ const getUsageType = async (
             privateUsage,
         } = context;
 
-        if (request.delogLogic) {
-            return {
-                status: true,
-                data: 'CUSTOM_LOGIC',
-            };
-        }
-
         if (privateUsage) {
             return {
                 status: true,

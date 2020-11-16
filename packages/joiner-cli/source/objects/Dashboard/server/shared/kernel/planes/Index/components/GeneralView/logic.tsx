@@ -17,7 +17,7 @@
 
 
     // #region external
-    import delogLogo from '../../assets/delog-logo.png';
+    import joinerLogo from '../../assets/joiner-logo.png';
 
     import { AppState } from '#kernel-services/state/store';
     import selectors from '#kernel-services/state/selectors';
@@ -96,7 +96,6 @@ export const renderGeneralView = (
     const stateViewCompactSelectors = selectors.view.getViewCompactSelectors(state);
     const stateViewOwnerID = selectors.view.getViewOwnerID(state);
     const stateViewUsageType = selectors.view.getViewUsageType(state);
-    const stateViewActiveProviderID = selectors.data.getActiveProviderID(state);
 
     const dispatchAddEntity = (
         payload: any,
@@ -130,15 +129,15 @@ export const renderGeneralView = (
                                 <>
                                     <div>
                                         <img
-                                            src={delogLogo}
-                                            alt="delog"
+                                            src={joinerLogo}
+                                            alt="joiner"
                                             height={30}
                                             onClick={() => setCompactSelectors(true)}
                                         />
                                     </div>
 
                                     <div>
-                                        delog
+                                        joiner
                                     </div>
                                 </>
                             )}

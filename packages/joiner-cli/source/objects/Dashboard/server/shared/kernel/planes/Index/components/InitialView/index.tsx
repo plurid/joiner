@@ -9,7 +9,7 @@
 
 
     // #region external
-    import delogLogo from '../../assets/delog-logo.png';
+    import joinerLogo from '../../assets/joiner-logo.png';
     // #endregion external
 
 
@@ -40,18 +40,18 @@ const InitialView: React.FC<InitialViewProperties> = (
         <StyledInitialView>
             <div>
                 <img
-                    src={delogLogo}
-                    alt="delog logo"
+                    src={joinerLogo}
+                    alt="joiner logo"
                     height={250}
                 />
             </div>
 
             <h1>
-                delog
+                joiner
             </h1>
 
             <h2>
-                Cloud-Native Logger
+                Multi/Mono-Repository Task Runner
             </h2>
 
             <div
