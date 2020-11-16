@@ -31,7 +31,7 @@ require('dotenv').config({
 
 
 /** CONSTANTS */
-const BUILD_DIRECTORY = process.env.PLURID_BUILD_DIRECTORY || 'build';
+const BUILD_DIRECTORY = process.env.PLURID_BUILD_DIRECTORY || 'distribution';
 
 const buildFolder = path.join(process.cwd(), BUILD_DIRECTORY);
 const verbose = process.env.PLURID_DEFAULT_VERBOSE === 'true' && !process.argv[3]
@@ -64,10 +64,10 @@ const commandStart = [
 ];
 
 const commandWatchClient = [
-    `${crossCommand('webpack')} --watch --config ./scripts/workings/client.development.js`,
+    `${crossCommand('webpack')} --watch --config ./scripts/dashboard/workings/client.development.js`,
 ];
 const commandWatchServer = [
-    `${crossCommand('rollup')} -w -c ./scripts/workings/server.development.js`,
+    `${crossCommand('rollup')} -w -c ./scripts/dashboard/workings/server.development.js`,
 ];
 
 const commandStartLocal = [
@@ -105,21 +105,21 @@ const commandContainerizeProductionStills = [
 ];
 
 const commandBuildClientDevelopment = [
-    `${crossCommand('webpack')} --config ./scripts/workings/client.development.js`,
+    `${crossCommand('webpack')} --config ./scripts/dashboard/workings/client.development.js`,
 ];
 const commandBuildClientProduction = [
-    `${crossCommand('webpack')} --config ./scripts/workings/client.production.js`,
+    `${crossCommand('webpack')} --config ./scripts/dashboard/workings/client.production.js`,
 ];
 
 const commandBuildServerDevelopment = [
-    `${crossCommand('rollup')} -c ./scripts/workings/server.development.js`,
+    `${crossCommand('rollup')} -c ./scripts/dashboard/workings/server.development.js`,
 ];
 const commandBuildServerProduction = [
-    `${crossCommand('rollup')} -c ./scripts/workings/server.production.js`,
+    `${crossCommand('rollup')} -c ./scripts/dashboard/workings/server.production.js`,
 ];
 
 const commandBuildStills = [
-    'node ./scripts/workings/stills.js',
+    'node ./scripts/dashboard/workings/stills.js',
 ];
 
 

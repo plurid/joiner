@@ -24,15 +24,9 @@
 
 
     // #region internal
-    import {
-        DelogLogic,
-    } from './data/interfaces';
-
     import preserves from './preserves';
 
     import setupHandlers from './handlers';
-
-    import mockLogic from './logic/mock';
     // #endregion internal
 // #endregion imports
 
@@ -83,12 +77,12 @@ const servicesData: PluridServerServicesData = {
 };
 
 const options: PluridServerPartialOptions = {
-    serverName: 'Delog Server',
+    serverName: 'Joiner Server',
     buildDirectory,
     open: openAtStart,
     debug,
     ignore: [
-        '/delog',
+        '/joiner',
     ],
 };
 
@@ -99,7 +93,7 @@ const template: PluridServerTemplateConfiguration = {
 
 
 // #region server
-const delogServer = new PluridServer({
+const joinerServer = new PluridServer({
     helmet,
     routes,
     preserves,
@@ -113,12 +107,10 @@ const delogServer = new PluridServer({
 });
 
 
-const delogSetup = (
-    logic?: DelogLogic,
+const joinerSetup = (
 ) => {
     setupHandlers(
-        delogServer,
-        logic,
+        joinerServer,
     );
 }
 // #endregion server
@@ -135,11 +127,11 @@ const delogSetup = (
  * for programmatic usage.
  */
 if (require.main === module) {
-    delogSetup(
+    joinerSetup(
         // mockLogic,
     );
 
-    delogServer.start(port);
+    joinerServer.start(port);
 }
 // #endregion run
 
@@ -147,8 +139,8 @@ if (require.main === module) {
 
 // #region exports
 export {
-    delogSetup,
+    joinerSetup,
 };
 
-export default delogServer;
+export default joinerServer;
 // #endregion exports

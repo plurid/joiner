@@ -20,7 +20,7 @@ const input = 'source/objects/Dashboard/server/server/index.ts';
 
 const output = [
     {
-        file: `./${BUILD_DIRECTORY}/index.js`,
+        file: `./${BUILD_DIRECTORY}/dashboard/index.js`,
         format: 'cjs',
         exports: 'named',
     },
