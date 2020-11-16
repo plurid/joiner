@@ -1,3 +1,13 @@
+// #region imports
+    // #region internal
+    import {
+        serverStart,
+    } from './server';
+    // #endregion internal
+// #endregion imports
+
+
+
 // #region module
 const dashboardStatus = async () => {
     // read configuration file
@@ -12,7 +22,18 @@ const dashboardStart = async () => {
     // check if server already started
 
     // start server
-    console.log(`start.`);
+    const data = await serverStart();
+
+    if (!data) {
+        return;
+    }
+
+    const {
+        pid,
+        port,
+    } = data;
+
+    console.log(`start`, pid, port);
 }
 
 
