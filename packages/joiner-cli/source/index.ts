@@ -3,6 +3,7 @@
     import cli from './cli';
 
     import {
+        dashboardCommand,
         initializeCommand,
         listCommand,
         runCommand,
@@ -23,6 +24,7 @@
 
 // #region module
 const commands = {
+    dashboard: dashboardCommand,
     initialize: initializeCommand,
     list: listCommand,
     run: runCommand,
