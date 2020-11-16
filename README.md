@@ -122,24 +122,25 @@ The packages paths are resolved relative to the folder from where the command is
 Usage: joiner <command>
 
 Options:
-  -v, --version                   output the version number
-  -c, --configuration <file>      path to the .deon or .yaml configuration file (defaults: 'joiner', 'scripts/joiner', 'scripts/joiner.packages')
-  -h, --help                      display help for command
+    -v, --version                   output the version number
+    -c, --configuration <file>      path to the .deon or .yaml configuration file (defaults: 'joiner', 'scripts/joiner', 'scripts/joiner.packages')
+    -h, --help                      display help for command
 
 Commands:
-  manual                          the "joiner" manual
-  initialize [options]            initialize the "joiner" configuration file
-  list                            list joiner commandable packages
-  run <package> <command...>      run an arbitrary command on package by name or on "all" packages
-  command <package> <command...>  run the named commands specified in the "joiner" file on package by name or on "all" packages
-  update <package>                update package by name or "all" packages
-  patch [options] <package>       patch package version by name or "all" packages
-  commit [options] <package>      commit package by name or "all" packages
-  publish <package>               publish package by name or "all" packages
-  ucom <package>                  ucom - update, commit - package by name or "all" packages
-  upcom <package>                 upcom - update, patch, commit - package by name or "all" packages
-  upcomlish <package>             upcomlish - update, patch, commit, publish - package by name or "all" packages
-  develop                         start a server to listen for changes in the development watched packages and update the cross-dependencies
+    manual                          the "joiner" manual
+    dashboard                       configure a local web server with a global view over the "joiner" packages registered on the machine
+    initialize [options]            initialize the "joiner" configuration file
+    list                            list joiner commandable packages
+    run <package> <command...>      run an arbitrary command on package by name or on "all" packages
+    command <package> <command...>  run the named commands specified in the "joiner" file on package by name or on "all" packages
+    update <package>                update package by name or "all" packages
+    patch [options] <package>       patch package version by name or "all" packages
+    commit [options] <package>      commit package by name or "all" packages
+    publish <package>               publish package by name or "all" packages
+    ucom <package>                  ucom - update, commit - package by name or "all" packages
+    upcom <package>                 upcom - update, patch, commit - package by name or "all" packages
+    upcomlish <package>             upcomlish - update, patch, commit, publish - package by name or "all" packages
+    develop                         start a server to listen for changes in the development watched packages and update the cross-dependencies
 ```
 
 Instead of `package`, the signifier `all` can be used to run the command on all the registered packages.
