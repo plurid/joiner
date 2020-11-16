@@ -38,6 +38,7 @@ const build =  {
         'path',
         'fs',
         'http',
+        'os',
     ],
     watch: {
         include: 'source/**',

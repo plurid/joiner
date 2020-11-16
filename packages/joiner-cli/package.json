@@ -41,6 +41,7 @@
         "build.dashboard.production": "node scripts/dashboard build.production",
         "build.cli.development": "rollup -c ./scripts/rollup.config.ts && yarn build.removeTests",
         "build.cli.production": "rollup -c ./scripts/rollup.config.ts && yarn build.removeTests",
+        "build.development": "yarn build.dashboard.development && yarn build.cli.development",
         "build": "yarn build.dashboard.production && yarn build.cli.production",
         "prebuild": "rm -rf distribution",
         "prepublishOnly": "yarn build"
