@@ -37,7 +37,7 @@ const serverStart = async () => {
         pid,
     } = spawnedChild;
 
-    const port: string = await new Promise(async (resolve, _) => {
+    const port: string = await new Promise((resolve, _) => {
         setTimeout(async () => {
             const outFile = await fs.readFile(
                 './out.log',
