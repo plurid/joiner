@@ -14,6 +14,7 @@
     } from '#data/constants';
 
     import {
+        dashboardCommand,
         initializeCommand,
         listCommand,
         runCommand,
@@ -60,6 +61,65 @@ const main = async (
         .action(async ()=> {
             console.log(`\n\tThe "joiner" manual is available on: ${MANUAL_JOINER}\n`);
         });
+
+
+    const dashboard = new program.Command('dashboard');
+
+    dashboard
+        .storeOptionsAsProperties(false)
+        .passCommandToAction(false)
+        .description('configure a local web server with a global view over the "joiner" packages registered on the machine');
+
+    dashboard
+        .command('start')
+        .description('start the dashboard server')
+        .action(async () => {
+            await dashboardCommand(
+                'start',
+            );
+        });
+
+    dashboard
+        .command('stop')
+        .description('stop the dashboard server')
+        .action(async () => {
+            await dashboardCommand(
+                'stop',
+            );
+        });
+
+    dashboard
+        .command('register [path]')
+        .description('register a ".joiner" configuration file on the dashboard server')
+        .action(async (
+            path,
+        ) => {
+            await dashboardCommand(
+                'register',
+                {
+                    path,
+                },
+            );
+        });
+
+    dashboard
+        .command('deregister [path]')
+        .description('deregister a ".joiner" configuration file on the dashboard server')
+        .action(async (
+            path,
+        ) => {
+            await dashboardCommand(
+                'deregister',
+                {
+                    path,
+                },
+            );
+        });
+
+    program.addCommand(
+        dashboard,
+    );
+
 
     program
         .command('initialize')

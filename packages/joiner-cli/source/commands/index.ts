@@ -1,5 +1,6 @@
 // #region imports
     // #region internal
+    import dashboardCommand from './dashboard';
     import initializeCommand from './initialize';
     import listCommand from './list';
     import runCommand from './run';
@@ -19,6 +20,7 @@
 
 // #region exports
 export {
+    dashboardCommand,
     initializeCommand,
     listCommand,
     runCommand,
