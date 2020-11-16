@@ -37,8 +37,8 @@
 /** ENVIRONMENT */
 const watchMode = process.env.PLURID_WATCH_MODE === 'true';
 const isProduction = process.env.ENV_MODE === 'production';
-const buildDirectory = process.env.PLURID_BUILD_DIRECTORY || 'build';
-const port = process.env.PORT || 56965;
+const buildDirectory = process.env.PLURID_BUILD_DIRECTORY || 'distribution/dashboard';
+const port = process.env.PORT || 10100;
 
 const applicationRoot = 'joiner-application';
 const openAtStart = watchMode
