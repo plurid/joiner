@@ -1,6 +1,7 @@
 // #region imports
     // #region external
     import {
+        dashboardStatus,
         dashboardStart,
         dashboardStop,
         dashboardRegister,
@@ -22,7 +23,8 @@ const resolveCommand = (
     const cleanValue = value.toLowerCase().trim();
 
     if (
-        cleanValue === 'start'
+        cleanValue === 'status'
+        || cleanValue === 'start'
         || cleanValue === 'stop'
         || cleanValue === 'register'
         || cleanValue === 'deregister'
@@ -47,6 +49,9 @@ const dashboardCommand = async (
     }
 
     switch(command) {
+        case 'status':
+            await dashboardStatus();
+            break;
         case 'start':
             await dashboardStart();
             break;

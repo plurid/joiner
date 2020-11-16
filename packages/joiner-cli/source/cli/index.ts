@@ -71,6 +71,15 @@ const main = async (
         .description('configure a local web server with a global view over the "joiner" packages registered on the machine');
 
     dashboard
+        .command('status')
+        .description('status of the dashboard server')
+        .action(async () => {
+            await dashboardCommand(
+                'status',
+            );
+        });
+
+    dashboard
         .command('start')
         .description('start the dashboard server')
         .action(async () => {

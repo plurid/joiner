@@ -1,4 +1,9 @@
 // #region module
+const dashboardStatus = async () => {
+    console.log(`status.`);
+}
+
+
 const dashboardStart = async () => {
     console.log(`start.`);
 }
@@ -27,6 +32,7 @@ const dashboardDeregister = async (
 
 // #region exports
 export {
+    dashboardStatus,
     dashboardStart,
     dashboardStop,
     dashboardRegister,
