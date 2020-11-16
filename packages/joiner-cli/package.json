@@ -36,11 +36,12 @@
     "scripts": {
         "test": "jest -c ./configurations/jest.config.js --coverage",
         "start": "rollup -c ./scripts/rollup.config.ts rollup.config.ts -w",
+        "build.removeTests": "rm -rf `find ./distribution/ -type d -name __tests__`",
         "build.dashboard.development": "node scripts/dashboard build.development",
         "build.dashboard.production": "node scripts/dashboard build.production",
-        "build.removeTests": "rm -rf `find ./distribution/ -type d -name __tests__`",
-        "build.development": "rollup -c ./scripts/rollup.config.ts && yarn build.removeTests",
-        "build": "rollup -c ./scripts/rollup.config.ts && yarn build.removeTests",
+        "build.cli.development": "rollup -c ./scripts/rollup.config.ts && yarn build.removeTests",
+        "build.cli.production": "rollup -c ./scripts/rollup.config.ts && yarn build.removeTests",
+        "build": "yarn build.dashboard.production && yarn build.cli.production",
         "prebuild": "rm -rf distribution",
         "prepublishOnly": "yarn build"
     },
