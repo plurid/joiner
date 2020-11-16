@@ -11,6 +11,7 @@
             "node_modules/@types",
         ],
 
+
         "baseUrl": ".",
         "paths": {
             "#commands/*": [
@@ -25,7 +26,39 @@
             "#services/*": [
                 "./source/services/*"
             ],
+
+            "#client/*": [
+                "./source/objects/Dashboard/server/client/*"
+            ],
+            "#server/*": [
+                "./source/objects/Dashboard/server/server/*"
+            ],
+            "#kernel-assets/*": [
+                "./source/objects/Dashboard/server/shared/kernel/assets/*"
+            ],
+            "#kernel-components/*": [
+                "./source/objects/Dashboard/server/shared/kernel/components/*"
+            ],
+            "#kernel-containers/*": [
+                "./source/objects/Dashboard/server/shared/kernel/containers/*"
+            ],
+            "#kernel-planes/*": [
+                "./source/objects/Dashboard/server/shared/kernel/planes/*"
+            ],
+            "#kernel-data/*": [
+                "./source/objects/Dashboard/server/shared/kernel/data/*"
+            ],
+            "#kernel-services/*": [
+                "./source/objects/Dashboard/server/shared/kernel/services/*"
+            ],
+            "#routes/*": [
+                "./source/objects/Dashboard/server/shared/routes/*"
+            ],
+            "#shell/*": [
+                "./source/objects/Dashboard/server/shared/shell/*"
+            ]
         },
+
 
         "declaration": true,
         "declarationDir": "distribution",
