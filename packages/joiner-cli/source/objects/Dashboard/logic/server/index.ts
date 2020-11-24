@@ -55,7 +55,7 @@ const serverStart = async () => {
             }
 
             resolve('');
-        }, 1_000);
+        }, 2_000);
     });
 
     spawnedChild.unref();
