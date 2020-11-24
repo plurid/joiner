@@ -122,7 +122,7 @@ const dashboardRegister = async (
         paths,
     });
 
-    console.log(`${options.path} registered.`);
+    console.log(`\n\t${options.path} registered.\n`);
 }
 
 
@@ -143,7 +143,7 @@ const dashboardDeregister = async (
         paths: updatedPaths,
     });
 
-    console.log(`${options.path} deregistered.`);
+    console.log(`\n\t${options.path} deregistered.\n`);
 }
 // #endregion module
 
