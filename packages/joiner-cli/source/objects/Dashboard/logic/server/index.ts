@@ -46,7 +46,15 @@ const serverStart = async () => {
 
             fs.unlink('./out.log');
 
-            resolve(outFile);
+            const re = /http:\/\/localhost:(\d+)/;
+            const match = outFile.match(re);
+
+            if (match) {
+                resolve(match[1]);
+                return;
+            }
+
+            resolve('');
         }, 1_000);
     });
 
