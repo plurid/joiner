@@ -62,6 +62,7 @@ const updateConfigurationFile = async (
 
         return true;
     } catch (error) {
+        console.log('error', error);
         return false;
     }
 }

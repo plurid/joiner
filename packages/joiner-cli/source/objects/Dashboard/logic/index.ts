@@ -44,15 +44,11 @@ const dashboardStatus = async () => {
 
 const dashboardStart = async () => {
     const configurationFile = await readConfigurationFile();
-    const {
-        dashboard,
-    } = configurationFile;
 
     if (
-        dashboard?.port
-        && dashboard?.pid
+        configurationFile?.dashboard
     ) {
-        console.log(`\n\tJoiner dashboard already started on http://localhost:${dashboard.port}\n`);
+        console.log(`\n\tJoiner dashboard already started on http://localhost:${configurationFile.dashboard.port}\n`);
         return;
     }
 
@@ -80,22 +76,31 @@ const dashboardStart = async () => {
 
 
 const dashboardStop = async () => {
-    const configurationFile = await readConfigurationFile();
-    const {
-        dashboard,
-    } = configurationFile;
+    try {
+        const configurationFile = await readConfigurationFile();
+        const {
+            dashboard,
+        } = configurationFile;
 
-    if (
-        !dashboard
-    ) {
-        console.log(`\n\tJoiner dashboard not started.\n`);
-        return;
+        if (
+            !dashboard
+        ) {
+            console.log(`\n\tJoiner dashboard not started.\n`);
+            return;
+        }
+
+        const killCommand = `kill -9 ${dashboard.pid}`;
+        execSync(killCommand);
+
+        const updatedConfigurationFile = {
+            dashboard: undefined,
+        };
+        await updateConfigurationFile(updatedConfigurationFile);
+
+        console.log(`\n\tJoiner dashboard stopped on port ${dashboard.port}.\n`);
+    } catch (error) {
+        console.log(`\n\tSomething went wrong.\n`);
     }
-
-    const killCommand = `kill -9 ${dashboard.pid}`;
-    execSync(killCommand);
-
-    console.log(`\n\tJoiner dashboard stopped on port ${dashboard.port}.\n`);
 }
 
 
