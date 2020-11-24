@@ -1914,6 +1914,11 @@ ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+alpha-versioning@^0.0.0-0:
+  version "0.0.0-0"
+  resolved "https://registry.yarnpkg.com/alpha-versioning/-/alpha-versioning-0.0.0-0.tgz#e8cff43d2130b7f1c9eeb53d196f7f8bada9dcba"
+  integrity sha512-tyXzvpp55yMvPYg3pN6XsMxkV3cHl4JAKscpYF2LIn4x4HIQ0lNANANLV8mSVUQoknTkjaFNJyA2fcppi/8w3A==
+
 alphanum-sort@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
