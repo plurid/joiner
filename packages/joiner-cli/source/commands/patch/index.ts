@@ -9,6 +9,11 @@
     import {
         execSync,
     } from 'child_process';
+
+    import {
+        isAlphaVersion,
+        updateAlphaVersion,
+    } from 'alpha-versioning';
     // #endregion libraries
 
 
@@ -42,7 +47,7 @@ const patchCommand = async (
             name: 'in the current directory',
             path: process.cwd(),
             private: false,
-            version: '0.0.0',
+            version: '0.0.0-0',
         };
         await patchLogic(
             packageData,
@@ -77,25 +82,49 @@ const patchLogic = async (
     try {
         console.log(`\n\tPatching version for package ${configPackage.name}...`);
 
-        const versionTypeCommand = resolveVersionType(versionType);
-        const patchCommand = `npm version ${versionTypeCommand} --no-git-tag-version`;
-        execSync(
-            patchCommand,
-            {
-                cwd: configPackage.path,
-                stdio: 'ignore',
-            },
-        );
-
         const packageJSONPath = path.join(configPackage.path, 'package.json');
         const packageJSONRawData = await fs.readFile(packageJSONPath, 'utf-8');
         const packageJSONData = JSON.parse(packageJSONRawData);
         const {
-            name,
             version,
         } = packageJSONData;
 
-        console.log(`\t${name} version patched to version ${version}.\n`);
+        const isAlpha = isAlphaVersion(version);
+
+        if (!isAlpha) {
+            const versionTypeCommand = resolveVersionType(versionType);
+            const patchCommand = `npm version ${versionTypeCommand} --no-git-tag-version`;
+            execSync(
+                patchCommand,
+                {
+                    cwd: configPackage.path,
+                    stdio: 'ignore',
+                },
+            );
+
+            const packageJSONPath = path.join(configPackage.path, 'package.json');
+            const packageJSONRawData = await fs.readFile(packageJSONPath, 'utf-8');
+            const packageJSONData = JSON.parse(packageJSONRawData);
+            const {
+                name,
+                version,
+            } = packageJSONData;
+
+            console.log(`\t${name} version patched to version ${version}.\n`);
+            return;
+        }
+
+
+        const alphaUpdatedVersion = updateAlphaVersion(version);
+        const updatedPackageData = {
+            ...packageJSONData,
+        };
+        updatedPackageData.version = alphaUpdatedVersion;
+
+        await fs.writeFile(
+            packageJSONPath,
+            JSON.stringify(updatedPackageData, null, 4),
+        );
     } catch (error) {
         console.log(`\n\tSomething went wrong. Check the version field for '${configPackage.name}'.\n`);
     }
