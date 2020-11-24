@@ -4,13 +4,15 @@
         promises as fs,
     } from 'fs';
 
-    import Deon from '@plurid/deon';
+    import Deon, {
+        typer,
+    } from '@plurid/deon';
     // #endregion libraries
 
 
     // #region external
     import {
-        ConfigurationFile,
+        JoinerConfigurationFile,
     } from '../../../data/interfaces';
 
     import {
@@ -27,7 +29,7 @@
 
 // #region module
 const updateConfigurationFile = async (
-    data: Partial<ConfigurationFile>,
+    data: Partial<JoinerConfigurationFile>,
 ) => {
     try {
         const deon = new Deon();
@@ -65,7 +67,7 @@ const updateConfigurationFile = async (
 }
 
 
-const readConfigurationFile = async () => {
+const readConfigurationFile = async (): Promise<JoinerConfigurationFile> => {
     const exists = await fileExists(joinerConfigurationPath);
 
     if (!exists) {
@@ -73,7 +75,7 @@ const readConfigurationFile = async () => {
             joinerConfigurationPath,
             '',
         );
-        return {} as any;
+        return {} as JoinerConfigurationFile;
     }
 
     const data = await fs.readFile(
@@ -82,9 +84,9 @@ const readConfigurationFile = async () => {
     );
 
     const deon = new Deon();
-    const ownerData: ConfigurationFile = await deon.parse(data);
+    const ownerData: JoinerConfigurationFile = await deon.parse(data);
 
-    return ownerData;
+    return typer(ownerData);
 }
 // #endregion module
 

@@ -1,4 +1,14 @@
 // #region module
+export interface JoinerConfigurationDashboard {
+    pid: number;
+    port: number;
+}
+
+export interface JoinerConfigurationFile {
+    dashboard?: JoinerConfigurationDashboard;
+}
+
+
 export interface ConfigurationFile {
     packages: Package[];
     yarnWorkspace: boolean;

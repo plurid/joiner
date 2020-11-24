@@ -1,4 +1,19 @@
 // #region imports
+    // #region imports
+    import {
+        execSync,
+    } from 'child_process';
+    // #endregion imports
+
+
+    // #region external
+    import {
+        updateConfigurationFile,
+        readConfigurationFile,
+    } from '#services/utilities';
+    // #endregion external
+
+
     // #region internal
     import {
         serverStart,
@@ -10,20 +25,39 @@
 
 // #region module
 const dashboardStatus = async () => {
-    // read configuration file
-    // log the data
-    console.log(`status.`);
+    const configurationFile = await readConfigurationFile();
+    const {
+        dashboard,
+    } = configurationFile;
+
+    if (
+        dashboard?.port
+        && dashboard?.pid
+    ) {
+        console.log(`\n\tJoiner dashboard started on http://localhost:${dashboard.port}\n`);
+        return;
+    }
+
+    console.log(`\n\tJoiner dashboard not started.\n`);
 }
 
 
 const dashboardStart = async () => {
-    // read configuration file
+    const configurationFile = await readConfigurationFile();
+    const {
+        dashboard,
+    } = configurationFile;
 
-    // check if server already started
+    if (
+        dashboard?.port
+        && dashboard?.pid
+    ) {
+        console.log(`\n\tJoiner dashboard already started on http://localhost:${dashboard.port}\n`);
+        return;
+    }
 
-    // start server
+
     const data = await serverStart();
-
     if (!data) {
         return;
     }
@@ -33,17 +67,35 @@ const dashboardStart = async () => {
         port,
     } = data;
 
-    console.log(`start`, pid, port);
+    const updatedConfigurationFile = {
+        dashboard: {
+            pid,
+            port,
+        },
+    };
+    await updateConfigurationFile(updatedConfigurationFile);
+
+    console.log(`\n\tJoiner dashboard started on http://localhost:${port}\n`);
 }
 
 
 const dashboardStop = async () => {
-    // read configuration file
+    const configurationFile = await readConfigurationFile();
+    const {
+        dashboard,
+    } = configurationFile;
 
-    // check if server started
+    if (
+        !dashboard
+    ) {
+        console.log(`\n\tJoiner dashboard not started.\n`);
+        return;
+    }
 
-    // stop server
-    console.log(`stop.`);
+    const killCommand = `kill -9 ${dashboard.pid}`;
+    execSync(killCommand);
+
+    console.log(`\n\tJoiner dashboard stopped on port ${dashboard.port}.\n`);
 }
 
 
