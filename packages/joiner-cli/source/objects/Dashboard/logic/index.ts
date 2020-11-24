@@ -10,6 +10,8 @@
     import {
         updateConfigurationFile,
         readConfigurationFile,
+
+        resolveAbsolutePath,
     } from '#services/utilities';
     // #endregion external
 
@@ -109,9 +111,11 @@ const dashboardRegister = async (
 ) => {
     const configurationFile = await readConfigurationFile();
 
+    const pathValue = resolveAbsolutePath(options.path);
+
     const paths: string[] = [
         ...(configurationFile.paths || []),
-        options.path,
+        pathValue,
     ];
 
     await updateConfigurationFile({
@@ -131,7 +135,9 @@ const dashboardDeregister = async (
         ...(configurationFile.paths || []),
     ];
 
-    const updatedPaths = paths.filter(path => path !== options.path);
+    const pathValue = resolveAbsolutePath(options.path);
+
+    const updatedPaths = paths.filter(path => path !== pathValue);
 
     await updateConfigurationFile({
         paths: updatedPaths,

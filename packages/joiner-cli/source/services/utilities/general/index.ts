@@ -3,6 +3,8 @@
     import {
         promises as fs,
     } from 'fs';
+
+    import path from 'path';
     // #endregion libraries
 // #endregion imports
 
@@ -50,5 +52,19 @@ export function debouncedCallback<A extends any[]>(
             }
         }, wait);
     };
+}
+
+
+export const resolveAbsolutePath = (
+    value: string,
+) => {
+    const resolvedPath = path.isAbsolute(value)
+        ? value
+        : path.join(
+            process.cwd(),
+            value,
+        );
+
+    return resolvedPath;
 }
 // #endregion module
