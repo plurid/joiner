@@ -107,18 +107,37 @@ const dashboardStop = async () => {
 const dashboardRegister = async (
     options: any,
 ) => {
-    // add options.path to configuration
+    const configurationFile = await readConfigurationFile();
 
-    console.log(`register.`, options);
+    const paths: string[] = [
+        ...(configurationFile.paths || []),
+        options.path,
+    ];
+
+    await updateConfigurationFile({
+        paths,
+    });
+
+    console.log(`${options.path} registered.`);
 }
 
 
 const dashboardDeregister = async (
     options: any,
 ) => {
-    // remove options.path to configuration
+    const configurationFile = await readConfigurationFile();
 
-    console.log(`deregister.`, options);
+    const paths: string[] = [
+        ...(configurationFile.paths || []),
+    ];
+
+    const updatedPaths = paths.filter(path => path !== options.path);
+
+    await updateConfigurationFile({
+        paths: updatedPaths,
+    });
+
+    console.log(`${options.path} deregistered.`);
 }
 // #endregion module
 
