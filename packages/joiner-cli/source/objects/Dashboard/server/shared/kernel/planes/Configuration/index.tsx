@@ -39,6 +39,8 @@
 
 
     // #region internal
+    import PackageLine from './PackageLine';
+
     import {
         StyledConfiguration,
     } from './styled';
@@ -76,7 +78,7 @@ const Configuration: React.FC<ConfigurationProperties> = (
 
         // #region state
         stateConfigurations,
-        // stateGeneralTheme,
+        stateGeneralTheme,
         // stateInteractionTheme,
         // #endregion state
     } = properties;
@@ -130,27 +132,36 @@ const Configuration: React.FC<ConfigurationProperties> = (
                     )}
                 />
 
-                <PluridTextItem
-                    icon={PluridIconFrame}
-                    name="packages"
-                    render={(<>
-                        <h2>
-                            packages
-                        </h2>
-                    </>)}
-                />
+                <div
+                    style={{
+                        margin: '2rem 0',
+                    }}
+                >
+                    <PluridTextItem
+                        icon={PluridIconFrame}
+                        name="packages"
+                        render={(<>
+                            <h2>
+                                packages
+                            </h2>
+                        </>)}
+                    />
 
-                <ul>
-                    {packages.map(pkg => {
-                        return (
-                            <li
-                                key={Math.random() + ''}
-                            >
-                                {pkg}
-                            </li>
-                        );
-                    })}
-                </ul>
+                    <ul>
+                        {packages.map(pkg => {
+                            return (
+                                <li
+                                    key={Math.random() + ''}
+                                >
+                                    <PackageLine
+                                        name={pkg}
+                                        theme={stateGeneralTheme}
+                                    />
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
            </StyledConfiguration>
         );
     }
