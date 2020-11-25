@@ -4,6 +4,8 @@
         promises as fs,
     } from 'fs';
 
+    import path from 'path';
+
     import {
         spawn,
     } from 'child_process';
@@ -17,13 +19,16 @@ const serverStart = async () => {
     const out = fsSync.openSync('./out.log', 'a');
     const error = fsSync.openSync('./out.log', 'a');
 
+    /**
+     * Start the server from the package root.
+     */
     const spawnedChild = spawn(
         'node',
         [
-            './dashboard/index.js',
+            './distribution/dashboard/index.js',
         ],
         {
-            cwd: __dirname,
+            cwd: path.dirname(__dirname),
             stdio: [
                 'ignore',
                 out,
