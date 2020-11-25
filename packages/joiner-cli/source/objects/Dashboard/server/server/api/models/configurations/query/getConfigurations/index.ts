@@ -5,6 +5,10 @@
     } from '#server/data/interfaces';
 
     import {
+        readConfigurations,
+    } from '#server/logic/operators/configurations';
+
+    import {
         generateMethodLogs,
     } from '#server/utilities';
     // #endregion external
@@ -83,11 +87,11 @@ const getConfigurations = async (
             logLevels.info,
         );
 
+        const data = await readConfigurations(paths);
+
         return {
             status: true,
-            data: [
-                // ...Configurations,
-            ],
+            data,
         };
         // #endregion public usage
     } catch (error) {

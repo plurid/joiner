@@ -5,6 +5,8 @@
     } from 'fs';
 
     import path from 'path';
+
+    import crypto from 'crypto';
     // #endregion libraries
 // #endregion imports
 
@@ -66,5 +68,15 @@ export const resolveAbsolutePath = (
         );
 
     return resolvedPath;
+}
+
+
+export const hashString = (
+    value: string,
+) => {
+    return crypto
+        .createHash('sha256')
+        .update(value, 'utf8')
+        .digest('base64');
 }
 // #endregion module
