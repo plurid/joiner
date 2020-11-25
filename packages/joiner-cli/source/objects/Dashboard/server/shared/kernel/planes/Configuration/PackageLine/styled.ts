@@ -26,5 +26,8 @@ export const StyledPackageLine = styled.div<IStyledPackageLine>`
 export const StyledPackageLineButtons = styled.div`
     display: grid;
     grid-template-columns: repeat(6, 30px);
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
 `;
 // #region module
