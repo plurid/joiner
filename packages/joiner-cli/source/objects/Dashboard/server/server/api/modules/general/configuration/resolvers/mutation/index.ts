@@ -7,7 +7,7 @@
     } from '#server/data/interfaces';
 
     import {
-        Packages,
+        Configurations,
     } from '#server/api/models';
     // #endregion external
 // #endregion imports
@@ -16,19 +16,19 @@
 
 // #region exports
 export default {
-    generatePackage: (
+    generateConfiguration: (
         _: any,
         { input }: InputOf<InputValueString>,
         context: Context,
-    ) => Packages.Mutation.generatePackage(
+    ) => Configurations.Mutation.generateConfiguration(
         input,
         context,
     ),
-    obliteratePackage: (
+    obliterateConfiguration: (
         _: any,
         { input }: InputOf<InputValueString>,
         context: Context,
-    ) => Packages.Mutation.obliteratePackage(
+    ) => Configurations.Mutation.obliterateConfiguration(
         input,
         context,
     ),

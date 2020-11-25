@@ -6,8 +6,8 @@
     } from '#server/data/interfaces';
 
     import {
-        deregisterPackage,
-    } from '#server/logic/operators/packages';
+        registerConfiguration,
+    } from '#server/logic/operators/configurations';
 
     import {
         generateMethodLogs,
@@ -18,10 +18,10 @@
 
 
 // #region module
-export const obliteratePackageLogs = generateMethodLogs('obliteratePackage');
+export const generateConfigurationLogs = generateMethodLogs('generateConfiguration');
 
 
-const obliteratePackage = async (
+const generateConfiguration = async (
     input: InputValueString,
     context: Context,
 ) => {
@@ -42,7 +42,7 @@ const obliteratePackage = async (
 
     // #region log start
     logger.log(
-        obliteratePackageLogs.infoStart,
+        generateConfigurationLogs.infoStart,
         logLevels.info,
     );
     // #endregion log start
@@ -59,13 +59,13 @@ const obliteratePackage = async (
         // #region private usage
         if (privateUsage) {
             logger.log(
-                obliteratePackageLogs.infoHandlePrivateUsage,
+                generateConfigurationLogs.infoHandlePrivateUsage,
                 logLevels.trace,
             );
 
             if (!privateOwnerIdentonym) {
                 logger.log(
-                    obliteratePackageLogs.infoEndPrivateUsage,
+                    generateConfigurationLogs.infoEndPrivateUsage,
                     logLevels.info,
                 );
 
@@ -74,36 +74,38 @@ const obliteratePackage = async (
                 };
             }
 
-            await deregisterPackage(name);
+            const registeredConfiguration = await registerConfiguration(name);
 
             logger.log(
-                obliteratePackageLogs.infoSuccessPrivateUsage,
+                generateConfigurationLogs.infoSuccessPrivateUsage,
                 logLevels.info,
             );
 
             return {
                 status: true,
+                data: registeredConfiguration,
             };
         }
         // #endregion private usage
 
 
         // #region public usage
-        await deregisterPackage(name);
+        const registeredConfiguration = await registerConfiguration(name);
 
         logger.log(
-            obliteratePackageLogs.infoSuccess,
+            generateConfigurationLogs.infoSuccess,
             logLevels.info,
         );
 
         return {
             status: true,
+            data: registeredConfiguration,
         };
         // #endregion public usage
     } catch (error) {
         // #region error handle
         logger.log(
-            obliteratePackageLogs.errorEnd,
+            generateConfigurationLogs.errorEnd,
             logLevels.error,
             error,
         );
@@ -119,5 +121,5 @@ const obliteratePackage = async (
 
 
 // #region exports
-export default obliteratePackage;
+export default generateConfiguration;
 // #endregion exports

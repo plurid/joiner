@@ -13,9 +13,9 @@
 
 
 // #region module
-export const getPackagesLogs = generateMethodLogs('getPackages');
+export const getConfigurationsLogs = generateMethodLogs('getConfigurations');
 
-const getPackages = async (
+const getConfigurations = async (
     context: Context,
 ) => {
     // #region context unpack
@@ -37,7 +37,7 @@ const getPackages = async (
 
     // #region log start
     logger.log(
-        getPackagesLogs.infoStart,
+        getConfigurationsLogs.infoStart,
         logLevels.info,
     );
     // #endregion log start
@@ -47,13 +47,13 @@ const getPackages = async (
         // #region private usage
         if (privateUsage) {
             logger.log(
-                getPackagesLogs.infoHandlePrivateUsage,
+                getConfigurationsLogs.infoHandlePrivateUsage,
                 logLevels.trace,
             );
 
             if (!privateOwnerIdentonym) {
                 logger.log(
-                    getPackagesLogs.infoEndPrivateUsage,
+                    getConfigurationsLogs.infoEndPrivateUsage,
                     logLevels.info,
                 );
 
@@ -63,14 +63,14 @@ const getPackages = async (
             }
 
             logger.log(
-                getPackagesLogs.infoSuccessPrivateUsage,
+                getConfigurationsLogs.infoSuccessPrivateUsage,
                 logLevels.info,
             );
 
             return {
                 status: true,
                 data: [
-                    // ...Packages,
+                    // ...Configurations,
                 ],
             };
         }
@@ -79,21 +79,21 @@ const getPackages = async (
 
         // #region public usage
         logger.log(
-            getPackagesLogs.infoSuccessCustomLogicUsage,
+            getConfigurationsLogs.infoSuccessCustomLogicUsage,
             logLevels.info,
         );
 
         return {
             status: true,
             data: [
-                // ...Packages,
+                // ...Configurations,
             ],
         };
         // #endregion public usage
     } catch (error) {
         // #region error handle
         logger.log(
-            getPackagesLogs.errorEnd,
+            getConfigurationsLogs.errorEnd,
             logLevels.error,
             error,
         );
@@ -109,5 +109,5 @@ const getPackages = async (
 
 
 // #region exports
-export default getPackages;
+export default getConfigurations;
 // #endregion exports

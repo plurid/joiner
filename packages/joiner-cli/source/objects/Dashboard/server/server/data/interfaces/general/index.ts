@@ -9,8 +9,9 @@ export interface OwnerToken {
 }
 
 
-export interface JoinerPackage {
+export interface JoinerConfiguration {
     id: string;
     path: string;
+    packages: string[];
 }
 // #endregion module

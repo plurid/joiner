@@ -8,7 +8,7 @@
 
     // #region external
     import {
-        JoinerPackage,
+        JoinerConfiguration,
     } from '#server/data/interfaces';
 
     import database from '#server/services/database';
@@ -18,27 +18,28 @@
 
 
 // #region module
-const registerPackage = async (
+const registerConfiguration = async (
     path: string,
 ) => {
     const id = uuid.generate();
 
-    const joinerPackage: JoinerPackage = {
+    const joinerConfiguration: JoinerConfiguration = {
         id,
         path,
+        packages: [],
     };
 
     // await database.store(
     //     'package',
     //     id,
-    //     joinerPackage,
+    //     joinerConfiguration,
     // );
 
-    return joinerPackage;
+    return joinerConfiguration;
 }
 
 
-const deregisterPackage = async (
+const deregisterConfiguration = async (
     id: string,
 ) => {
     try {
@@ -56,7 +57,7 @@ const deregisterPackage = async (
 
 // #region exports
 export {
-    registerPackage,
-    deregisterPackage,
+    registerConfiguration,
+    deregisterConfiguration,
 };
 // #endregion exports

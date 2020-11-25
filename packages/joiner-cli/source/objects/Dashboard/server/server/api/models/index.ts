@@ -1,7 +1,7 @@
 // #region imports
     // #region internal
     import Owner from './owner';
-    import Packages from './packages';
+    import Configurations from './configurations';
     // #endregion internal
 // #endregion imports
 
@@ -10,6 +10,6 @@
 // #region exports
 export {
     Owner,
-    Packages,
+    Configurations,
 };
 // #endregion exports

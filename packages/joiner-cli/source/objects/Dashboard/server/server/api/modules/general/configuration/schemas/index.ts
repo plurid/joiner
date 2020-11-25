@@ -9,39 +9,40 @@
 // #region module
 export const queries = gql`
     extend type Query {
-        getPackages: ResponsePackages!
+        getConfigurations: ResponseConfigurations!
     }
 `;
 
 
 export const mutations = gql`
     extend type Mutation {
-        generatePackage(input: InputValueString!): ResponsePackage!
-        obliteratePackage(input: InputValueString!): Response!
+        generateConfiguration(input: InputValueString!): ResponseConfiguration!
+        obliterateConfiguration(input: InputValueString!): Response!
     }
 `;
 
 
 export const types = gql`
-    type ResponsePackage {
+    type ResponseConfiguration {
         status: Boolean!
         error: Error
-        data: Package
+        data: Configuration
     }
 
-    type ResponsePackages {
+    type ResponseConfigurations {
         status: Boolean!
         error: Error
-        data: [Package!]
+        data: [Configuration!]
     }
 
-    type Package {
+    type Configuration {
         id: String!
         path: String!
+        packages: [String!]
     }
 
     extend type Owner {
-        packages: [Package!]
+        configurations: [Configuration!]
     }
 `;
 // #endregion module

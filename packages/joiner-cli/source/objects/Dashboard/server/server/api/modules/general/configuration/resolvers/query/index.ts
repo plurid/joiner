@@ -5,7 +5,7 @@
     } from '#server/data/interfaces';
 
     import {
-        Packages,
+        Configurations,
     } from '#server/api/models';
     // #endregion external
 // #endregion imports
@@ -14,11 +14,11 @@
 
 // #region exports
 export default {
-    getPackages: (
+    getConfigurations: (
         _: any,
         __: any,
         context: Context,
-    ) => Packages.Query.getPackages(
+    ) => Configurations.Query.getConfigurations(
         context,
     ),
 };
