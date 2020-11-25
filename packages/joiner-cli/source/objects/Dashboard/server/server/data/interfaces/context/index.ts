@@ -25,6 +25,8 @@ export interface Context {
 
     instance: Application;
 
+    paths: string[];
+
     customLogicUsage: boolean;
 
     privateUsage: boolean;

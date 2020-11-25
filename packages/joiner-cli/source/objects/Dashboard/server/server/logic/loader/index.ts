@@ -1,24 +1,16 @@
 // #region imports
     // #region external
-    import database from '#server/services/database';
+    import {
+        readConfigurationFile,
+    } from '#services/utilities';
     // #endregion external
 // #endregion imports
 
 
 
 // #region module
-const loadData = async (
-    ownerID: string | undefined,
-) => {
-    if (!ownerID) {
-        return {
-        };
-    }
-
-
-    const data = {
-
-    };
+const loadData = async () => {
+    const data = await readConfigurationFile();
 
     return data;
 }
