@@ -27,4 +27,11 @@ export const StyledConfiguration = styled.div`
         margin: 0;
     }
 `;
+
+
+export const StyledPackageLines = styled.div`
+    ul {
+        list-style: none;
+    }
+`;
 // #endregion module

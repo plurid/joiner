@@ -47,6 +47,9 @@ export const configurationRowRenderer = (
             <PluridLink
                 route={`/configuration/${id}`}
                 devisible={true}
+                style={{
+                    display: 'grid',
+                }}
             >
                 <PluridIconInfo
                     atClick={() => {}}

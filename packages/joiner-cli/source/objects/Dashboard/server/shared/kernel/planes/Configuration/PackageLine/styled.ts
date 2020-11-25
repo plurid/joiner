@@ -16,5 +16,15 @@ export interface IStyledPackageLine {
 }
 
 export const StyledPackageLine = styled.div<IStyledPackageLine>`
+    display: grid;
+    grid-template-columns: 400px 200px;
+    margin-bottom: 1rem;
+`;
+
+
+
+export const StyledPackageLineButtons = styled.div`
+    display: grid;
+    grid-template-columns: repeat(6, 30px);
 `;
 // #region module

@@ -9,7 +9,10 @@
     import {
         PluridIconPlay,
         PluridIconCommand,
+        PluridIconReset,
         PluridIconAdd,
+        PluridIconRepository,
+        PluridIconExtract,
     } from '@plurid/plurid-icons-react';
     // #endregion libraries
 
@@ -17,6 +20,7 @@
     // #region internal
     import {
         StyledPackageLine,
+        StyledPackageLineButtons,
     } from './styled';
     // #endregion internal
 // #region imports
@@ -79,13 +83,32 @@ const PackageLine: React.FC<PackageLineProperties> = (
                 {name}
             </div>
 
-            <div>
-                <PluridIconPlay />
+            <StyledPackageLineButtons>
+                <PluridIconPlay
+                    title="run"
+                />
 
-                <PluridIconCommand />
+                <PluridIconCommand
+                    title="command"
+                />
 
-                <PluridIconAdd />
-            </div>
+                <PluridIconReset
+                    title="update"
+                />
+
+
+                <PluridIconAdd
+                    title="patch"
+                />
+
+                <PluridIconRepository
+                    title="commit"
+                />
+
+                <PluridIconExtract
+                    title="publish"
+                />
+            </StyledPackageLineButtons>
         </StyledPackageLine>
     );
     // #endregion render

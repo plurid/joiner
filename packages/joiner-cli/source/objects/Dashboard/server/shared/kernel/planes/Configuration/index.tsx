@@ -43,6 +43,7 @@
 
     import {
         StyledConfiguration,
+        StyledPackageLines,
     } from './styled';
     // #endregion internal
 // #endregion imports
@@ -147,20 +148,22 @@ const Configuration: React.FC<ConfigurationProperties> = (
                         </>)}
                     />
 
-                    <ul>
-                        {packages.map(pkg => {
-                            return (
-                                <li
-                                    key={Math.random() + ''}
-                                >
-                                    <PackageLine
-                                        name={pkg}
-                                        theme={stateGeneralTheme}
-                                    />
-                                </li>
-                            );
-                        })}
-                    </ul>
+                    <StyledPackageLines>
+                        <ul>
+                            {packages.map(pkg => {
+                                return (
+                                    <li
+                                        key={Math.random() + ''}
+                                    >
+                                        <PackageLine
+                                            name={pkg}
+                                            theme={stateGeneralTheme}
+                                        />
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </StyledPackageLines>
                 </div>
            </StyledConfiguration>
         );
