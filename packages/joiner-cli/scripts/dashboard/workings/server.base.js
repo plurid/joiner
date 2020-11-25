@@ -33,6 +33,7 @@ const externalPackages = [
     'path',
     'stream',
     'os',
+    'crypto',
 ];
 
 const styledComponentsTransformer = createStyledComponentsTransformer({
