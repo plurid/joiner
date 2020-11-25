@@ -39,6 +39,7 @@ const build =  {
         'fs',
         'http',
         'os',
+        'crypto',
     ],
     watch: {
         include: 'source/**',
