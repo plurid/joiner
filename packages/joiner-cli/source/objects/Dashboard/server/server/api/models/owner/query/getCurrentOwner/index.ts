@@ -35,8 +35,14 @@ const getCurrentOwner = async (
         }
 
         return {
-            status: false,
+            status: true,
+            data: {
+                id: '',
+            },
         };
+        // return {
+        //     status: false,
+        // };
     } catch (error) {
         return {
             status: false,
