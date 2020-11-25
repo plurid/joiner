@@ -13,4 +13,10 @@ export interface InputQuery {
     count?: number;
     start?: string;
 }
+
+
+export interface InputExecuteCommand {
+    configurationID: string;
+    command: string;
+}
 // #endregion module

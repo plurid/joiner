@@ -16,6 +16,7 @@ export const queries = gql`
 
 export const mutations = gql`
     extend type Mutation {
+        executeCommand(input: InputExecuteCommand!): Response!
         generateConfiguration(input: InputValueString!): ResponseConfiguration!
         obliterateConfiguration(input: InputValueString!): Response!
     }
@@ -45,6 +46,14 @@ export const types = gql`
         configurations: [Configuration!]
     }
 `;
+
+
+export const inputs = gql`
+    input InputExecuteCommand {
+        configurationID: String!
+        command: String!
+    }
+`;
 // #endregion module
 
 
@@ -54,5 +63,6 @@ export default gql`
     ${queries}
     ${mutations}
     ${types}
+    ${inputs}
 `;
 // #endregion exports
