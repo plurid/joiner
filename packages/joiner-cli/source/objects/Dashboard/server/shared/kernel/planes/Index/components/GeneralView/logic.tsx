@@ -44,12 +44,12 @@
 // #region module
 export const generalSelectors = [
     'analytics',
-    'packages',
+    'configurations',
 ];
 
 export const generalSelectorsIcons = {
     analytics: PluridIconStatistics,
-    packages: PluridIconApps,
+    configurations: PluridIconApps,
 };
 
 
@@ -64,10 +64,10 @@ export const renderSelectedView = (
                     analytics
                 </div>
             );
-        case 'packages':
+        case 'configurations':
             return (
                 <div>
-                    packages
+                    configurations
                 </div>
             );
         default:
