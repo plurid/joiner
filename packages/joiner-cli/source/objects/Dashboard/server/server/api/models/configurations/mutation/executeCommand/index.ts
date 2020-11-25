@@ -1,6 +1,8 @@
 // #region imports
     // #region libraries
-    import fsSync from 'fs';
+    import fsSync, {
+        promises as fs,
+    } from 'fs';
 
     import {
         spawn,
@@ -46,55 +48,61 @@ const identifyConfiguration = (
 export const executeCommandLogs = generateMethodLogs('executeCommand');
 
 
-const executeCommand = (
+const executeCommand = async (
     input: InputExecuteCommand,
     context: Context,
 ) => {
-    const {
-        paths,
-    } = context;
+    try {
+        const {
+            paths,
+        } = context;
 
-    const {
-        command,
-        configurationID,
-        package: packageName,
-    } = input;
+        const {
+            command,
+            configurationID,
+            package: packageName,
+        } = input;
 
 
-    const configurationPath = identifyConfiguration(
-        paths,
-        configurationID,
-    );
+        const configurationPath = identifyConfiguration(
+            paths,
+            configurationID,
+        );
 
-    if (!configurationPath) {
+        if (!configurationPath) {
+            return {
+                status: false,
+            };
+        }
+
+
+        const out = fsSync.openSync('./out.log', 'a');
+        const error = fsSync.openSync('./out.log', 'a');
+        const spawnedChild = spawn(
+            'joiner',
+            [
+                `-c ${configurationPath} ${packageName} ${command}`,
+            ],
+            {
+                stdio: [
+                    'ignore',
+                    out,
+                    error,
+                ],
+                detached: true,
+            },
+        );
+
+        spawnedChild.unref();
+
+        return {
+            status: true,
+        };
+    } catch (error) {
         return {
             status: false,
         };
     }
-
-
-    const out = fsSync.openSync('./out.log', 'a');
-    const error = fsSync.openSync('./out.log', 'a');
-    const spawnedChild = spawn(
-        'joiner',
-        [
-            `-c ${configurationPath} ${packageName} ${command}`,
-        ],
-        {
-            stdio: [
-                'ignore',
-                out,
-                error,
-            ],
-            detached: true,
-        },
-    );
-
-    spawnedChild.unref();
-
-    return {
-        status: true,
-    };
 }
 // #endregion module
 
