@@ -99,7 +99,7 @@ const main = async (
 
     dashboard
         .command('register [path]')
-        .description('register a ".joiner" configuration file on the dashboard server')
+        .description('register a "joiner" configuration file on the dashboard server')
         .action(async (
             path,
         ) => {
@@ -113,7 +113,7 @@ const main = async (
 
     dashboard
         .command('deregister [path]')
-        .description('deregister a ".joiner" configuration file on the dashboard server')
+        .description('deregister a "joiner" configuration file on the dashboard server')
         .action(async (
             path,
         ) => {
