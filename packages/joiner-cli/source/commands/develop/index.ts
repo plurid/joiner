@@ -4,7 +4,7 @@
         parseConfigurationFile,
     } from '#services/logic/configuration';
 
-    import DevelopmentServer from '#objects/DevelopmentServer';
+    import DevelopmentServer from '#objects/Development/DevelopmentServer';
     // #endregion external
 // #endregion imports
 
