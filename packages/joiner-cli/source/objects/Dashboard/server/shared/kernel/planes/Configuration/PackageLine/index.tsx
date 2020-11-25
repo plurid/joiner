@@ -17,6 +17,15 @@
     // #endregion libraries
 
 
+    // #region external
+    import client from '#kernel-services/graphql/client';
+
+    import {
+        EXECUTE_COMMAND,
+    } from '#kernel-services/graphql/mutate';
+    // #endregion external
+
+
     // #region internal
     import {
         StyledPackageLine,
@@ -31,6 +40,7 @@
 export interface PackageLineProperties {
     // #region required
         // #region values
+        id: string;
         name: string;
         theme: Theme;
         // #endregion values
@@ -55,6 +65,7 @@ const PackageLine: React.FC<PackageLineProperties> = (
     const {
         // #region required
             // #region values
+            id,
             name,
             theme,
             // #endregion values
@@ -72,6 +83,32 @@ const PackageLine: React.FC<PackageLineProperties> = (
         // #endregion optional
     } = properties;
     // #endregion properties
+
+
+    // #region handlers
+    const executeCommand = async (
+        command: string
+    ) => {
+        try {
+            const input = {
+                configurationID: id,
+                command,
+                package: name,
+            };
+
+            client.mutate({
+                mutation: EXECUTE_COMMAND,
+                variables: {
+                    input,
+                },
+            });
+
+            return;
+        } catch (error) {
+            return;
+        }
+    }
+    // #endregion handlers
 
 
     // #region render
@@ -94,19 +131,22 @@ const PackageLine: React.FC<PackageLineProperties> = (
 
                 <PluridIconReset
                     title="update"
+                    atClick={() => executeCommand('update')}
                 />
-
 
                 <PluridIconAdd
                     title="patch"
+                    atClick={() => executeCommand('patch')}
                 />
 
                 <PluridIconRepository
                     title="commit"
+                    atClick={() => executeCommand('commit')}
                 />
 
                 <PluridIconExtract
                     title="publish"
+                    atClick={() => executeCommand('publish')}
                 />
             </StyledPackageLineButtons>
         </StyledPackageLine>

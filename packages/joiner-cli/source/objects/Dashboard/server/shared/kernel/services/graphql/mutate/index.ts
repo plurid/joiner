@@ -21,6 +21,20 @@ export const OBLITERATE_CONFIGURATION = gql`
 `;
 
 
+export const EXECUTE_COMMAND = gql`
+    mutation ExecuteCommand($input: InputExecuteCommand!) {
+        executeCommand(input: $input) {
+            status
+            error {
+                type
+                path
+                message
+            }
+        }
+    }
+`;
+
+
 export const LOGIN = gql`
     mutation Login($input: InputLogin!) {
         login(input: $input) {

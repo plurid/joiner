@@ -118,6 +118,7 @@ const Configuration: React.FC<ConfigurationProperties> = (
         configuration: JoinerConfiguration,
     ) => {
         const {
+            id,
             path,
             packages,
         } = configuration;
@@ -156,6 +157,7 @@ const Configuration: React.FC<ConfigurationProperties> = (
                                         key={Math.random() + ''}
                                     >
                                         <PackageLine
+                                            id={id}
                                             name={pkg}
                                             theme={stateGeneralTheme}
                                         />
