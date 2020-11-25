@@ -290,27 +290,32 @@ Cross-linking packages depending on each other with symlinks becomes very fast a
 
 To setup the packages linkage, the configuration file should have at least the `watchPackages` field, if not, all the registered packages will be watched.
 
-``` yaml
-development:
-  # The packages which are targeted for development watch.
-  # The server will listen for file changes in the `watch directory` of the `package`
-  # and copy the files to the `node_modules` of all the packages which require them.
-  # The catch-all 'all' can be used, or a single package can be passed.
-  # default: all
-  watchPackages: 'all' # ['packageName'] | 'all' | 'packageName'
+``` deon
+development {
+    // The packages which are targeted for development watch.
+    // The server will listen for file changes in the `watch directory` of the `package`
+    // and copy the files to the `node_modules` of all the packages which require them.
+    // The catch-all 'all' can be used, or a single package can be passed.
+    // default all
+    watchPackages 'all' // ['packageName'] | 'packageName' | 'all'
 
-  # Port for the server started with `joiner develop`.
-  # default: 55000
-  serverPort: 55000
+    // Port for the server started with `joiner develop`.
+    // default 55000
+    serverPort 55000
 
-  # default: ['build', 'distribution', 'dist']
-  watchDirectories: ['build', 'distribution', 'dist']
+    // default ['build', 'distribution', 'dist']
+    watchDirectories [
+        build
+        distribution
+        dist
+    ]
 
-  # Paths to other packages which need to be linked/watched/updated
-  # but which do not belong to the same life-cycle management
-  # as the top-defined `packages`.
-  # default: []
-  externalPackages: []
+    // Paths to other packages which need to be linked/watched/updated
+    // but which do not belong to the same life-cycle management
+    // as the top-defined `packages`.
+    // default []
+    externalPackages []
+}
 ```
 
 To start the development server and the watchers, run the command
