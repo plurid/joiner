@@ -26,6 +26,7 @@
 
 
     // #region internal
+    import ConfigurationsView from './components/ConfigurationsView';
 
     import {
         StyledGeneralView,
@@ -43,12 +44,12 @@
 
 // #region module
 export const generalSelectors = [
-    'analytics',
+    // 'analytics',
     'configurations',
 ];
 
 export const generalSelectorsIcons = {
-    analytics: PluridIconStatistics,
+    // analytics: PluridIconStatistics,
     configurations: PluridIconApps,
 };
 
@@ -58,17 +59,17 @@ export const renderSelectedView = (
     setGeneralView: any,
 ) => {
     switch (stateIndexGeneralSelector) {
-        case 'analytics':
-            return (
-                <div>
-                    analytics
-                </div>
-            );
+        // case 'analytics':
+        //     return (
+        //         <div>
+        //             analytics
+        //         </div>
+        //     );
         case 'configurations':
             return (
-                <div>
-                    configurations
-                </div>
+                <ConfigurationsView
+                    setGeneralView={setGeneralView}
+                />
             );
         default:
             return (<></>);

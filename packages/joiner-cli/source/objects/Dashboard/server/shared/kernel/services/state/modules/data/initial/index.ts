@@ -9,6 +9,7 @@
 // #region module
 const initialState: Types.State = {
     id: '',
+    configurations: [],
 };
 // #endregion module
 

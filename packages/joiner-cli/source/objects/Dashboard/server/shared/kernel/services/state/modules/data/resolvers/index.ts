@@ -22,14 +22,28 @@ export const addEntity = (
         ...state,
     };
 
+    let configurations = [
+        ...newState.configurations,
+    ];
 
-    // switch (type) {
 
-    // }
+    switch (type) {
+        case 'configuration':
+            configurations = [
+                ...configurations,
+                {
+                    ...data,
+                },
+            ];
+            break;
+    }
 
 
     return {
         ...newState,
+        configurations: [
+            ...configurations,
+        ],
     };
 }
 
@@ -47,13 +61,24 @@ export const removeEntity = (
         ...state,
     };
 
+    let configurations = [
+        ...newState.configurations,
+    ];
 
-    // switch (type) {
 
-    // }
+    switch (type) {
+        case 'configuration':
+            configurations = configurations.filter(
+                configuration => configuration.id !== id
+            );
+            break;
+    }
 
     return {
         ...newState,
+        configurations: [
+            ...configurations,
+        ],
     };
 }
 
@@ -72,13 +97,24 @@ export const addEntities = (
         ...state,
     };
 
+    let configurations = [
+        ...newState.configurations,
+    ];
 
-    // switch (type) {
 
-    // }
+    switch (type) {
+        case 'configurations':
+            configurations = [
+                ...data,
+            ];
+            break;
+    }
 
     return {
         ...newState,
+        configurations: [
+            ...configurations,
+        ],
     };
 }
 

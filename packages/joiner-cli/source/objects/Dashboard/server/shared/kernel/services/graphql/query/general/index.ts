@@ -18,6 +18,11 @@ export const GET_CURRENT_OWNER = gql`
             }
             data {
                 id
+                configurations {
+                    id
+                    path
+                    packages
+                }
             }
         }
     }

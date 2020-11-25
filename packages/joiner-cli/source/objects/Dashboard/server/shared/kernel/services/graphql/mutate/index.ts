@@ -7,6 +7,20 @@
 
 
 // #region module
+export const OBLITERATE_CONFIGURATION = gql`
+    mutation ObliterateConfiguration($input: InputValueString!) {
+        obliterateConfiguration(input: $input) {
+            status
+            error {
+                type
+                path
+                message
+            }
+        }
+    }
+`;
+
+
 export const LOGIN = gql`
     mutation Login($input: InputLogin!) {
         login(input: $input) {

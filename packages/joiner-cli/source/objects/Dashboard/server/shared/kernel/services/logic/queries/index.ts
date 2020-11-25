@@ -41,6 +41,11 @@ const getCurrentOwner = async (
     ) => dispatch(
         actions.view.setViewOwnerID(payload),
     );
+    const dispatchDataAddEntities: typeof actions.data.addEntities = (
+        payload,
+    ) => dispatch(
+        actions.data.addEntities(payload),
+    );
 
     try {
         const query = await client.query({
@@ -56,9 +61,15 @@ const getCurrentOwner = async (
 
         const {
             id,
+            configurations,
         } = graphql.deleteTypenames(response.data);
 
         dispatchSetOwnerID(id);
+
+        dispatchDataAddEntities({
+            type: 'configurations',
+            data: configurations,
+        });
 
         return true;
     } catch (error) {
