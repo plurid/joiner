@@ -1,15 +1,13 @@
 // #region imports
     // #region internal
-    import owner from './owner/schemas';
-    import packages from './packages/schemas';
+    import getPackages from './getPackages';
     // #endregion internal
 // #endregion imports
 
 
 
 // #region exports
-export default [
-    owner,
-    packages,
-];
+export default {
+    getPackages,
+};
 // #endregion exports

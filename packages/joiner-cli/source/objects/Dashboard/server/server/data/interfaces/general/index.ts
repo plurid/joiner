@@ -7,4 +7,10 @@ export interface JoinerOwner {
 export interface OwnerToken {
     token: string;
 }
+
+
+export interface JoinerPackage {
+    id: string;
+    path: string;
+}
 // #endregion module
