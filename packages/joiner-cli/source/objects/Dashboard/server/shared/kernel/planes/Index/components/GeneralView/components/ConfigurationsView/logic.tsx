@@ -39,10 +39,6 @@ export const configurationRowRenderer = (
                 data={path}
             />
 
-            <div>
-                {path}
-            </div>
-
             <PluridIconDelete
                 atClick={() => handleConfigurationObliterate(id)}
             />

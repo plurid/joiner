@@ -229,11 +229,7 @@ const ConfigurationsView: React.FC<ConfigurationsViewProperties> = (
     const rowsHeader = (
         <>
             <div>
-                id
-            </div>
-
-            <div>
-                name
+                path
             </div>
 
             <div />
@@ -245,7 +241,7 @@ const ConfigurationsView: React.FC<ConfigurationsViewProperties> = (
             generalTheme={stateGeneralTheme}
             interactionTheme={stateInteractionTheme}
 
-            rowTemplate="2fr 2fr 30px"
+            rowTemplate="3fr 30px"
             rowsHeader={rowsHeader}
             rows={filteredRows}
             noRows="no configurations"
