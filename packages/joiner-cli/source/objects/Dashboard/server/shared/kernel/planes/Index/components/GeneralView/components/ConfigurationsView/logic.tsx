@@ -4,7 +4,12 @@
 
     import {
         PluridIconDelete,
+        PluridIconInfo,
     } from '@plurid/plurid-icons-react';
+
+    import {
+        PluridLink,
+    } from '@plurid/plurid-react';
 
     import {
         PluridCopyableLine,
@@ -38,6 +43,15 @@ export const configurationRowRenderer = (
             <PluridCopyableLine
                 data={path}
             />
+
+            <PluridLink
+                route={`/configuration/${id}`}
+                devisible={true}
+            >
+                <PluridIconInfo
+                    atClick={() => {}}
+                />
+            </PluridLink>
 
             <PluridIconDelete
                 atClick={() => handleConfigurationObliterate(id)}

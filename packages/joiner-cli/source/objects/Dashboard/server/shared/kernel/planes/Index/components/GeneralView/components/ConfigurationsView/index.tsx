@@ -233,6 +233,8 @@ const ConfigurationsView: React.FC<ConfigurationsViewProperties> = (
             </div>
 
             <div />
+
+            <div />
         </>
     );
 
@@ -241,7 +243,7 @@ const ConfigurationsView: React.FC<ConfigurationsViewProperties> = (
             generalTheme={stateGeneralTheme}
             interactionTheme={stateInteractionTheme}
 
-            rowTemplate="3fr 30px"
+            rowTemplate="3fr 30px 30px"
             rowsHeader={rowsHeader}
             rows={filteredRows}
             noRows="no configurations"
