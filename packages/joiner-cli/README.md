@@ -26,7 +26,7 @@
 
 `joiner` can run arbitrary commands in each target project, or specific commands (`update`, `commit`, etc.) based on supported workflows.
 
-`joiner` is a sub-automation tool in that the commands are manually called from the `command-line`, from the [`dashboard`](#dashboard) or from the `api`, and it requires another publish/subscribe-like layer on top of it in order to reach full automation.
+`joiner` is a sub-automation tool in that the commands are manually called from the `command-line`, from the [`dashboard`](#dashboard), or from the `api`, and it requires another publish/subscribe-like layer on top of it in order to reach full automation.
 
 
 Supported languages:
@@ -244,7 +244,7 @@ development {
 
 ### Dashboard
 
-In order to provide a global view of all the `joiner` configurations and packages from the machine, the dashboard server can be started simply running:
+In order to provide a global view of all the `joiner` configurations and packages from the machine, the dashboard server can be started by running:
 
 ```
 joiner dashboard start
