@@ -196,7 +196,7 @@ export const renderGeneralView = (
                                         )}
                                     </StyledGeneralHelpItem>
 
-                                    {stateViewUsageType === 'PRIVATE_USAGE' && (
+                                    {/* {stateViewUsageType === 'PRIVATE_USAGE' && (
                                         <StyledGeneralHelpItem
                                             onClick={() => logout()}
                                             compactSelectors={stateViewCompactSelectors}
@@ -213,7 +213,7 @@ export const renderGeneralView = (
                                                 </>
                                             )}
                                         </StyledGeneralHelpItem>
-                                    )}
+                                    )} */}
                                 </ul>
                             )}
                         </StyledGeneralHelp>

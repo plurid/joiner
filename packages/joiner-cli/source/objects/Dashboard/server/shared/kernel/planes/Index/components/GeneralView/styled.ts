@@ -42,9 +42,9 @@ export const StyledGeneralSelectors = styled.div<IStyledGeneralSelectors>`
         ({
             viewUsageType,
         }: IStyledGeneralSelectors) => {
-            if (viewUsageType) {
-                return '100px auto 80px';
-            }
+            // if (viewUsageType) {
+            //     return '100px auto 80px';
+            // }
 
             return '100px auto 40px';
         }
