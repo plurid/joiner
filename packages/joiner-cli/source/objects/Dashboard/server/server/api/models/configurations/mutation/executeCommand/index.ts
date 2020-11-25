@@ -57,6 +57,7 @@ const executeCommand = (
     const {
         command,
         configurationID,
+        package: packageName,
     } = input;
 
 
@@ -77,7 +78,7 @@ const executeCommand = (
     const spawnedChild = spawn(
         'joiner',
         [
-            `-c ${configurationPath} ${command}`,
+            `-c ${configurationPath} ${packageName} ${command}`,
         ],
         {
             stdio: [

@@ -52,6 +52,7 @@ export const inputs = gql`
     input InputExecuteCommand {
         configurationID: String!
         command: String!
+        package: String!
     }
 `;
 // #endregion module

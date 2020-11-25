@@ -18,5 +18,6 @@ export interface InputQuery {
 export interface InputExecuteCommand {
     configurationID: string;
     command: string;
+    package: string;
 }
 // #endregion module
