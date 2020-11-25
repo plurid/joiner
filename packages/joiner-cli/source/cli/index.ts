@@ -52,7 +52,7 @@ const main = async (
     program
         .option(
             '-c, --configuration <file>',
-            `path to the .deon or .yaml configuration file (defaults: 'joiner', 'scripts/joiner', 'scripts/joiner.packages')`,
+            `path to the ".deon" or ".yaml" configuration file (defaults: "joiner", "scripts/joiner", "scripts/joiner.packages")`,
         );
 
     program
