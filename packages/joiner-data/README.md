@@ -17,3 +17,18 @@
 <h3 align="center">
     common configuration values
 </h3>
+
+
+
+## Usage
+
+Import the values in a `.deon` file and use accordingly
+
+``` deon
+import base from https://raw.githubusercontent.com/plurid/joiner/master/packages/joiner-data/values/base.deon
+
+
+{
+    ...#base
+}
+```
