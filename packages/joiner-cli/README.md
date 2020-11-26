@@ -26,7 +26,7 @@
 
 `joiner` can run arbitrary commands in each target project, or specific commands (`update`, `commit`, etc.) based on supported workflows.
 
-`joiner` is a sub-automation tool in that the commands are manually called from the `command-line`, from the [`dashboard`](#dashboard), or from the `api`, and it requires another publish/subscribe-like layer on top of it in order to reach full automation.
+`joiner` is a sub-automation tool in that the commands are manually called from the [`command-line`](#command-line-interface), from the [`dashboard`](#dashboard), or from the [`api`](#api), and it requires another publish/subscribe-like layer on top of it in order to reach full automation.
 
 
 Supported languages:
@@ -44,6 +44,7 @@ For `JavaScript`/`TypeScript`, `joiner` can be used on its own or conjoined with
     + [Command-Line Interface](#command-line-interface)
     + [Configuration File](#configuration-file)
     + [Dashboard](#dashboard)
+    + [API](#api)
 + [Advanced Usage](#advanced-usage)
     + [Aliases](#aliases)
     + [Development](#development)
@@ -242,6 +243,7 @@ development {
 }
 ```
 
+
 ### Dashboard
 
 In order to provide a global view of all the `joiner` configurations and packages from the machine, the dashboard server can be started by running:
@@ -259,6 +261,30 @@ joiner dashboard register /path/to/joiner-configuration-file
 <p align="center">
     <img src="https://raw.githubusercontent.com/plurid/joiner/master/about/screenshots/ss-1.png" height="500px">
 </p>
+
+
+### API
+
+Once the dashboard server has been started, it can receive GraphQL-based API requests on `http://localhost:<port>/joiner` (the default port is `10100`: `http://localhost:10100/joiner`).
+
+``` graphql
+input InputExecuteCommand {
+    configurationID: String!
+    command: String!
+    package: String!
+}
+
+mutation ExecuteCommand($input: InputExecuteCommand!) {
+    executeCommand(input: $input) {
+        status
+        error {
+            type
+            path
+            message
+        }
+    }
+}
+```
 
 
 
