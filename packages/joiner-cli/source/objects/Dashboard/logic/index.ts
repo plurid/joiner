@@ -3,6 +3,8 @@
     import {
         execSync,
     } from 'child_process';
+
+    import fetch from 'cross-fetch';
     // #endregion imports
 
 
@@ -26,6 +28,23 @@
 
 
 // #region module
+const verifyDashboard = async (
+    address: string,
+) => {
+    try {
+        const response = await fetch(address);
+
+        if (response.status !== 200) {
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+
 const dashboardStatus = async () => {
     const configurationFile = await readConfigurationFile();
     const {
@@ -33,14 +52,28 @@ const dashboardStatus = async () => {
     } = configurationFile;
 
     if (
-        dashboard?.port
-        && dashboard?.pid
+        !dashboard?.port
+        || !dashboard?.pid
     ) {
-        console.log(`\n\tJoiner dashboard started on http://localhost:${dashboard.port}\n`);
+        console.log(`\n\tJoiner dashboard not started.\n`);
         return;
     }
 
-    console.log(`\n\tJoiner dashboard not started.\n`);
+    const dashboardAdress = `http://localhost:${dashboard.port}`;
+    const dashboardActive = await verifyDashboard(dashboardAdress);
+
+    if (!dashboardActive) {
+        // Clean dashboard metadata since process is no longer active.
+        const updatedConfigurationFile = {
+            dashboard: undefined,
+        };
+        await updateConfigurationFile(updatedConfigurationFile);
+
+        console.log(`\n\tJoiner dashboard not started.\n`);
+        return;
+    }
+
+    console.log(`\n\tJoiner dashboard started on ${dashboardAdress}\n`);
 }
 
 
@@ -50,8 +83,19 @@ const dashboardStart = async () => {
     if (
         configurationFile?.dashboard
     ) {
-        console.log(`\n\tJoiner dashboard already started on http://localhost:${configurationFile.dashboard.port}\n`);
-        return;
+        const dashboardAdress = `http://localhost:${configurationFile.dashboard.port}`;
+        const dashboardActive = await verifyDashboard(dashboardAdress);
+
+        if (dashboardActive) {
+            console.log(`\n\tJoiner dashboard already started on ${dashboardAdress}\n`);
+            return;
+        } else {
+            // Clean dashboard metadata since process is no longer active.
+            const updatedConfigurationFile = {
+                dashboard: undefined,
+            };
+            await updateConfigurationFile(updatedConfigurationFile);
+        }
     }
 
 
@@ -91,8 +135,12 @@ const dashboardStop = async () => {
             return;
         }
 
-        const killCommand = `kill -9 ${dashboard.pid}`;
-        execSync(killCommand);
+        try {
+            const killCommand = `kill -9 ${dashboard.pid}`;
+            execSync(killCommand);
+        } catch (error) {
+            // continue
+        }
 
         const updatedConfigurationFile = {
             dashboard: undefined,
@@ -109,41 +157,49 @@ const dashboardStop = async () => {
 const dashboardRegister = async (
     options: any,
 ) => {
-    const configurationFile = await readConfigurationFile();
+    try {
+        const configurationFile = await readConfigurationFile();
 
-    const pathValue = resolveAbsolutePath(options.path);
+        const pathValue = resolveAbsolutePath(options.path);
 
-    const paths: string[] = [
-        ...(configurationFile.paths || []),
-        pathValue,
-    ];
+        const paths: string[] = [
+            ...(configurationFile.paths || []),
+            pathValue,
+        ];
 
-    await updateConfigurationFile({
-        paths,
-    });
+        await updateConfigurationFile({
+            paths,
+        });
 
-    console.log(`\n\t${options.path} registered.\n`);
+        console.log(`\n\t${options.path} registered.\n`);
+    } catch (error) {
+        console.log(`\n\tSomething went wrong.\n`);
+    }
 }
 
 
 const dashboardDeregister = async (
     options: any,
 ) => {
-    const configurationFile = await readConfigurationFile();
+    try {
+        const configurationFile = await readConfigurationFile();
 
-    const paths: string[] = [
-        ...(configurationFile.paths || []),
-    ];
+        const paths: string[] = [
+            ...(configurationFile.paths || []),
+        ];
 
-    const pathValue = resolveAbsolutePath(options.path);
+        const pathValue = resolveAbsolutePath(options.path);
 
-    const updatedPaths = paths.filter(path => path !== pathValue);
+        const updatedPaths = paths.filter(path => path !== pathValue);
 
-    await updateConfigurationFile({
-        paths: updatedPaths,
-    });
+        await updateConfigurationFile({
+            paths: updatedPaths,
+        });
 
-    console.log(`\n\t${options.path} deregistered.\n`);
+        console.log(`\n\t${options.path} deregistered.\n`);
+    } catch (error) {
+        console.log(`\n\tSomething went wrong.\n`);
+    }
 }
 // #endregion module
 
