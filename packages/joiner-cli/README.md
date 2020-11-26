@@ -206,7 +206,7 @@ commit {
 
     // The commit message is formed from:
     // commitRoot + packageFolderName + commitDivider + commitMessage
-    // default: false
+    // default false
     combine false // false | true
 
     // The root of the packages/workspace.
