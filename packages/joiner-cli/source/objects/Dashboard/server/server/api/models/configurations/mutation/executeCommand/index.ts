@@ -1,8 +1,6 @@
 // #region imports
     // #region libraries
-    import fsSync, {
-        promises as fs,
-    } from 'fs';
+    import fsSync from 'fs';
 
     import {
         spawn,
@@ -75,13 +73,15 @@ const executeCommand = async (
             };
         }
 
-
         const out = fsSync.openSync('./out.log', 'a');
         const error = fsSync.openSync('./out.log', 'a');
         const spawnedChild = spawn(
             'joiner',
             [
-                `-c ${configurationPath} ${packageName} ${command}`,
+                '-c',
+                configurationPath,
+                command,
+                packageName,
             ],
             {
                 stdio: [
