@@ -19,4 +19,6 @@
         divider ' > '
         message setup: package
     }
+
+    runFrom ../
 }
