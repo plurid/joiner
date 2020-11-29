@@ -52,6 +52,7 @@ For `JavaScript`/`TypeScript`, `joiner` can be used on its own or conjoined with
     + [Joiner Package](#joiner-package)
     + [Path Resolution](#path-resolution)
 + [Packages](#packages)
++ [Codeophon](#codeophon)
 
 
 
@@ -442,3 +443,10 @@ which contains a path trunk, relative to the `joiner.deon` (or `.yaml`) file, fr
 [@plurid/joiner][joiner-cli] • the CLI application
 
 [joiner-cli]: https://github.com/plurid/joiner/tree/master/packages/joiner-cli
+
+
+
+## [Codeophon](https://github.com/ly3xqhl8g9/codeophon)
+
++ Licensing: [delicense](https://github.com/ly3xqhl8g9/delicense)
++ Versioning: [αver](https://github.com/ly3xqhl8g9/alpha-versioning)
