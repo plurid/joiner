@@ -448,5 +448,5 @@ which contains a path trunk, relative to the `joiner.deon` (or `.yaml`) file, fr
 
 ## [Codeophon](https://github.com/ly3xqhl8g9/codeophon)
 
-+ Licensing: [delicense](https://github.com/ly3xqhl8g9/delicense)
-+ Versioning: [αver](https://github.com/ly3xqhl8g9/alpha-versioning)
++ licensing: [delicense](https://github.com/ly3xqhl8g9/delicense)
++ versioning: [αver](https://github.com/ly3xqhl8g9/alpha-versioning)
