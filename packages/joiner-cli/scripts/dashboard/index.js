@@ -85,11 +85,11 @@ const commandClean = [
 ];
 
 const commandLint = [
-    `${crossCommand('eslint')} -c ./configurations/.eslintrc.js ./source`,
+    `${crossCommand('eslint')} -c ./configurations/.eslintrc.js ./source/objects/Dashboard/server`,
 ];
 
 const commandTest = [
-    `${crossCommand('jest')} -c ./configurations/jest.config.js ./source`,
+    `${crossCommand('jest')} -c ./configurations/jest.config.js --passWithNoTests ./source/objects/Dashboard/server`,
 ];
 
 const commandContainerizeProduction = [
