@@ -15,7 +15,7 @@
         "email": "source@plurid.com",
         "url": "https://github.com/plurid/joiner/issues"
     },
-    "homepage": "https://github.com/plurid/joiner/blob/master/packages/joiner/README.md",
+    "homepage": "https://github.com/plurid/joiner/blob/master/packages/joiner-cli/README.md",
     "publishConfig": {
         "access": "public"
     },
