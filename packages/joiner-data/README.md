@@ -15,8 +15,15 @@
 
 
 <h3 align="center">
-    common configuration values
+    Common Configuration Values
 </h3>
+
+
+
+### Contents
+
++ [Usage](#usage)
++ [Codeophon](#codeophon)
 
 
 
@@ -32,3 +39,9 @@ import base from https://raw.githubusercontent.com/plurid/joiner/master/packages
     ...#base
 }
 ```
+
+
+
+## [Codeophon](https://github.com/ly3xqhl8g9/codeophon)
+
++ licensing: [delicense](https://github.com/ly3xqhl8g9/delicense)
