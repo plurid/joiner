@@ -22,8 +22,8 @@
     } from '@plurid/plurid-icons-react';
 
     import {
-        PluridTextItem,
-    } from '@plurid/plurid-ui-react';
+        universal,
+    } from '@plurid/plurid-ui-components-react';
     // #endregion libraries
 
 
@@ -51,6 +51,12 @@
 
 
 // #region module
+const {
+    varia: {
+        TextItem: PluridTextItem,
+    },
+} = universal;
+
 export interface ConfigurationOwnProperties {
     plurid: PluridComponentProperty;
 }

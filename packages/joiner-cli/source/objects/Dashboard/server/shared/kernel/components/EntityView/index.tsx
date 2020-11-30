@@ -13,10 +13,8 @@
     } from '@plurid/plurid-themes';
 
     import {
-        PluridTextline,
-        PluridPureButton,
-        PluridSpinner,
-    } from '@plurid/plurid-ui-react';
+        universal,
+    } from '@plurid/plurid-ui-components-react';
 
     import {
         PluridIconReset,
@@ -48,6 +46,18 @@
 
 
 // #region module
+const {
+    buttons: {
+        PureButton: PluridPureButton,
+    },
+    inputs: {
+        Textline: PluridTextline,
+    },
+    markers: {
+        Spinner: PluridSpinner,
+    },
+} = universal;
+
 export interface EntityViewProperties {
     // #region required
         // #region values

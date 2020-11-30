@@ -12,8 +12,8 @@
     } from '@plurid/plurid-react';
 
     import {
-        PluridCopyableLine,
-    } from '@plurid/plurid-ui-react';
+        universal,
+    } from '@plurid/plurid-ui-components-react';
     // #endregion libraries
 
 
@@ -27,6 +27,12 @@
 
 
 // #region module
+const {
+    varia: {
+        CopyableLine: PluridCopyableLine,
+    },
+} = universal;
+
 export const configurationRowRenderer = (
     configuration: JoinerConfiguration,
     handleConfigurationObliterate: (
