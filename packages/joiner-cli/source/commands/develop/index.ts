@@ -2,9 +2,9 @@
     // #region external
     import {
         parseConfigurationFile,
-    } from '#services/logic/configuration';
+    } from '~services/logic/configuration';
 
-    import DevelopmentServer from '#objects/Development/DevelopmentServer';
+    import DevelopmentServer from '~objects/Development/DevelopmentServer';
     // #endregion external
 // #endregion imports
 

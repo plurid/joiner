@@ -10,15 +10,15 @@
     import {
         Package,
         ConfigurationFile,
-    } from '#data/interfaces';
+    } from '~data/interfaces';
 
     import {
         parseConfigurationFile,
-    } from '#services/logic/configuration';
+    } from '~services/logic/configuration';
 
     import {
         resolvePackage,
-    } from '#services/logic/packages';
+    } from '~services/logic/packages';
     // #endregion external
 // #endregion imports
 

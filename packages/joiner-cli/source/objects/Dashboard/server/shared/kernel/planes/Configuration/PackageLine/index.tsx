@@ -18,11 +18,11 @@
 
 
     // #region external
-    import client from '#kernel-services/graphql/client';
+    import client from '~kernel-services/graphql/client';
 
     import {
         EXECUTE_COMMAND,
-    } from '#kernel-services/graphql/mutate';
+    } from '~kernel-services/graphql/mutate';
     // #endregion external
 
 

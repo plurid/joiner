@@ -12,15 +12,15 @@
     import {
         Context,
         InputExecuteCommand,
-    } from '#server/data/interfaces';
+    } from '~server/data/interfaces';
 
     import {
         generateMethodLogs,
-    } from '#server/utilities';
+    } from '~server/utilities';
 
     import {
         hashString,
-    } from '#services/utilities';
+    } from '~services/utilities';
     // #endregion external
 // #endregion imports
 

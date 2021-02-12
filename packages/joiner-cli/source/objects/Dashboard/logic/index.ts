@@ -14,7 +14,7 @@
         readConfigurationFile,
 
         resolveAbsolutePath,
-    } from '#services/utilities';
+    } from '~services/utilities';
     // #endregion external
 
 

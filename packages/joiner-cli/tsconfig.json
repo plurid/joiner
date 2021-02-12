@@ -14,47 +14,47 @@
 
         "baseUrl": ".",
         "paths": {
-            "#commands/*": [
+            "~commands/*": [
                 "./source/commands/*"
             ],
-            "#data/*": [
+            "~data/*": [
                 "./source/data/*"
             ],
-            "#objects/*": [
+            "~objects/*": [
                 "./source/objects/*"
             ],
-            "#services/*": [
+            "~services/*": [
                 "./source/services/*"
             ],
 
-            "#client/*": [
+            "~client/*": [
                 "./source/objects/Dashboard/server/client/*"
             ],
-            "#server/*": [
+            "~server/*": [
                 "./source/objects/Dashboard/server/server/*"
             ],
-            "#kernel-assets/*": [
+            "~kernel-assets/*": [
                 "./source/objects/Dashboard/server/shared/kernel/assets/*"
             ],
-            "#kernel-components/*": [
+            "~kernel-components/*": [
                 "./source/objects/Dashboard/server/shared/kernel/components/*"
             ],
-            "#kernel-containers/*": [
+            "~kernel-containers/*": [
                 "./source/objects/Dashboard/server/shared/kernel/containers/*"
             ],
-            "#kernel-planes/*": [
+            "~kernel-planes/*": [
                 "./source/objects/Dashboard/server/shared/kernel/planes/*"
             ],
-            "#kernel-data/*": [
+            "~kernel-data/*": [
                 "./source/objects/Dashboard/server/shared/kernel/data/*"
             ],
-            "#kernel-services/*": [
+            "~kernel-services/*": [
                 "./source/objects/Dashboard/server/shared/kernel/services/*"
             ],
-            "#routes/*": [
+            "~routes/*": [
                 "./source/objects/Dashboard/server/shared/routes/*"
             ],
-            "#shell/*": [
+            "~shell/*": [
                 "./source/objects/Dashboard/server/shared/shell/*"
             ]
         },

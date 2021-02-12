@@ -9,21 +9,21 @@
     // #region external
     import {
         ConfigurationFile,
-    } from '#data/interfaces';
+    } from '~data/interfaces';
 
     import {
         JoinerConfiguration,
-    } from '#server/data/interfaces';
+    } from '~server/data/interfaces';
 
-    import database from '#server/services/database';
+    import database from '~server/services/database';
 
     import {
         parseConfigurationFile,
-    } from '#services/logic/configuration';
+    } from '~services/logic/configuration';
 
     import {
         hashString,
-    } from '#services/utilities';
+    } from '~services/utilities';
     // #endregion external
 // #endregion imports
 

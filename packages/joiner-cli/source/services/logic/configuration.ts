@@ -17,7 +17,7 @@
     // #region external
     import {
         ConfigurationFile,
-    } from '#data/interfaces';
+    } from '~data/interfaces';
 
     import {
         locatePackages,
@@ -49,7 +49,7 @@ export const parseConfigurationFile = async (
             );
         }
 
-        const parsedData = yaml.safeLoad(configurationFileData);
+        const parsedData = yaml.load(configurationFileData);
 
         return await handleParsedConfigurationFile(
             parsedData,

@@ -2,15 +2,15 @@
     // #region external
     import {
         Context,
-    } from '#server/data/interfaces';
+    } from '~server/data/interfaces';
 
     import {
         readConfigurations,
-    } from '#server/logic/operators/configurations';
+    } from '~server/logic/operators/configurations';
 
     import {
         generateMethodLogs,
-    } from '#server/utilities';
+    } from '~server/utilities';
     // #endregion external
 // #endregion imports
 

@@ -1,9 +1,9 @@
 // #region imports
     // #region external
-    import updateCommand from '#commands/update';
-    import patchCommand from '#commands/patch';
-    import commitCommand from '#commands/commit';
-    import publishCommand from '#commands/publish';
+    import updateCommand from '~commands/update';
+    import patchCommand from '~commands/patch';
+    import commitCommand from '~commands/commit';
+    import publishCommand from '~commands/publish';
     // #endregion external
 // #endregion imports
 

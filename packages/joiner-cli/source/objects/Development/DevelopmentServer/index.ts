@@ -7,7 +7,7 @@
     // #region external
     import {
         ConfigurationFile,
-    } from '#data/interfaces';
+    } from '~data/interfaces';
 
     import DevelopmentWatcher from '../DevelopmentWatcher';
     // #endregion external

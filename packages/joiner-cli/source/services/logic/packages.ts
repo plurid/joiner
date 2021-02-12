@@ -14,7 +14,7 @@
     import {
         ConfigurationFile,
         Package,
-    } from '#data/interfaces';
+    } from '~data/interfaces';
     // #endregion external
 // #endregion imports
 
@@ -201,7 +201,7 @@ const readPackageFile = async (
         try {
             const packageJoinerPath = path.join(packagePath, 'joiner.package.yaml');
             const packageRawData = await fs.readFile(packageJoinerPath, 'utf-8');
-            const packageData = yaml.safeLoad(packageRawData);
+            const packageData = yaml.load(packageRawData);
 
             const packageName = (packageData as any)?.name ?? '';
             const packageAlias = computePackageAlias(packageName);
