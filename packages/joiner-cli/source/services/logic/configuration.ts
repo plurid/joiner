@@ -42,7 +42,9 @@ export const parseConfigurationFile = async (
 
         if (extension === DEON_FILENAME_EXTENSION) {
             const deon = new Deon();
-            const data = await deon.parse(configurationFileData);
+            const data = await deon.parse(configurationFileData, {
+                filebase: path.dirname(configurationFilepath),
+            });
             return await handleParsedConfigurationFile(
                 data,
                 configurationFilepath,
