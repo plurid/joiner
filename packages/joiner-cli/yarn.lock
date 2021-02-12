@@ -745,12 +745,12 @@
     graphql-tag "^2.11.0"
     subscriptions-transport-ws "^0.9.18"
 
-"@plurid/deon@^0.0.0-0":
-  version "0.0.0-0"
-  resolved "https://registry.yarnpkg.com/@plurid/deon/-/deon-0.0.0-0.tgz#6d62df1fd611c72b15696ebcbda13dd19847889c"
-  integrity sha512-i/dwBVvpIghxvVyaPQQDW+YoLn3o/yWchQqQuP0IWTJxq9zfpjmPx5A3HJfNd8rmUZKUdAUt5jGng3wpqXbCAg==
+"@plurid/deon@^0.0.0-1":
+  version "0.0.0-1"
+  resolved "https://registry.yarnpkg.com/@plurid/deon/-/deon-0.0.0-1.tgz#39e45b7ec460bcc9675f94fd48c1d9dee5a058a3"
+  integrity sha512-wUiX0M3wweoBKJLRjROabSLIjC6+7hHtW4lApEsm/HqBocQV0bufwexKl8jlLWgcnaGXPTFx9rCRFIbu4dBC7g==
   dependencies:
-    commander "^6.2.0"
+    commander "^7.0.0"
     cross-fetch "^3.0.6"
     encoding "^0.1.13"
     sync-fetch "^0.3.0"

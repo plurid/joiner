@@ -53,7 +53,7 @@
         "@apollo/client": "^3.3.9",
         "@google-cloud/storage": "^5.7.4",
         "@plurid/delog": "^0.0.0-0",
-        "@plurid/deon": "^0.0.0-0",
+        "@plurid/deon": "^0.0.0-1",
         "@plurid/plurid-data": "^0.0.0-0",
         "@plurid/plurid-engine": "^0.0.0-0",
         "@plurid/plurid-functions": "^0.0.0-0",
