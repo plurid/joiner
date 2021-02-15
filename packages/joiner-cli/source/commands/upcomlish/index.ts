@@ -1,5 +1,9 @@
 // #region imports
     // #region external
+    import {
+        ExecutionOptions,
+    } from '~data/interfaces';
+
     import updateCommand from '~commands/update';
     import patchCommand from '~commands/patch';
     import commitCommand from '~commands/commit';
@@ -12,15 +16,19 @@
 // #region module
 const upcomlishCommand = async (
     packageName: string,
-    configurationFile: string,
+    options: ExecutionOptions,
 ) => {
     console.log(`\n\t---------------`);
     console.log(`\tUpcomlishing ${packageName}...`);
 
-    await updateCommand(packageName, configurationFile);
-    await patchCommand(packageName, configurationFile, 'patch');
-    await commitCommand(packageName, configurationFile);
-    await publishCommand(packageName, configurationFile);
+    const {
+        configuration,
+    } = options;
+
+    await updateCommand(packageName, options);
+    await patchCommand(packageName, configuration, 'patch');
+    await commitCommand(packageName, configuration);
+    await publishCommand(packageName, options);
 
     console.log(`\n\tUpcomlished ${packageName}.`);
     console.log(`\t---------------\n`);

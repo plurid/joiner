@@ -1,5 +1,9 @@
 // #region imports
     // #region external
+    import {
+        ExecutionOptions,
+    } from '~data/interfaces';
+
     import updateCommand from '~commands/update';
     import commitCommand from '~commands/commit';
     // #endregion external
@@ -10,13 +14,17 @@
 // #region module
 const ucomCommand = async (
     packageName: string,
-    configurationFile: string,
+    options: ExecutionOptions,
 ) => {
     console.log(`\n\t---------------`);
     console.log(`\tUcomishing ${packageName}...`);
 
-    await updateCommand(packageName, configurationFile);
-    await commitCommand(packageName, configurationFile);
+    const {
+        configuration,
+    } = options;
+
+    await updateCommand(packageName, options);
+    await commitCommand(packageName, configuration);
 
     console.log(`\n\tUcomished ${packageName}.`);
     console.log(`\t---------------\n`);

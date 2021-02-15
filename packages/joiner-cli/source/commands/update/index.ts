@@ -13,6 +13,7 @@
     // #region external
     import {
         Package,
+        ExecutionOptions,
     } from '~data/interfaces';
 
     import {
@@ -30,9 +31,13 @@
 // #region module
 const updateCommand = async (
     packageName: string,
-    configurationFile: string,
+    options: ExecutionOptions,
 ) => {
-    const configurationData = await parseConfigurationFile(configurationFile);
+    const {
+        configuration,
+    } = options;
+
+    const configurationData = await parseConfigurationFile(configuration);
     if (!configurationData) {
         return;
     }

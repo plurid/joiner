@@ -9,6 +9,7 @@
     // #region external
     import {
         Package,
+        ExecutionOptions,
     } from '~data/interfaces';
 
     import {
@@ -18,6 +19,10 @@
     import {
         resolvePackage,
     } from '~services/logic/packages';
+
+    import {
+        generateBatches,
+    } from '~services/logic/batches';
     // #endregion external
 // #endregion imports
 
@@ -27,15 +32,38 @@
 const runCommand = async (
     packageName: string,
     command: string[],
-    configurationFile: string,
+    options: ExecutionOptions,
 ) => {
-    const configurationData = await parseConfigurationFile(configurationFile);
+    const {
+        batch,
+        parallel,
+        configuration,
+    } = options;
+
+    const configurationData = await parseConfigurationFile(configuration);
     if (!configurationData) {
         return;
     }
 
     const resolvedPackage = resolvePackage(packageName, configurationData);
     if (!resolvedPackage) {
+        return;
+    }
+
+    if (parallel) {
+        const batches = generateBatches(
+            resolvedPackage,
+            batch,
+        );
+
+        // run logic in worker
+        for (const batchPackages of batches) {
+            for (const configPackage of batchPackages) {
+                console.log(configPackage);
+                // await runLogic(configPackage, command);
+            }
+        }
+
         return;
     }
 

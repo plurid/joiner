@@ -83,4 +83,11 @@ export interface Package {
     joinerpackage: boolean;
     language?: 'javascript' | 'typescript';
 }
+
+
+export interface ExecutionOptions {
+    configuration: string;
+    parallel: boolean;
+    batch: number;
+}
 // #endregion module

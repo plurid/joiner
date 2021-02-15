@@ -10,6 +10,7 @@
     import {
         Package,
         ConfigurationFile,
+        ExecutionOptions,
     } from '~data/interfaces';
 
     import {
@@ -28,11 +29,15 @@
 const commandCommand = async (
     packageName: string,
     commandNames: string[],
-    configurationFile: string,
+    options: ExecutionOptions,
 ) => {
-    const configurationData = await parseConfigurationFile(configurationFile);
+    const {
+        configuration
+    } = options;
+
+    const configurationData = await parseConfigurationFile(configuration);
     if (!configurationData) {
-        console.log(`\n\tNo configuration data in the configuration file ${configurationFile}.\n`);
+        console.log(`\n\tNo configuration data in the configuration file ${configuration}.\n`);
         return;
     }
 
