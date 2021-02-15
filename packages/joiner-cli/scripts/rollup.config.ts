@@ -60,11 +60,21 @@ const build = {
 };
 
 
-const workerRun = {
-    input: 'source/workers/run.ts',
+const workersNames = [
+    'run',
+    'command',
+    'update',
+    'publish',
+    'ucom',
+    'upcom',
+    'upcomlish',
+];
+
+const workers = workersNames.map(worker => ({
+    input: `source/workers/${worker}.ts`,
     output: [
         {
-            file: 'distribution/worker-run.js',
+            file: `distribution/worker-${worker}.js`,
             format: 'cjs',
             globals,
             sourcemap: true,
@@ -83,7 +93,7 @@ const workerRun = {
         commonjs(),
         sourceMaps(),
     ],
-};
+}));
 // #endregion module
 
 
@@ -91,6 +101,6 @@ const workerRun = {
 // #region exports
 export default [
     build,
-    workerRun,
+    ...workers,
 ];
 // #endregion exports
