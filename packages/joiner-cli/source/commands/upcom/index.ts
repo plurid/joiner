@@ -4,9 +4,19 @@
         ExecutionOptions,
     } from '~data/interfaces';
 
-    import updateCommand from '~commands/update';
-    import patchCommand from '~commands/patch';
-    import commitCommand from '~commands/commit';
+    import {
+        parseConfigurationFile,
+    } from '~services/logic/configuration';
+
+    import {
+        resolvePackage,
+    } from '~services/logic/packages';
+
+    import {
+        upcomExecution,
+    } from '~services/logic/executions/upcom';
+
+    import Batcher from '~objects/Batcher';
     // #endregion external
 // #endregion imports
 
@@ -17,16 +27,42 @@ const upcomCommand = async (
     packageName: string,
     options: ExecutionOptions,
 ) => {
-    console.log(`\n\t---------------`);
-    console.log(`\tUpcomishing ${packageName}...`);
-
     const {
+        batch,
+        parallel,
         configuration,
     } = options;
 
-    await updateCommand(packageName, options);
-    await patchCommand(packageName, configuration, 'patch');
-    await commitCommand(packageName, configuration);
+    if (parallel) {
+        const configurationData = await parseConfigurationFile(configuration);
+        if (!configurationData) {
+            return;
+        }
+
+        const resolvedPackage = resolvePackage(packageName, configurationData);
+        if (!resolvedPackage) {
+            return;
+        }
+
+        const batcher = new Batcher(
+            resolvedPackage,
+            batch,
+            'upcom',
+            {},
+        );
+
+        await batcher.run();
+
+        return;
+    }
+
+    console.log(`\n\t---------------`);
+    console.log(`\tUpcomishing ${packageName}...`);
+
+    await upcomExecution(
+        packageName,
+        options,
+    );
 
     console.log(`\n\tUpcomished ${packageName}.`);
     console.log(`\t---------------\n`);

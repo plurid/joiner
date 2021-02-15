@@ -4,10 +4,19 @@
         ExecutionOptions,
     } from '~data/interfaces';
 
-    import updateCommand from '~commands/update';
-    import patchCommand from '~commands/patch';
-    import commitCommand from '~commands/commit';
-    import publishCommand from '~commands/publish';
+    import {
+        parseConfigurationFile,
+    } from '~services/logic/configuration';
+
+    import {
+        resolvePackage,
+    } from '~services/logic/packages';
+
+    import {
+        upcomlishExecution,
+    } from '~services/logic/executions/upcomlish';
+
+    import Batcher from '~objects/Batcher';
     // #endregion external
 // #endregion imports
 
@@ -18,19 +27,44 @@ const upcomlishCommand = async (
     packageName: string,
     options: ExecutionOptions,
 ) => {
-    console.log(`\n\t---------------`);
-    console.log(`\tUpcomlishing ${packageName}...`);
-
     const {
+        batch,
+        parallel,
         configuration,
     } = options;
 
-    await updateCommand(packageName, options);
-    await patchCommand(packageName, configuration, 'patch');
-    await commitCommand(packageName, configuration);
-    await publishCommand(packageName, options);
+    if (parallel) {
+        const configurationData = await parseConfigurationFile(configuration);
+        if (!configurationData) {
+            return;
+        }
 
-    console.log(`\n\tUpcomlished ${packageName}.`);
+        const resolvedPackage = resolvePackage(packageName, configurationData);
+        if (!resolvedPackage) {
+            return;
+        }
+
+        const batcher = new Batcher(
+            resolvedPackage,
+            batch,
+            'upcomlish',
+            {},
+        );
+
+        await batcher.run();
+
+        return;
+    }
+
+    console.log(`\n\t---------------`);
+    console.log(`\tUpcomlishishing ${packageName}...`);
+
+    await upcomlishExecution(
+        packageName,
+        options,
+    );
+
+    console.log(`\n\tUpcomlishished ${packageName}.`);
     console.log(`\t---------------\n`);
 }
 // #endregion module

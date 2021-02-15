@@ -1,14 +1,6 @@
 // #region imports
-    // #region libraries
-    import {
-        execSync,
-    } from 'child_process';
-    // #endregion libraries
-
-
     // #region external
     import {
-        Package,
         ExecutionOptions,
     } from '~data/interfaces';
 
@@ -19,6 +11,12 @@
     import {
         resolvePackage,
     } from '~services/logic/packages';
+
+    import {
+        publishExecution,
+    } from '~services/logic/executions/publish';
+
+    import Batcher from '~objects/Batcher';
     // #endregion external
 // #endregion imports
 
@@ -30,6 +28,8 @@ const publishCommand = async (
     options: ExecutionOptions,
 ) => {
     const {
+        batch,
+        parallel,
         configuration,
     } = options;
 
@@ -43,35 +43,21 @@ const publishCommand = async (
         return;
     }
 
-    for (const configPackage of resolvedPackage) {
-        await publishLogic(configPackage);
-    }
-}
-
-
-const publishLogic = async (
-    configPackage: Package,
-) => {
-    try {
-        if (configPackage.private) {
-            console.log(`\n\tPackage '${configPackage.name} is private. Did not publish.'`);
-            return;
-        }
-
-        console.log(`\n\tPublishing the package '${configPackage.name}'...`);
-
-        const publishCommand = 'npm publish';
-        execSync(
-            publishCommand,
-            {
-                cwd: configPackage.path,
-                stdio: 'ignore',
-            },
+    if (parallel) {
+        const batcher = new Batcher(
+            resolvedPackage,
+            batch,
+            'publish',
+            {},
         );
 
-        console.log(`\t'${configPackage.name}' published.\n`);
-    } catch (error) {
-        console.log(`\n\tSomething went wrong.\n`);
+        await batcher.run();
+
+        return;
+    }
+
+    for (const configPackage of resolvedPackage) {
+        await publishExecution(configPackage);
     }
 }
 // #endregion module
