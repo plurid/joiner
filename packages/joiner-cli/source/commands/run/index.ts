@@ -1,14 +1,6 @@
 // #region imports
-    // #region libraries
-    import {
-        execSync,
-    } from 'child_process';
-    // #endregion libraries
-
-
     // #region external
     import {
-        Package,
         ExecutionOptions,
     } from '~data/interfaces';
 
@@ -23,6 +15,14 @@
     import {
         generateBatches,
     } from '~services/logic/batches';
+
+    import {
+        runWorker,
+    } from '~services/logic/worker';
+
+    import {
+        runExecution,
+    } from '~services/logic/executions/run';
     // #endregion external
 // #endregion imports
 
@@ -59,8 +59,13 @@ const runCommand = async (
         // run logic in worker
         for (const batchPackages of batches) {
             for (const configPackage of batchPackages) {
-                console.log(configPackage);
-                // await runLogic(configPackage, command);
+                runWorker(
+                    'run',
+                    {
+                        configPackage,
+                        command,
+                    },
+                );
             }
         }
 
@@ -68,31 +73,11 @@ const runCommand = async (
     }
 
     for (const configPackage of resolvedPackage) {
-        await runLogic(configPackage, command);
+        await runExecution(
+            configPackage,
+            command,
+        );
     }
-}
-
-
-const runLogic = async (
-    configPackage: Package,
-    command: string[],
-) => {
-    const executableCommand = command.join(' ');
-
-    console.log(`\n\tRunning command '${executableCommand}' in:\n\t${configPackage.path}\n`);
-    const startTime = Date.now();
-
-    execSync(
-        executableCommand,
-        {
-            cwd: configPackage.path,
-            stdio: 'inherit',
-        },
-    );
-
-    const endTime = Date.now();
-    const commandTime = (endTime - startTime)/1000;
-    console.log(`\n\tCommand\n\n\t\t${executableCommand}\n\n\tran in ${commandTime} seconds.\n`);
 }
 // #endregion module
 
