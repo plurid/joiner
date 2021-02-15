@@ -184,9 +184,14 @@ const main = async (
             optionsBatchDescription,
             optionsBatchDefault,
         )
-        .action(async (packageName: string, command: string[]) => {
+        .action(async (
+            packageName: string,
+            command: string[],
+            commandOptions: any,
+        ) => {
             const options = await resolveExecutionOptions(
                 program,
+                commandOptions,
             );
 
             await runCommand(
@@ -208,9 +213,14 @@ const main = async (
             optionsBatchDescription,
             optionsBatchDefault,
         )
-        .action(async (packageName: string, commands: string[]) => {
+        .action(async (
+            packageName: string,
+            commands: string[],
+            commandOptions: any,
+        ) => {
             const options = await resolveExecutionOptions(
                 program,
+                commandOptions,
             );
 
             await commandCommand(
@@ -233,9 +243,13 @@ const main = async (
             optionsBatchDescription,
             optionsBatchDefault,
         )
-        .action(async (packageName: string) => {
+        .action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
             const options = await resolveExecutionOptions(
                 program,
+                commandOptions,
             );
 
             await updateCommand(
@@ -251,13 +265,19 @@ const main = async (
             '-t, --type <versionType>',
             'version type: major, minor, patch',
             'patch',
-        ).action(async (packageName: string) => {
+        ).action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
             const options = program.opts();
 
             const {
                 configuration,
-                type,
             } = options;
+
+            const {
+                type,
+            } = commandOptions;
 
             const resvoledConfiguration = configuration
                 || await getDefaultConfigurationFilepath();
@@ -276,13 +296,19 @@ const main = async (
             '-m, --message <text>',
             'commit message',
             '',
-        ).action(async (packageName: string) => {
+        ).action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
             const options = program.opts();
 
             const {
                 configuration,
-                message,
             } = options;
+
+            const {
+                message,
+            } = commandOptions;
 
             const resvoledConfiguration = configuration
                 || await getDefaultConfigurationFilepath();
@@ -306,9 +332,13 @@ const main = async (
             optionsBatchDescription,
             optionsBatchDefault,
         )
-        .action(async (packageName: string) => {
+        .action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
             const options = await resolveExecutionOptions(
                 program,
+                commandOptions,
             );
 
             await publishCommand(
@@ -330,9 +360,13 @@ const main = async (
             optionsBatchDescription,
             optionsBatchDefault,
         )
-        .action(async (packageName: string) => {
+        .action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
             const options = await resolveExecutionOptions(
                 program,
+                commandOptions,
             );
 
             await ucomCommand(
@@ -353,9 +387,13 @@ const main = async (
             optionsBatchDescription,
             optionsBatchDefault,
         )
-        .action(async (packageName: string) => {
+        .action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
             const options = await resolveExecutionOptions(
                 program,
+                commandOptions,
             );
 
             await upcomCommand(
@@ -376,9 +414,13 @@ const main = async (
             optionsBatchDescription,
             optionsBatchDefault,
         )
-        .action(async (packageName: string) => {
+        .action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
             const options = await resolveExecutionOptions(
                 program,
+                commandOptions,
             );
 
             await upcomlishCommand(

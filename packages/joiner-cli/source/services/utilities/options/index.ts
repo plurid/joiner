@@ -20,21 +20,25 @@
 // #region module
 const resolveExecutionOptions = async (
     prg: program.CommanderStatic,
+    commandOptions: any,
 ) => {
     const options = prg.opts();
 
     const {
-        parallel,
-        batch,
         configuration,
     } = options;
+
+    const {
+        parallel,
+        batch,
+    } = commandOptions;
 
     const resolvedConfiguration = configuration
         || await getDefaultConfigurationFilepath();
 
     const executionOptions: ExecutionOptions = {
         configuration: resolvedConfiguration,
-        parallel,
+        parallel: parallel ?? false,
         batch: parseInt(batch) || 10,
     };
 

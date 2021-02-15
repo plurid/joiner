@@ -56,17 +56,21 @@ const runCommand = async (
             batch,
         );
 
-        // run logic in worker
         for (const batchPackages of batches) {
+            const promises = [];
+
             for (const configPackage of batchPackages) {
-                runWorker(
+                const resolving = runWorker<any>(
                     'run',
                     {
                         configPackage,
                         command,
                     },
                 );
+                promises.push(resolving);
             }
+
+            await Promise.all(promises);
         }
 
         return;
