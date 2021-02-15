@@ -23,6 +23,8 @@
     import {
         runExecution,
     } from '~services/logic/executions/run';
+
+    import Batcher from '~objects/Batcher';
     // #endregion external
 // #endregion imports
 
@@ -45,33 +47,25 @@ const runCommand = async (
         return;
     }
 
-    const resolvedPackage = resolvePackage(packageName, configurationData);
+    const resolvedPackage = resolvePackage(
+        packageName,
+        configurationData,
+    );
     if (!resolvedPackage) {
         return;
     }
 
     if (parallel) {
-        const batches = generateBatches(
+        const batcher = new Batcher(
             resolvedPackage,
             batch,
+            'run',
+            {
+                command,
+            },
         );
 
-        for (const batchPackages of batches) {
-            const promises = [];
-
-            for (const configPackage of batchPackages) {
-                const resolving = runWorker<any>(
-                    'run',
-                    {
-                        configPackage,
-                        command,
-                    },
-                );
-                promises.push(resolving);
-            }
-
-            await Promise.all(promises);
-        }
+        await batcher.run();
 
         return;
     }
