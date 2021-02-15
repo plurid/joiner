@@ -17,7 +17,7 @@ const globals = {
     'commander': 'program',
 };
 
-const build =  {
+const build = {
     input: `source/index.ts`,
     output: [
         {
@@ -58,10 +58,39 @@ const build =  {
         sourceMaps(),
     ],
 };
+
+
+const workerRun = {
+    input: 'source/workers/run.ts',
+    output: [
+        {
+            file: 'distribution/worker-run.js',
+            format: 'cjs',
+            globals,
+            sourcemap: true,
+        },
+    ],
+    plugins: [
+        typescript({
+            useTsconfigDeclarationDir: true,
+        }),
+        external({
+            includeDependencies: true,
+        }),
+        resolve({
+            preferBuiltins: true,
+        }),
+        commonjs(),
+        sourceMaps(),
+    ],
+};
 // #endregion module
 
 
 
 // #region exports
-export default build;
+export default [
+    build,
+    workerRun,
+];
 // #endregion exports
