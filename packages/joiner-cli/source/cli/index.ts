@@ -32,6 +32,10 @@
     import {
         getDefaultConfigurationFilepath,
     } from '~services/logic/configuration';
+
+    import {
+        resolveExecutionOptions,
+    } from '~services/utilities/options';
     // #endregion external
 // #endregion imports
 
@@ -41,6 +45,15 @@
 const main = async (
     program: CommanderStatic,
 ) => {
+    const optionsParallelCommand = '-p, --parallel';
+    const optionsParallelDescription = 'if multiple packages, process them in parallel';
+    const optionsParallelDefault = false;
+
+    const optionsBatchCommand = '-b, --batch <size>';
+    const optionsBatchDescription = 'if multiple packages and processing in parallel, specify a batch size';
+    const optionsBatchDefault = '10';
+
+
     program
         .name('joiner')
         .usage('<command>')
@@ -63,6 +76,7 @@ const main = async (
         });
 
 
+
     const dashboard = new program.Command('dashboard');
 
     dashboard
@@ -77,6 +91,7 @@ const main = async (
                 'status',
             );
         });
+
 
     dashboard
         .command('start')
@@ -95,6 +110,7 @@ const main = async (
                 'stop',
             );
         });
+
 
     dashboard
         .command('register [path]')
@@ -129,6 +145,7 @@ const main = async (
     );
 
 
+
     program
         .command('initialize')
         .description('initialize the "joiner" configuration file')
@@ -154,44 +171,90 @@ const main = async (
             );
         });
 
+
     program
         .command('run <package> <command...>')
         .description('run an arbitrary command on package by name or on "all" packages')
-        .action(async (packageName: string, command: string[]) => {
-            const configuration = program.opts().configuration
-                || await getDefaultConfigurationFilepath();
+        .option(
+            optionsParallelCommand,
+            optionsParallelDescription,
+            optionsParallelDefault,
+        ).option(
+            optionsBatchCommand,
+            optionsBatchDescription,
+            optionsBatchDefault,
+        )
+        .action(async (
+            packageName: string,
+            command: string[],
+            commandOptions: any,
+        ) => {
+            const options = await resolveExecutionOptions(
+                program,
+                commandOptions,
+            );
 
             await runCommand(
                 packageName,
                 command,
-                configuration,
+                options,
             );
         });
 
     program
         .command('command <package> <command...>')
         .description('run the named commands specified in the "joiner" file on package by name or on "all" packages')
-        .action(async (packageName: string, commands: string[]) => {
-            const configuration = program.opts().configuration
-                || await getDefaultConfigurationFilepath();
+        .option(
+            optionsParallelCommand,
+            optionsParallelDescription,
+            optionsParallelDefault,
+        ).option(
+            optionsBatchCommand,
+            optionsBatchDescription,
+            optionsBatchDefault,
+        )
+        .action(async (
+            packageName: string,
+            commands: string[],
+            commandOptions: any,
+        ) => {
+            const options = await resolveExecutionOptions(
+                program,
+                commandOptions,
+            );
 
             await commandCommand(
                 packageName,
                 commands,
-                configuration,
+                options,
             );
         });
+
 
     program
         .command('update <package>')
         .description('update package by name or "all" packages')
-        .action(async (packageName: string) => {
-            const configuration = program.opts().configuration
-                || await getDefaultConfigurationFilepath();
+        .option(
+            optionsParallelCommand,
+            optionsParallelDescription,
+            optionsParallelDefault,
+        ).option(
+            optionsBatchCommand,
+            optionsBatchDescription,
+            optionsBatchDefault,
+        )
+        .action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
+            const options = await resolveExecutionOptions(
+                program,
+                commandOptions,
+            );
 
             await updateCommand(
                 packageName,
-                configuration,
+                options,
             );
         });
 
@@ -202,14 +265,27 @@ const main = async (
             '-t, --type <versionType>',
             'version type: major, minor, patch',
             'patch',
-        ).action(async (packageName: string, options: any) => {
-            const configuration = program.opts().configuration
+        ).action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
+            const options = program.opts();
+
+            const {
+                configuration,
+            } = options;
+
+            const {
+                type,
+            } = commandOptions;
+
+            const resvoledConfiguration = configuration
                 || await getDefaultConfigurationFilepath();
 
             await patchCommand(
                 packageName,
-                configuration,
-                options.type,
+                resvoledConfiguration,
+                type,
             );
         });
 
@@ -220,65 +296,139 @@ const main = async (
             '-m, --message <text>',
             'commit message',
             '',
-        ).action(async (packageName: string, options: any) => {
-            const configuration = program.opts().configuration
+        ).action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
+            const options = program.opts();
+
+            const {
+                configuration,
+            } = options;
+
+            const {
+                message,
+            } = commandOptions;
+
+            const resvoledConfiguration = configuration
                 || await getDefaultConfigurationFilepath();
 
             await commitCommand(
                 packageName,
-                configuration,
-                options.message,
+                resvoledConfiguration,
+                message,
             );
         });
 
     program
         .command('publish <package>')
         .description('publish package by name or "all" packages')
-        .action(async (packageName: string) => {
-            const configuration = program.opts().configuration
-                || await getDefaultConfigurationFilepath();
+        .option(
+            optionsParallelCommand,
+            optionsParallelDescription,
+            optionsParallelDefault,
+        ).option(
+            optionsBatchCommand,
+            optionsBatchDescription,
+            optionsBatchDefault,
+        )
+        .action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
+            const options = await resolveExecutionOptions(
+                program,
+                commandOptions,
+            );
 
-            await publishCommand(packageName, configuration);
+            await publishCommand(
+                packageName,
+                options,
+            );
         });
+
 
     program
         .command('ucom <package>')
         .description('ucom - update, commit - package by name or "all" packages')
-        .action(async (packageName: string) => {
-            const configuration = program.opts().configuration
-                || await getDefaultConfigurationFilepath();
+        .option(
+            optionsParallelCommand,
+            optionsParallelDescription,
+            optionsParallelDefault,
+        ).option(
+            optionsBatchCommand,
+            optionsBatchDescription,
+            optionsBatchDefault,
+        )
+        .action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
+            const options = await resolveExecutionOptions(
+                program,
+                commandOptions,
+            );
 
             await ucomCommand(
                 packageName,
-                configuration,
+                options,
             );
         });
 
     program
         .command('upcom <package>')
         .description('upcom - update, patch, commit - package by name or "all" packages')
-        .action(async (packageName: string) => {
-            const configuration = program.opts().configuration
-                || await getDefaultConfigurationFilepath();
+        .option(
+            optionsParallelCommand,
+            optionsParallelDescription,
+            optionsParallelDefault,
+        ).option(
+            optionsBatchCommand,
+            optionsBatchDescription,
+            optionsBatchDefault,
+        )
+        .action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
+            const options = await resolveExecutionOptions(
+                program,
+                commandOptions,
+            );
 
             await upcomCommand(
                 packageName,
-                configuration,
+                options,
             );
         });
 
     program
         .command('upcomlish <package>')
         .description('upcomlish - update, patch, commit, publish - package by name or "all" packages')
-        .action(async (packageName: string) => {
-            const configuration = program.opts().configuration
-                || await getDefaultConfigurationFilepath();
+        .option(
+            optionsParallelCommand,
+            optionsParallelDescription,
+            optionsParallelDefault,
+        ).option(
+            optionsBatchCommand,
+            optionsBatchDescription,
+            optionsBatchDefault,
+        )
+        .action(async (
+            packageName: string,
+            commandOptions: any,
+        ) => {
+            const options = await resolveExecutionOptions(
+                program,
+                commandOptions,
+            );
 
             await upcomlishCommand(
                 packageName,
-                configuration,
+                options,
             );
         });
+
 
     program
         .command('develop')

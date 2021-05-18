@@ -1,14 +1,7 @@
 // #region imports
-    // #region libraries
-    import {
-        execSync,
-    } from 'child_process';
-    // #endregion libraries
-
-
     // #region external
     import {
-        Package,
+        ExecutionOptions,
     } from '~data/interfaces';
 
     import {
@@ -18,6 +11,20 @@
     import {
         resolvePackage,
     } from '~services/logic/packages';
+
+    import {
+        generateBatches,
+    } from '~services/logic/batches';
+
+    import {
+        runWorker,
+    } from '~services/logic/worker';
+
+    import {
+        runExecution,
+    } from '~services/logic/executions/run';
+
+    import Batcher from '~objects/Batcher';
     // #endregion external
 // #endregion imports
 
@@ -27,44 +34,48 @@
 const runCommand = async (
     packageName: string,
     command: string[],
-    configurationFile: string,
+    options: ExecutionOptions,
 ) => {
-    const configurationData = await parseConfigurationFile(configurationFile);
+    const {
+        batch,
+        parallel,
+        configuration,
+    } = options;
+
+    const configurationData = await parseConfigurationFile(configuration);
     if (!configurationData) {
         return;
     }
 
-    const resolvedPackage = resolvePackage(packageName, configurationData);
+    const resolvedPackage = resolvePackage(
+        packageName,
+        configurationData,
+    );
     if (!resolvedPackage) {
         return;
     }
 
-    for (const configPackage of resolvedPackage) {
-        await runLogic(configPackage, command);
+    if (parallel) {
+        const batcher = new Batcher(
+            resolvedPackage,
+            batch,
+            'run',
+            {
+                command,
+            },
+        );
+
+        await batcher.run();
+
+        return;
     }
-}
 
-
-const runLogic = async (
-    configPackage: Package,
-    command: string[],
-) => {
-    const executableCommand = command.join(' ');
-
-    console.log(`\n\tRunning command '${executableCommand}' in:\n\t${configPackage.path}\n`);
-    const startTime = Date.now();
-
-    execSync(
-        executableCommand,
-        {
-            cwd: configPackage.path,
-            stdio: 'inherit',
-        },
-    );
-
-    const endTime = Date.now();
-    const commandTime = (endTime - startTime)/1000;
-    console.log(`\n\tCommand\n\n\t\t${executableCommand}\n\n\tran in ${commandTime} seconds.\n`);
+    for (const configPackage of resolvedPackage) {
+        await runExecution(
+            configPackage,
+            command,
+        );
+    }
 }
 // #endregion module
 

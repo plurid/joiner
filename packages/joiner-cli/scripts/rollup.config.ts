@@ -17,7 +17,7 @@ const globals = {
     'commander': 'program',
 };
 
-const build =  {
+const build = {
     input: `source/index.ts`,
     output: [
         {
@@ -58,10 +58,49 @@ const build =  {
         sourceMaps(),
     ],
 };
+
+
+const workersNames = [
+    'run',
+    'command',
+    'update',
+    'publish',
+    'ucom',
+    'upcom',
+    'upcomlish',
+];
+
+const workers = workersNames.map(worker => ({
+    input: `source/workers/${worker}.ts`,
+    output: [
+        {
+            file: `distribution/worker-${worker}.js`,
+            format: 'cjs',
+            globals,
+            sourcemap: true,
+        },
+    ],
+    plugins: [
+        typescript({
+            useTsconfigDeclarationDir: true,
+        }),
+        external({
+            includeDependencies: true,
+        }),
+        resolve({
+            preferBuiltins: true,
+        }),
+        commonjs(),
+        sourceMaps(),
+    ],
+}));
 // #endregion module
 
 
 
 // #region exports
-export default build;
+export default [
+    build,
+    ...workers,
+];
 // #endregion exports

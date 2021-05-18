@@ -1,15 +1,7 @@
 // #region imports
-    // #region libraries
-    import {
-        execSync,
-    } from 'child_process';
-    // #endregion libraries
-
-
     // #region external
     import {
-        Package,
-        ConfigurationFile,
+        ExecutionOptions,
     } from '~data/interfaces';
 
     import {
@@ -19,6 +11,12 @@
     import {
         resolvePackage,
     } from '~services/logic/packages';
+
+    import {
+        commandExecution,
+    } from '~services/logic/executions/command';
+
+    import Batcher from '~objects/Batcher';
     // #endregion external
 // #endregion imports
 
@@ -28,11 +26,17 @@
 const commandCommand = async (
     packageName: string,
     commandNames: string[],
-    configurationFile: string,
+    options: ExecutionOptions,
 ) => {
-    const configurationData = await parseConfigurationFile(configurationFile);
+    const {
+        batch,
+        parallel,
+        configuration,
+    } = options;
+
+    const configurationData = await parseConfigurationFile(configuration);
     if (!configurationData) {
-        console.log(`\n\tNo configuration data in the configuration file ${configurationFile}.\n`);
+        console.log(`\n\tNo configuration data in the configuration file ${configuration}.\n`);
         return;
     }
 
@@ -50,39 +54,28 @@ const commandCommand = async (
         }
     }
 
+    if (parallel) {
+        const batcher = new Batcher(
+            resolvedPackage,
+            batch,
+            'command',
+            {
+                commandNames,
+                configurationData,
+            },
+        );
+
+        await batcher.run();
+
+        return;
+    }
+
     for (const configPackage of resolvedPackage) {
-        await runLogic(
+        await commandExecution(
             configPackage,
             commandNames,
             configurationData,
         );
-    }
-}
-
-
-const runLogic = async (
-    configPackage: Package,
-    commandNames: string[],
-    configurationData: ConfigurationFile,
-) => {
-    for (const commandName of commandNames) {
-        const executableCommandData = configurationData.commands[commandName];
-        const executableCommand = executableCommandData.join(' ');
-
-        console.log(`\n\tRunning command '${executableCommand}' in:\n\t${configPackage.path}\n`);
-        const startTime = Date.now();
-
-        execSync(
-            executableCommand,
-            {
-                cwd: configPackage.path,
-                stdio: 'inherit',
-            },
-        );
-
-        const endTime = Date.now();
-        const commandTime = (endTime - startTime) / 1000;
-        console.log(`\n\tCommand\n\n\t\t${executableCommand}\n\n\tran in ${commandTime} seconds.\n`);
     }
 }
 // #endregion module

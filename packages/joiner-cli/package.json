@@ -1,6 +1,6 @@
 {
     "name": "@plurid/joiner",
-    "version": "0.0.0-2",
+    "version": "0.0.0-3",
     "description": "Multi/Mono-Repository Task Runner",
     "keywords": [
         "joiner"
@@ -132,6 +132,7 @@
         "jest-config": "^26.6.3",
         "nodemon": "^2.0.7",
         "open": "^7.4.0",
+        "postcss": "^8.2.6",
         "puppeteer": "^7.1.0",
         "react-stripe-elements": "^6.1.2",
         "redux-devtools-extension": "^2.13.8",

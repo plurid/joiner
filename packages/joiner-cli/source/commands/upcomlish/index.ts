@@ -1,9 +1,22 @@
 // #region imports
     // #region external
-    import updateCommand from '~commands/update';
-    import patchCommand from '~commands/patch';
-    import commitCommand from '~commands/commit';
-    import publishCommand from '~commands/publish';
+    import {
+        ExecutionOptions,
+    } from '~data/interfaces';
+
+    import {
+        parseConfigurationFile,
+    } from '~services/logic/configuration';
+
+    import {
+        resolvePackage,
+    } from '~services/logic/packages';
+
+    import {
+        upcomlishExecution,
+    } from '~services/logic/executions/upcomlish';
+
+    import Batcher from '~objects/Batcher';
     // #endregion external
 // #endregion imports
 
@@ -12,17 +25,46 @@
 // #region module
 const upcomlishCommand = async (
     packageName: string,
-    configurationFile: string,
+    options: ExecutionOptions,
 ) => {
+    const {
+        batch,
+        parallel,
+        configuration,
+    } = options;
+
+    if (parallel) {
+        const configurationData = await parseConfigurationFile(configuration);
+        if (!configurationData) {
+            return;
+        }
+
+        const resolvedPackage = resolvePackage(packageName, configurationData);
+        if (!resolvedPackage) {
+            return;
+        }
+
+        const batcher = new Batcher(
+            resolvedPackage,
+            batch,
+            'upcomlish',
+            {},
+        );
+
+        await batcher.run();
+
+        return;
+    }
+
     console.log(`\n\t---------------`);
-    console.log(`\tUpcomlishing ${packageName}...`);
+    console.log(`\tUpcomlishishing ${packageName}...`);
 
-    await updateCommand(packageName, configurationFile);
-    await patchCommand(packageName, configurationFile, 'patch');
-    await commitCommand(packageName, configurationFile);
-    await publishCommand(packageName, configurationFile);
+    await upcomlishExecution(
+        packageName,
+        options,
+    );
 
-    console.log(`\n\tUpcomlished ${packageName}.`);
+    console.log(`\n\tUpcomlishished ${packageName}.`);
     console.log(`\t---------------\n`);
 }
 // #endregion module

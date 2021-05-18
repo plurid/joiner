@@ -1,7 +1,22 @@
 // #region imports
     // #region external
-    import updateCommand from '~commands/update';
-    import commitCommand from '~commands/commit';
+    import {
+        ExecutionOptions,
+    } from '~data/interfaces';
+
+    import {
+        parseConfigurationFile,
+    } from '~services/logic/configuration';
+
+    import {
+        resolvePackage,
+    } from '~services/logic/packages';
+
+    import {
+        ucomExecution,
+    } from '~services/logic/executions/ucom';
+
+    import Batcher from '~objects/Batcher';
     // #endregion external
 // #endregion imports
 
@@ -10,13 +25,44 @@
 // #region module
 const ucomCommand = async (
     packageName: string,
-    configurationFile: string,
+    options: ExecutionOptions,
 ) => {
+    const {
+        batch,
+        parallel,
+        configuration,
+    } = options;
+
+    if (parallel) {
+        const configurationData = await parseConfigurationFile(configuration);
+        if (!configurationData) {
+            return;
+        }
+
+        const resolvedPackage = resolvePackage(packageName, configurationData);
+        if (!resolvedPackage) {
+            return;
+        }
+
+        const batcher = new Batcher(
+            resolvedPackage,
+            batch,
+            'ucom',
+            {},
+        );
+
+        await batcher.run();
+
+        return;
+    }
+
     console.log(`\n\t---------------`);
     console.log(`\tUcomishing ${packageName}...`);
 
-    await updateCommand(packageName, configurationFile);
-    await commitCommand(packageName, configurationFile);
+    await ucomExecution(
+        packageName,
+        options,
+    );
 
     console.log(`\n\tUcomished ${packageName}.`);
     console.log(`\t---------------\n`);
