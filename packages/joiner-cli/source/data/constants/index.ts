@@ -17,7 +17,7 @@ export const joinerConfigurationPath = path.join(
 );
 
 
-export const JOINER_CLI_VERSION = '0.0.0-0';
+export const JOINER_CLI_VERSION = '#JOINER_CLI_VERSION';
 
 
 export const MANUAL_JOINER = 'https://manual.plurid.com/joiner';
