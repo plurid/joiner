@@ -1,6 +1,8 @@
 // #region imports
     // #region libraries
-    import program from 'commander';
+    import {
+        Command,
+    } from 'commander';
     // #endregion libraries
 
 
@@ -19,7 +21,7 @@
 
 // #region module
 const resolveExecutionOptions = async (
-    prg: program.CommanderStatic,
+    prg: Command,
     commandOptions: any,
 ) => {
     const options = prg.opts();

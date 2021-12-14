@@ -28,13 +28,18 @@ const updateExecution = async (
     console.log(`\n\tChecking for updates ${inThePackage}...`);
 
     try {
-        const updatedPackages = await checkUpdates.run({
+        const updatedPackages = await checkUpdates({
             packageFile: path.join(configPackage.path, 'package.json'),
             silent: true,
             jsonUpgraded: true,
             upgrade: true,
             dep: 'prod,dev',
         });
+
+        if (!updatedPackages) {
+            console.log(`\n\tCould not find updates ${inThePackage}...`);
+            return;
+        }
 
         if (Object.keys(updatedPackages).length > 0) {
             console.log(`\n\t'${configPackage.name}' dependencies updated:\n`);
