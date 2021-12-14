@@ -1,4 +1,6 @@
 {
+    name Joiner Test Global
+
     packages [
         test/global
         test/scope-com/*
