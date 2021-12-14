@@ -1,7 +1,7 @@
 // #region imports
     // #region libraries
     import program, {
-        CommanderStatic,
+        Command,
     } from 'commander';
     // #endregion libraries
 
@@ -43,7 +43,7 @@
 
 // #region module
 const main = async (
-    program: CommanderStatic,
+    program: Command,
 ) => {
     const optionsParallelCommand = '-p, --parallel';
     const optionsParallelDescription = 'if multiple packages, process them in parallel';
@@ -77,7 +77,7 @@ const main = async (
 
 
 
-    const dashboard = new program.Command('dashboard');
+    const dashboard = new Command('dashboard');
 
     dashboard
         .storeOptionsAsProperties(false)
@@ -446,6 +446,8 @@ const main = async (
 
 
 const cli = () => {
+    const program = new Command();
+
     main(program);
 }
 // #endregion module

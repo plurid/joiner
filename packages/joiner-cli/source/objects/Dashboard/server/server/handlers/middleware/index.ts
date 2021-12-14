@@ -4,7 +4,9 @@
         Express,
     } from 'express';
 
-    import bodyParser from 'body-parser';
+    import {
+        json as jsonParser,
+    } from 'body-parser';
     import cookieParser from 'cookie-parser';
     // #endregion libraries
 
@@ -26,10 +28,10 @@ const setupMiddleware = async (
     instance: Express,
 ) => {
     instance.use(
-        cookieParser(),
-        bodyParser.json({
+        cookieParser() as any,
+        jsonParser({
             limit: '100mb',
-        }),
+        }) as any,
     );
 
     instance.post(

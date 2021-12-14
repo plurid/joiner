@@ -14,7 +14,7 @@
     } from '@plurid/plurid-themes';
 
     import {
-        PluridComponentProperty,
+        PluridPlaneComponentProperty,
     } from '@plurid/plurid-react';
 
     import {
@@ -58,7 +58,7 @@ const {
 } = universal;
 
 export interface ConfigurationOwnProperties {
-    plurid: PluridComponentProperty;
+    plurid: PluridPlaneComponentProperty;
 }
 
 export interface ConfigurationStateProperties {
@@ -92,7 +92,7 @@ const Configuration: React.FC<ConfigurationProperties> = (
 
     const {
         id,
-    } = plurid.route.plane.parameters;
+    } = plurid.plane.parameters;
     // #endregion properties
 
 

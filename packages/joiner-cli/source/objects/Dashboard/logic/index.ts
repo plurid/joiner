@@ -10,6 +10,10 @@
 
     // #region external
     import {
+        JoinerConfigurationFile,
+    } from '../../../data/interfaces';
+
+    import {
         updateConfigurationFile,
         readConfigurationFile,
 
@@ -108,8 +112,11 @@ const dashboardStart = async () => {
         pid,
         port,
     } = data;
+    if (!pid) {
+        return;
+    }
 
-    const updatedConfigurationFile = {
+    const updatedConfigurationFile: Partial<JoinerConfigurationFile> = {
         dashboard: {
             pid,
             port,
