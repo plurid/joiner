@@ -101,6 +101,7 @@
         "@rollup/plugin-commonjs": "^21.0.1",
         "@rollup/plugin-json": "^4.1.0",
         "@rollup/plugin-node-resolve": "^13.1.1",
+        "@rollup/plugin-replace": "^3.0.0",
         "@rollup/plugin-url": "^6.1.0",
         "@types/adm-zip": "^0.4.34",
         "@types/bson": "^4.0.5",

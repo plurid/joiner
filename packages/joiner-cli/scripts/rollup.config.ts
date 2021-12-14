@@ -5,6 +5,7 @@
     import commonjs from '@rollup/plugin-commonjs';
     import sourceMaps from 'rollup-plugin-sourcemaps';
     import typescript from 'rollup-plugin-typescript2';
+    import replace from '@rollup/plugin-replace';
     // #endregion libraries
 // #endregion imports
 
@@ -56,6 +57,11 @@ const build = {
         }),
         commonjs(),
         sourceMaps(),
+        replace({
+            "#JOINER_CLI_VERSION": JSON.stringify(pkg.version),
+            delimiters: ["'", "';"],
+            preventAssignment: true,
+        }),
     ],
 };
 
