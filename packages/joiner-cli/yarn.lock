@@ -1000,6 +1000,23 @@
     encoding "^0.1.13"
     sync-fetch "^0.3.1"
 
+"@plurid/elementql-client-react@^0.0.0-1":
+  version "0.0.0-1"
+  resolved "https://npm.plurid.cloud/@plurid%2felementql-client-react/-/elementql-client-react-0.0.0-1.tgz#e4d44bdc3392e1e978890cfe7c613239e5586cf4"
+  integrity sha512-Ve+7E1yQGNiNjyz+rC3KskK1f+AR/Ihyu6mPFE8y/raBnNVCB6ghoUZWjbaeVcyH5vWvRrNmp9lIqDDXtac1VQ==
+  dependencies:
+    "@plurid/elementql-client" "^0.0.0-1"
+
+"@plurid/elementql-client@^0.0.0-1":
+  version "0.0.0-1"
+  resolved "https://npm.plurid.cloud/@plurid%2felementql-client/-/elementql-client-0.0.0-1.tgz#07bba33786a56e34c92e4de1acb87c806415347b"
+  integrity sha512-gskixEW98sFNh0wQ7j2eK8peaM7+yyoh6t/yesjnnTqaw69tH11wUmhaUuBL/BWeXhy3BXgCknoXgss5ItHnUQ==
+
+"@plurid/elementql@^0.0.0-1":
+  version "0.0.0-1"
+  resolved "https://npm.plurid.cloud/@plurid%2felementql/-/elementql-0.0.0-1.tgz#6639dd5b71c72cd2df0bf16b615b2e4dfab54af3"
+  integrity sha512-ZhIRA9sGeegviDNFEdA71leocIwPXwU4vK81p+B7UEhBRl0hZ+O9pD1Rr5wuW9rU5FtfjDnEprntmyVi0ZEL4Q==
+
 "@plurid/plurid-data@^0.0.0-9":
   version "0.0.0-9"
   resolved "https://npm.plurid.cloud/@plurid%2fplurid-data/-/plurid-data-0.0.0-9.tgz#b1d451c51fe571c0800b9a1a95b2f693564628f1"

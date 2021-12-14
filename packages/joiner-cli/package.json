@@ -54,6 +54,8 @@
         "@google-cloud/storage": "^5.16.1",
         "@plurid/delog": "^0.0.0-6",
         "@plurid/deon": "^0.0.0-8",
+        "@plurid/elementql": "^0.0.0-1",
+        "@plurid/elementql-client-react": "^0.0.0-1",
         "@plurid/plurid-data": "^0.0.0-9",
         "@plurid/plurid-engine": "^0.0.0-8",
         "@plurid/plurid-functions": "^0.0.0-17",
