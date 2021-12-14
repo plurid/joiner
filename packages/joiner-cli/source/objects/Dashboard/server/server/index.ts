@@ -36,17 +36,13 @@
 // #region module
 // #region constants
 /** ENVIRONMENT */
-const watchMode = process.env.PLURID_WATCH_MODE === 'true';
-const isProduction = process.env.ENV_MODE === 'production';
+// const isProduction = process.env.ENV_MODE === 'production';
+const isProduction = true;
 const buildDirectory = 'distribution/dashboard';
 const port = process.env.PORT || 10100;
 
 const applicationRoot = 'joiner-application';
-const openAtStart = watchMode
-    ? false
-    : isProduction
-        ? false
-        : true;
+const openAtStart = true;
 const debug = isProduction
     ? 'info'
     : 'error';
