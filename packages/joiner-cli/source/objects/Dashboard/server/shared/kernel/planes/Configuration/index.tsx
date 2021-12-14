@@ -33,6 +33,7 @@
     } from '~server/data/interfaces';
 
     import { AppState } from '~kernel-services/state/store';
+    import StateContext from '~kernel-services/state/context';
     import selectors from '~kernel-services/state/selectors';
     // import actions from '~kernel-services/state/actions';
     // #endregion external
@@ -204,6 +205,10 @@ const mapDispatchToProperties = (
 const ConnectedConfiguration = connect(
     mapStateToProperties,
     mapDispatchToProperties,
+    null,
+    {
+        context: StateContext,
+    },
 )(Configuration);
 // #endregion module
 
