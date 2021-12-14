@@ -1,6 +1,6 @@
 // #region module
 export interface JoinerConfigurationDashboard {
-    pid: number;
+    pid: number | undefined;
     port: number;
 }
 

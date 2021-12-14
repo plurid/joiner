@@ -112,9 +112,6 @@ const dashboardStart = async () => {
         pid,
         port,
     } = data;
-    if (!pid) {
-        return;
-    }
 
     const updatedConfigurationFile: Partial<JoinerConfigurationFile> = {
         dashboard: {
