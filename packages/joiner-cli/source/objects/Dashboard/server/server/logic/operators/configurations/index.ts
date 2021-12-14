@@ -59,12 +59,17 @@ const readConfigurations = async (
     const joinerConfigurations: JoinerConfiguration[] = [];
 
     for (const configurationFile of configurationFiles) {
-        const id = hashString(configurationFile.path);
-        const path = configurationFile.path;
+        const {
+            name,
+            path,
+        } = configurationFile;
+
+        const id = hashString(path);
         const packages = configurationFile.packages.map(pkg => pkg.name);
 
         const joinerConfiguration: JoinerConfiguration = {
             id,
+            name,
             path,
             packages,
         };
