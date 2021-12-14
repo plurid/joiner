@@ -21,6 +21,7 @@ export const GET_CURRENT_OWNER = gql`
                 configurations {
                     id
                     path
+                    name
                     packages
                 }
             }

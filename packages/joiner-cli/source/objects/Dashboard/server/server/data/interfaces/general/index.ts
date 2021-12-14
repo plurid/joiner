@@ -12,6 +12,7 @@ export interface OwnerToken {
 export interface JoinerConfiguration {
     id: string;
     path: string;
+    name?: string;
     packages: string[];
 }
 // #endregion module

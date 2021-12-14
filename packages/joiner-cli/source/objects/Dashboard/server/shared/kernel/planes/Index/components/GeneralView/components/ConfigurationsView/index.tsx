@@ -230,7 +230,7 @@ const ConfigurationsView: React.FC<ConfigurationsViewProperties> = (
     const rowsHeader = (
         <>
             <div>
-                path
+                joiner
             </div>
 
             <div />

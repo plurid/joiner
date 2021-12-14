@@ -41,14 +41,21 @@ export const configurationRowRenderer = (
 ) => {
     const {
         id,
+        name,
         path,
     } = configuration;
 
     return (
         <>
-            <PluridCopyableLine
-                data={path}
-            />
+            {name ? (
+                <div>
+                    {name}
+                </div>
+            ) : (
+                <PluridCopyableLine
+                    data={path}
+                />
+            )}
 
             <PluridLink
                 route={`/configuration/${id}`}

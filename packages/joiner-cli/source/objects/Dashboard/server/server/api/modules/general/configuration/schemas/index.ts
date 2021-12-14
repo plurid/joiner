@@ -39,6 +39,7 @@ export const types = gql`
     type Configuration {
         id: String!
         path: String!
+        name: String
         packages: [String!]
     }
 
