@@ -68,13 +68,15 @@ export const handleParsedConfigurationFile = async (
     parsedData: any,
     configurationFilepath: string,
 ): Promise<ConfigurationFile | undefined> => {
-    const yarnWorkspace = typeof parsedData.yarnWorkspace === 'boolean'
-        ? parsedData.yarnWorkspace
-        : parsedData.yarnWorkspace === 'true';
+    const packageName = parsedData.name || '';
 
     const packageManager = parsedData.package?.manager ?? 'yarn';
     const packagePublisher = parsedData.package?.publisher ?? 'npm';
     const packageIgnore = parsedData.package?.ignore ?? [];
+
+    const yarnWorkspace = typeof parsedData.yarnWorkspace === 'boolean'
+        ? parsedData.yarnWorkspace
+        : parsedData.yarnWorkspace === 'true';
 
     const commitEngine = parsedData.commit?.engine ?? 'git';
     const commitCombine = typeof parsedData.commit?.combine === 'boolean'
@@ -115,13 +117,14 @@ export const handleParsedConfigurationFile = async (
     }
 
     const configurationFile: ConfigurationFile = {
-        yarnWorkspace,
+        name: packageName,
         packages,
         package: {
             manager: packageManager,
             publisher: packagePublisher,
             ignore: packageIgnore,
         },
+        yarnWorkspace,
         commit: {
             engine: commitEngine,
             combine: commitCombine,
