@@ -52,6 +52,7 @@ const processEnvironmentPlugin = new webpack.DefinePlugin({
     'process.env.SC_DISABLE_SPEEDY': true, /** HACK: styled components not rendering in production */
 
     'process.env.JOINER_ENDPOINT_GRAPHQL': JSON.stringify(process.env.JOINER_ENDPOINT_GRAPHQL),
+    'process.env.NODE_ENV': JSON.stringify(true),
 });
 
 
