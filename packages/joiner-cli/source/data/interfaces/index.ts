@@ -11,6 +11,7 @@ export interface JoinerConfigurationFile {
 
 
 export interface ConfigurationFile {
+    name: string;
     packages: Package[];
     yarnWorkspace: boolean;
     package: PackageConfiguration;
