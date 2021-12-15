@@ -8,6 +8,7 @@
     } from 'child_process';
 
     import {
+        sha,
         uuid,
     } from '@plurid/plurid-functions';
     // #endregion libraries
@@ -79,9 +80,10 @@ const executeCommand = async (
             };
         }
 
+        const packageSha = await sha.compute(packageName);
         const logFilename = path.join(
             logsPath,
-            `./out-${packageName}-${command}-${uuid.multiple(2)}.log`,
+            `./out-${packageSha}-${command}-${uuid.multiple(2)}.log`,
         );
 
         const out = fs.openSync(logFilename, 'a');
