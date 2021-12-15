@@ -11,6 +11,7 @@
     // #region external
     import IndexPlane from '~kernel-planes/Index';
     import ConfigurationPlane from '~kernel-planes/Configuration';
+    import LogPlane from '~kernel-planes/Log';
     import NotFoundPlane from '~kernel-planes/NotFound';
 
     import Head from '~kernel-components/Head';
@@ -33,6 +34,10 @@ const indexRoute: PluridReactRoute = {
         {
             value: '/configuration/:id',
             component: ConfigurationPlane,
+        },
+        {
+            value: '/log/:id',
+            component: LogPlane,
         },
     ],
     view: [

@@ -22,5 +22,6 @@ export interface JoinerLog {
     command: string;
     startAt: number;
     finishedAt: number;
+    data: string[];
 }
 // #endregion module
