@@ -27,7 +27,7 @@
 
     // #region internal
     import ConfigurationsView from './components/ConfigurationsView';
-    import LogsView from './components/ConfigurationsView';
+    import LogsView from './components/LogsView';
 
     import {
         StyledGeneralView,
