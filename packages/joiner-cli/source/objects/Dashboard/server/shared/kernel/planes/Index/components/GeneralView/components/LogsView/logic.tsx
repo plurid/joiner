@@ -51,11 +51,13 @@ export const logRowRenderer = (
                 }}
             >
                 <PluridIconInfo
+                    title="details"
                     atClick={() => {}}
                 />
             </PluridLink>
 
             <PluridIconDelete
+                title="delete"
                 atClick={() => handleLogObliterate(id)}
             />
         </>

@@ -253,6 +253,10 @@ const ConfigurationsView: React.FC<ConfigurationsViewProperties> = (
             refresh={() => {
                 getCurrentOwner(dispatch);
             }}
+
+            actionButtonText="Register Joiner"
+            actionButtonClick={() => {
+            }}
         />
     );
     // #endregion render
