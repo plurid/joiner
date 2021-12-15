@@ -8,6 +8,7 @@
     import {
         PluridIconStatistics,
         PluridIconApps,
+        PluridIconList,
         PluridIconArrowRight,
         PluridIconDocuments,
         PluridIconExternalLink,
@@ -53,7 +54,7 @@ export const generalSelectors = [
 export const generalSelectorsIcons = {
     // analytics: PluridIconStatistics,
     configurations: PluridIconApps,
-    logs: PluridIconDocuments,
+    logs: PluridIconList,
 };
 
 
