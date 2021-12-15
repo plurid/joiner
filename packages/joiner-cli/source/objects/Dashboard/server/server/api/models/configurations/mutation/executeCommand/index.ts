@@ -91,7 +91,8 @@ const executeCommand = async (
 
         fs.writeFileSync(
             logFilename,
-            `started at ${new Date(Date.now()).toLocaleString()}\n\n`,
+            `joiner -c ${configurationPath} ${command} ${packageName}\n`
+            + `started at ${new Date(Date.now()).toLocaleString()}\n\n`,
         );
 
         const spawnedChild = spawn(
