@@ -203,6 +203,27 @@ const ConfigurationsView: React.FC<ConfigurationsViewProperties> = (
             ),
         );
     }
+
+    const registerJoiner = async () => {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', '.json, .deon');
+
+        input.addEventListener('change', (event) => {
+            try {
+                const files: FileList = (event as any).path[0].files;
+                const file = files[0];
+
+                // read contents
+                // send name and contents to backend to find the file
+                // register it as joiner
+            } catch (error) {
+                return;
+            }
+        });
+
+        input.click();
+    }
     // #endregion handlers
 
 
@@ -256,6 +277,7 @@ const ConfigurationsView: React.FC<ConfigurationsViewProperties> = (
 
             actionButtonText="Register Joiner"
             actionButtonClick={() => {
+                registerJoiner();
             }}
         />
     );
