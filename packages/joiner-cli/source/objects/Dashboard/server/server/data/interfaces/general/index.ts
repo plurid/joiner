@@ -15,4 +15,12 @@ export interface JoinerConfiguration {
     name?: string;
     packages: string[];
 }
+
+export interface JoinerLog {
+    id: string;
+    package: string;
+    command: string;
+    startAt: number;
+    finishedAt: number;
+}
 // #endregion module

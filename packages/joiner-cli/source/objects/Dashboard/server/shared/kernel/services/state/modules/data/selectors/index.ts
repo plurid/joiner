@@ -11,12 +11,14 @@
 // #region module
 const getID = (state: AppState) => state.data.id;
 const getConfigurations = (state: AppState) => state.data.configurations;
+const getLogs = (state: AppState) => state.data.logs;
 
 
 
 const selectors = {
     getID,
     getConfigurations,
+    getLogs,
 };
 // #endregion module
 

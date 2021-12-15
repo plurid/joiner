@@ -2,6 +2,7 @@
     // #region external
     import {
         JoinerConfiguration,
+        JoinerLog,
     } from '~server/data/interfaces';
     // #endregion external
 // #endregion imports
@@ -10,7 +11,8 @@
 
 // #region module
 export type AddableEntityType =
-    | 'configuration';
+    | 'configuration'
+    | 'log';
 
 export const ADD_ENTITY = 'ADD_ENTITY';
 export interface AddEntityPayload {
@@ -24,7 +26,8 @@ export interface AddEntityAction {
 
 
 export type RemovableEntityType =
-    | 'configuration';
+    | 'configuration'
+    | 'log';
 
 export const REMOVE_ENTITY = 'REMOVE_ENTITY';
 export interface RemoveEntityPayload {
@@ -38,7 +41,8 @@ export interface RemoveEntityAction {
 
 
 export type AddableEntitiesType =
-    | 'configurations';
+    | 'configurations'
+    | 'logs';
 
 export const ADD_ENTITIES = 'ADD_ENTITIES';
 export interface AddEntitiesPayload {
@@ -53,7 +57,8 @@ export interface AddEntitiesAction {
 
 
 export type RemoveableEntitiesType =
-    | 'configuration';
+    | 'configuration'
+    | 'log';
 
 export const REMOVE_ENTITIES = 'REMOVE_ENTITIES';
 export interface RemoveEntitiesPayload {
@@ -76,6 +81,7 @@ export interface ClearDataAction {
 export interface State {
     id: string;
     configurations: JoinerConfiguration[];
+    logs: JoinerLog[];
 }
 
 

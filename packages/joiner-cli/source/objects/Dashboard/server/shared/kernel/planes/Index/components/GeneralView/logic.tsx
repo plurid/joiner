@@ -27,6 +27,7 @@
 
     // #region internal
     import ConfigurationsView from './components/ConfigurationsView';
+    import LogsView from './components/ConfigurationsView';
 
     import {
         StyledGeneralView,
@@ -46,11 +47,13 @@
 export const generalSelectors = [
     // 'analytics',
     'configurations',
+    'logs',
 ];
 
 export const generalSelectorsIcons = {
     // analytics: PluridIconStatistics,
     configurations: PluridIconApps,
+    logs: PluridIconDocuments,
 };
 
 
@@ -68,6 +71,12 @@ export const renderSelectedView = (
         case 'configurations':
             return (
                 <ConfigurationsView
+                    setGeneralView={setGeneralView}
+                />
+            );
+        case 'logs':
+            return (
+                <LogsView
                     setGeneralView={setGeneralView}
                 />
             );
