@@ -94,15 +94,9 @@ const Log: React.FC<LogProperties> = (
             <StyledLogData
                 theme={stateGeneralTheme}
             >
-                {log.data.map(line => {
-                    return (
-                        <div
-                            key={Math.random() + ''}
-                        >
-                            {line}
-                        </div>
-                    );
-                })}
+                <pre>
+                    {log.data.join('\n')}
+                </pre>
             </StyledLogData>
         </StyledLog>
     );

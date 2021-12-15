@@ -33,11 +33,6 @@ export interface IStyledLogData {
 export const StyledLogData = styled.div<IStyledLogData>`
     padding: 1rem;
 
-    font-family: ${
-        ({
-            theme,
-        }: IStyledLog) => theme.fontFamilyMonospace
-    };
     background-color: ${
         ({
             theme,
@@ -48,5 +43,20 @@ export const StyledLogData = styled.div<IStyledLogData>`
             theme,
         }: IStyledLogData) => theme.boxShadowUmbraInset
     };
+
+
+    pre {
+        margin: 0;
+        font-size: 0.9rem;
+        max-width: 900px;
+        max-height: 500px;
+        overflow: scroll;
+
+        font-family: ${
+            ({
+                theme,
+            }: IStyledLog) => theme.fontFamilyMonospace
+        };
+    }
 `;
 // #region module
