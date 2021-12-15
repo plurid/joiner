@@ -65,13 +65,13 @@ export const configurationRowRenderer = (
                 }}
             >
                 <PluridIconInfo
-                    title="details"
+                    // title="details"
                     atClick={() => {}}
                 />
             </PluridLink>
 
             <PluridIconDelete
-                title="deregister"
+                // title="deregister"
                 atClick={() => handleConfigurationObliterate(id)}
             />
         </>
