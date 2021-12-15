@@ -1,4 +1,10 @@
 // #region imports
+    // #region libraries
+    import os from 'os';
+    import path from 'path';
+    // #endregion libraries
+
+
     // #region external
     import {
         DatabaseType,
@@ -9,6 +15,17 @@
 
 
 // #region module
+export const joinerPath = path.join(
+    os.homedir(),
+    './.joiner',
+);
+
+export const joinerLogsPath = path.join(
+    joinerPath,
+    './logs',
+);
+
+
 export const DATABASE_TYPE = (process.env.JOINER_DATABASE_TYPE as DatabaseType | undefined)
     || 'mongo';
 
@@ -36,7 +53,7 @@ export const MONGO_ADDRESS = process.env.JOINER_MONGO_ADDRESS || '';
 export const MONGO_CONNECTION_STRING = process.env.JOINER_MONGO_CONNECTION_STRING || '';
 
 
-export const LOGS_PATH = process.env.JOINER_LOGS_PATH || './';
+export const LOGS_PATH = process.env.JOINER_LOGS_PATH || joinerLogsPath;
 
 
 export const TEST_MODE = process.env.JOINER_TEST_MODE === 'true';
