@@ -36,5 +36,8 @@ export const MONGO_ADDRESS = process.env.JOINER_MONGO_ADDRESS || '';
 export const MONGO_CONNECTION_STRING = process.env.JOINER_MONGO_CONNECTION_STRING || '';
 
 
+export const LOGS_PATH = process.env.JOINER_LOGS_PATH || './';
+
+
 export const TEST_MODE = process.env.JOINER_TEST_MODE === 'true';
 // #endregion module

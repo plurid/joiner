@@ -27,6 +27,7 @@
 
         CUSTOM_LOGIC_USAGE,
         PRIVATE_USAGE,
+        LOGS_PATH,
 
         logLevel,
         logLevels,
@@ -78,6 +79,7 @@ const setupGraphQLServer = async (
 
             const {
                 paths,
+                logsPath,
             } = await loadData();
 
             const context: Context = {
@@ -87,6 +89,7 @@ const setupGraphQLServer = async (
                 instance,
 
                 paths: paths || [],
+                logsPath: logsPath || LOGS_PATH,
 
                 customLogicUsage,
 

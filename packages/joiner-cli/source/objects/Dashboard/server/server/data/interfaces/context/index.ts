@@ -26,6 +26,7 @@ export interface Context {
     instance: Application;
 
     paths: string[];
+    logsPath: string;
 
     customLogicUsage: boolean;
 

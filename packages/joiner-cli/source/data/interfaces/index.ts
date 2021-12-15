@@ -7,6 +7,7 @@ export interface JoinerConfigurationDashboard {
 export interface JoinerConfigurationFile {
     dashboard?: JoinerConfigurationDashboard;
     paths?: string[];
+    logsPath?: string;
 }
 
 

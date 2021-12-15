@@ -1,10 +1,15 @@
 // #region imports
     // #region libraries
-    import fsSync from 'fs';
+    import path from 'path';
+    import fs from 'fs';
 
     import {
         spawn,
     } from 'child_process';
+
+    import {
+        uuid,
+    } from '@plurid/plurid-functions';
     // #endregion libraries
 
 
@@ -53,6 +58,7 @@ const executeCommand = async (
     try {
         const {
             paths,
+            logsPath,
         } = context;
 
         const {
@@ -73,8 +79,19 @@ const executeCommand = async (
             };
         }
 
-        const out = fsSync.openSync('./out.log', 'a');
-        const error = fsSync.openSync('./out.log', 'a');
+        const logFilename = path.join(
+            logsPath,
+            `./out-${packageName}-${command}-${uuid.multiple(2)}.log`,
+        );
+
+        const out = fs.openSync(logFilename, 'a');
+        const error = fs.openSync(logFilename, 'a');
+
+        fs.writeFileSync(
+            logFilename,
+            `started at ${new Date(Date.now()).toLocaleString()}\n\n`,
+        );
+
         const spawnedChild = spawn(
             'joiner',
             [
@@ -94,6 +111,13 @@ const executeCommand = async (
         );
 
         spawnedChild.unref();
+
+        spawnedChild.on('exit', () => {
+            fs.appendFileSync(
+                logFilename,
+                `\nfinished at ${new Date(Date.now()).toLocaleString()}\n`,
+            );
+        });
 
         return {
             status: true,
