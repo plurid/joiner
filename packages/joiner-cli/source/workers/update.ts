@@ -26,6 +26,7 @@ const main = () => {
 
     updateExecution(
         workerData.configPackage,
+        workerData.configurationFile,
     );
 }
 

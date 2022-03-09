@@ -48,7 +48,9 @@ const updateCommand = async (
             resolvedPackage,
             batch,
             'update',
-            {},
+            {
+                configurationFile: configurationData,
+            },
         );
 
         await batcher.run();
