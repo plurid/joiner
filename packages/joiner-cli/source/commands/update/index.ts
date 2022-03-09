@@ -57,7 +57,7 @@ const updateCommand = async (
     }
 
     for (const configPackage of resolvedPackage) {
-        await updateExecution(configPackage);
+        await updateExecution(configPackage, configurationData);
     }
 }
 // #endregion module

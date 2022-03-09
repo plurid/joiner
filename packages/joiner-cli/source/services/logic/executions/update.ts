@@ -13,6 +13,7 @@
     // #region external
     import {
         Package,
+        ConfigurationFile,
     } from '~data/interfaces';
     // #endregion external
 // #endregion imports
@@ -22,6 +23,7 @@
 // #region module
 const updateExecution = async (
     configPackage: Package,
+    configurationFile: ConfigurationFile,
 ) => {
     const inThePackage = `in the package '${configPackage.name}'`;
 
@@ -48,13 +50,13 @@ const updateExecution = async (
             }
 
             console.log(`\n\tInstalling the updates ${inThePackage}...`);
-            installCommand(configPackage);
+            installCommand(configPackage, configurationFile);
             console.log(`\tUpdates installed ${inThePackage}.\n`);
         } else {
             console.log(`\n\tNo dependencies updates ${inThePackage}.\n`);
 
             console.log(`\n\tInstalling the dependencies ${inThePackage}...`);
-            installCommand(configPackage);
+            installCommand(configPackage, configurationFile);
             console.log(`\tDependencies installed ${inThePackage}.\n`);
         }
     } catch (error) {
@@ -65,8 +67,9 @@ const updateExecution = async (
 
 const installCommand = (
     configPackage: Package,
+    configurationFile: ConfigurationFile,
 ) => {
-    const install = 'yarn install';
+    const install = `${configurationFile.package.manager} install`;
     execSync(
         install,
         {
