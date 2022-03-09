@@ -6,14 +6,12 @@
     } from 'redux';
 
     import thunk from 'redux-thunk';
-
-    import {
-        composeWithDevTools,
-    } from 'redux-devtools-extension';
     // #endregion libraries
 
 
     // #region external
+    import environment from '~kernel-services/utilities/environment';
+
     import reducers from '../reducers';
     // #endregion external
 // #endregion imports
@@ -21,6 +19,17 @@
 
 
 // #region module
+let composeWithDevTools: any;
+if (!environment.production) {
+    try {
+        const reduxDevTools = require('@redux-devtools/extension');
+        composeWithDevTools = reduxDevTools.composeWithDevTools;
+    } catch (error) {
+        composeWithDevTools = undefined;
+    }
+}
+
+
 export type AppState = ReturnType<typeof reducers>;
 
 const store = (
