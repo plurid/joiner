@@ -38,16 +38,16 @@
     "scripts": {
         "test": "jest -c ./configurations/jest.config.js --coverage",
         "clean": "rm -rf ./distribution",
-        "start": "yarn clean && rollup -c ./scripts/rollup.config.ts rollup.config.ts -w",
+        "start": "pnpm clean && rollup -c ./scripts/rollup.config.ts rollup.config.ts -w",
         "build.clean": "rm -rf `find ./distribution/ -type d -name __tests__`",
         "build.dashboard.development": "node scripts/dashboard build.development",
         "build.dashboard.production": "node scripts/dashboard build.production",
-        "build.cli.development": "rollup -c ./scripts/rollup.config.ts && yarn build.clean",
-        "build.cli.production": "rollup -c ./scripts/rollup.config.ts && yarn build.clean",
-        "build.development": "yarn build.dashboard.development && yarn build.cli.development",
-        "build": "yarn build.dashboard.production && yarn build.cli.production",
-        "prebuild": "yarn clean",
-        "prepublishOnly": "yarn build"
+        "build.cli.development": "rollup -c ./scripts/rollup.config.ts && pnpm build.clean",
+        "build.cli.production": "rollup -c ./scripts/rollup.config.ts && pnpm build.clean",
+        "build.development": "pnpm build.dashboard.development && pnpm build.cli.development",
+        "build": "pnpm build.dashboard.production && pnpm build.cli.production",
+        "prebuild": "pnpm clean",
+        "prepublishOnly": "pnpm build"
     },
     "dependencies": {
         "@apollo/client": "^3.6.2",
