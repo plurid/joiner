@@ -52,9 +52,11 @@ export const developmentPackageUpdateDirectoryLogic = async (
 
         // check that if there is already a build folder
         if (fs.existsSync(updatePackageDependencyBuildPath)) {
-            fs.rmdirSync(
+            fs.rmSync(
                 updatePackageDependencyBuildPath,
-                { recursive: true },
+                {
+                    recursive: true,
+                },
             );
         }
 
