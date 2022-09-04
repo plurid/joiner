@@ -36,6 +36,7 @@ const updateExecution = async (
             jsonUpgraded: true,
             upgrade: true,
             dep: 'prod,dev',
+            cache: true,
         });
 
         if (!updatedPackages) {
