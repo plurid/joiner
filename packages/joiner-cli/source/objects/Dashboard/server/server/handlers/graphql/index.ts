@@ -1,17 +1,23 @@
 // #region imports
     // #region libraries
+    import http from 'node:http';
+
     import {
         Application,
     } from 'express';
 
     import {
         ApolloServer,
-    } from 'apollo-server-express';
+    } from '@apollo/server';
+
+    import { expressMiddleware } from '@apollo/server/express4';
+
+    import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 
     import {
-        ApolloServerPluginLandingPageDisabled,
-        ApolloServerPluginLandingPageGraphQLPlayground,
-    } from 'apollo-server-core';
+        ApolloServerPluginLandingPageLocalDefault,
+        ApolloServerPluginLandingPageProductionDefault,
+    } from '@apollo/server/plugin/landingPage/default';
     // #endregion libraries
 
 
@@ -56,68 +62,73 @@
 const setupGraphQLServer = async (
     instance: Application,
 ) => {
-    const playground = {
-        faviconUrl: GRAPHQL_FAVICON,
-        title: GRAPHQL_TITLE,
-    };
+    // const playground = {
+    //     faviconUrl: GRAPHQL_FAVICON,
+    //     title: GRAPHQL_TITLE,
+    // };
 
     const customLogicUsage = CUSTOM_LOGIC_USAGE;
     const privateUsage = PRIVATE_USAGE;
 
     const logger = defaultLogger;
 
+    const httpServer = http.createServer(instance);
+
     const graphQLServer = new ApolloServer({
         typeDefs: schemas,
         resolvers,
-        context: async ({
-            req,
-            res,
-        }: any) => {
-            const privateOwnerIdentonym = privateUsage
-                ? await getPrivateOwner(req)
-                : '';
-
-            const {
-                paths,
-                logsPath,
-            } = await loadData();
-
-            const context: Context = {
-                request: req,
-                response: res,
-
-                instance,
-
-                paths: paths || [],
-                logsPath: logsPath || LOGS_PATH,
-
-                customLogicUsage,
-
-                privateUsage,
-                privateOwnerIdentonym,
-
-                logger,
-                logLevel,
-                logLevels,
-            };
-
-            return context;
-        },
         plugins: [
+            ApolloServerPluginDrainHttpServer({ httpServer }),
             environment.production
-                ? ApolloServerPluginLandingPageDisabled()
-                : ApolloServerPluginLandingPageGraphQLPlayground({
-                    ...playground,
-                }),
+                ? ApolloServerPluginLandingPageProductionDefault({})
+                // ? {}
+                : ApolloServerPluginLandingPageLocalDefault({}),
         ],
     });
 
+    const context = async ({
+        req,
+        res,
+    }: any) => {
+        const privateOwnerIdentonym = privateUsage
+            ? await getPrivateOwner(req)
+            : '';
+
+        const {
+            paths,
+            logsPath,
+        } = await loadData();
+
+        const context: Context = {
+            request: req,
+            response: res,
+
+            instance,
+
+            paths: paths || [],
+            logsPath: logsPath || LOGS_PATH,
+
+            customLogicUsage,
+
+            privateUsage,
+            privateOwnerIdentonym,
+
+            logger,
+            logLevel,
+            logLevels,
+        };
+
+        return context;
+    };
+
     await graphQLServer.start();
 
-    graphQLServer.applyMiddleware({
-        app: instance,
-        path: GRAPHQL_ENDPOINT,
-    });
+    instance.use(
+        GRAPHQL_ENDPOINT,
+        expressMiddleware(graphQLServer, {
+            context,
+        }),
+    );
 }
 // #endregion module
 
